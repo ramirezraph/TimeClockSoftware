@@ -4,6 +4,8 @@
     End Sub
 
     Private Sub btnBackToEmpLogin_Click(sender As Object, e As EventArgs) Handles btnBackToEmpLogin.Click
+        txtUsername.Text = ""
+        txtPassword.Text = ""
         Me.Hide()
         frmPasscode.Show()
     End Sub
@@ -15,7 +17,8 @@
             ShowMessage("Please complete the form.")
         Else
             If username = "admin" And password = "123" Then
-                ShowMessage("Login Success")
+                Me.Hide()
+                frmAdministrator.Show()
             Else
                 ShowMessage("Incorrect username or password. Try again.")
                 txtPassword.Text = ""

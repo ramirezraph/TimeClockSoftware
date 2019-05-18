@@ -83,9 +83,49 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized resource of type System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property cog_icon256() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("cog_icon256", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property frmpasscodebg() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("frmpasscodebg", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property gear_icon64() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("gear_icon64", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property home_icon64() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("home_icon64", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property setting_icon64() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("setting_icon64", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

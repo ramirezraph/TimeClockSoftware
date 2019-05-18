@@ -172,7 +172,7 @@ Partial Class frmLoginAdmin
         'btnCloseApp
         '
         Me.btnCloseApp.AutoSize = True
-        Me.btnCloseApp.BackColor = System.Drawing.Color.Transparent
+        Me.btnCloseApp.BackColor = System.Drawing.Color.Maroon
         Me.btnCloseApp.Font = New System.Drawing.Font("Calibri", 15.75!)
         Me.btnCloseApp.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.btnCloseApp.Location = New System.Drawing.Point(439, 12)
