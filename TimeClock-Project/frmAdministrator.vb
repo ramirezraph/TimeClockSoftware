@@ -415,13 +415,6 @@
         Dim confirm As Integer = MessageBox.Show("Are you sure you want to update?", "Confirm", MessageBoxButtons.YesNo)
 
         If confirm = DialogResult.Yes Then
-            MessageBox.Show(txtPasscode.Text)
-            MessageBox.Show((txtFirstName.Text).Substring(0, 1).ToUpper & (txtFirstName.Text).Substring(1).ToLower)
-            MessageBox.Show((txtLastName.Text).Substring(0, 1).ToUpper & (txtLastName.Text).Substring(1).ToLower)
-            MessageBox.Show(txtPosition.Text)
-            MessageBox.Show(txtAddress.Text)
-            MessageBox.Show(gender)
-            MessageBox.Show(txtContactNumber.Text)
             UpdateEmployee(txtPasscode.Text, (txtFirstName.Text).Substring(0, 1).ToUpper & (txtFirstName.Text).Substring(1).ToLower, (txtLastName.Text).Substring(0, 1).ToUpper & (txtLastName.Text).Substring(1).ToLower, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text)
         End If
 
@@ -441,7 +434,7 @@
         Access.AddParam("@contact", ContactNumber)
 
         Access.ExecuteQuery("UPDATE tblEmployee SET [Passcode]=@passcode,[FirstName]=@firstname,[LastName]=@lastname," &
-            "[Position]=@position,[Address]=@address,[Gender]=@gender,[Contact]=@contact" &
+            "[Position]=@position,[Address]=@address,[Gender]=@gender,[ContactNumber]=@contact" &
             " WHERE [Passcode] = @passcode")
 
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
@@ -449,8 +442,12 @@
         DisplayToastMessage("Employee has been updated successfully.", 1)
         RefreshEmployeeTable()
         ClearEmployeeTextboxes()
+        dgvEmployees.ClearSelection()
         btnEdit.Enabled = False
         btnDelete.Enabled = False
     End Sub
 
+    Private Sub btnLoadAttendance_Click(sender As Object, e As EventArgs) Handles btnLoadAttendance.Click
+
+    End Sub
 End Class
