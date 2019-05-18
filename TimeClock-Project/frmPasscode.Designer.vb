@@ -95,7 +95,7 @@ Partial Class frmPasscode
         Me.lblTime.AutoSize = True
         Me.lblTime.BackColor = System.Drawing.Color.Transparent
         Me.lblTime.Font = New System.Drawing.Font("Segoe UI", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTime.Location = New System.Drawing.Point(193, 75)
+        Me.lblTime.Location = New System.Drawing.Point(193, 88)
         Me.lblTime.Name = "lblTime"
         Me.lblTime.Size = New System.Drawing.Size(156, 86)
         Me.lblTime.TabIndex = 3
@@ -106,7 +106,7 @@ Partial Class frmPasscode
         Me.lblAMPM.AutoSize = True
         Me.lblAMPM.BackColor = System.Drawing.Color.Transparent
         Me.lblAMPM.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAMPM.Location = New System.Drawing.Point(321, 97)
+        Me.lblAMPM.Location = New System.Drawing.Point(321, 110)
         Me.lblAMPM.Name = "lblAMPM"
         Me.lblAMPM.Size = New System.Drawing.Size(58, 37)
         Me.lblAMPM.TabIndex = 4
@@ -117,7 +117,7 @@ Partial Class frmPasscode
         Me.lblDate.AutoSize = True
         Me.lblDate.BackColor = System.Drawing.Color.Transparent
         Me.lblDate.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDate.Location = New System.Drawing.Point(217, 154)
+        Me.lblDate.Location = New System.Drawing.Point(217, 167)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(105, 21)
         Me.lblDate.TabIndex = 5
@@ -130,7 +130,7 @@ Partial Class frmPasscode
         Me.txtFirstNum.Enabled = False
         Me.txtFirstNum.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFirstNum.ForeColor = System.Drawing.SystemColors.Info
-        Me.txtFirstNum.Location = New System.Drawing.Point(84, 210)
+        Me.txtFirstNum.Location = New System.Drawing.Point(84, 223)
         Me.txtFirstNum.Multiline = True
         Me.txtFirstNum.Name = "txtFirstNum"
         Me.txtFirstNum.Size = New System.Drawing.Size(73, 69)
@@ -140,7 +140,7 @@ Partial Class frmPasscode
         'pnl1Indic
         '
         Me.pnl1Indic.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-        Me.pnl1Indic.Location = New System.Drawing.Point(84, 279)
+        Me.pnl1Indic.Location = New System.Drawing.Point(84, 292)
         Me.pnl1Indic.Name = "pnl1Indic"
         Me.pnl1Indic.Size = New System.Drawing.Size(73, 6)
         Me.pnl1Indic.TabIndex = 10
@@ -148,7 +148,7 @@ Partial Class frmPasscode
         'pnl2Indic
         '
         Me.pnl2Indic.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-        Me.pnl2Indic.Location = New System.Drawing.Point(163, 279)
+        Me.pnl2Indic.Location = New System.Drawing.Point(163, 292)
         Me.pnl2Indic.Name = "pnl2Indic"
         Me.pnl2Indic.Size = New System.Drawing.Size(73, 6)
         Me.pnl2Indic.TabIndex = 12
@@ -160,7 +160,7 @@ Partial Class frmPasscode
         Me.txtSecondNum.Enabled = False
         Me.txtSecondNum.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSecondNum.ForeColor = System.Drawing.SystemColors.Info
-        Me.txtSecondNum.Location = New System.Drawing.Point(163, 210)
+        Me.txtSecondNum.Location = New System.Drawing.Point(163, 223)
         Me.txtSecondNum.Multiline = True
         Me.txtSecondNum.Name = "txtSecondNum"
         Me.txtSecondNum.Size = New System.Drawing.Size(73, 69)
@@ -170,7 +170,7 @@ Partial Class frmPasscode
         'pnl3Indic
         '
         Me.pnl3Indic.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-        Me.pnl3Indic.Location = New System.Drawing.Point(242, 279)
+        Me.pnl3Indic.Location = New System.Drawing.Point(242, 292)
         Me.pnl3Indic.Name = "pnl3Indic"
         Me.pnl3Indic.Size = New System.Drawing.Size(73, 6)
         Me.pnl3Indic.TabIndex = 14
@@ -182,7 +182,7 @@ Partial Class frmPasscode
         Me.txtThirdNum.Enabled = False
         Me.txtThirdNum.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtThirdNum.ForeColor = System.Drawing.SystemColors.Info
-        Me.txtThirdNum.Location = New System.Drawing.Point(242, 210)
+        Me.txtThirdNum.Location = New System.Drawing.Point(242, 223)
         Me.txtThirdNum.Multiline = True
         Me.txtThirdNum.Name = "txtThirdNum"
         Me.txtThirdNum.Size = New System.Drawing.Size(73, 69)
@@ -192,7 +192,7 @@ Partial Class frmPasscode
         'pnl4Indic
         '
         Me.pnl4Indic.BackColor = System.Drawing.Color.FromArgb(CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer), CType(CType(40, Byte), Integer))
-        Me.pnl4Indic.Location = New System.Drawing.Point(321, 279)
+        Me.pnl4Indic.Location = New System.Drawing.Point(321, 292)
         Me.pnl4Indic.Name = "pnl4Indic"
         Me.pnl4Indic.Size = New System.Drawing.Size(73, 6)
         Me.pnl4Indic.TabIndex = 16
@@ -204,7 +204,7 @@ Partial Class frmPasscode
         Me.txtFourthNum.Enabled = False
         Me.txtFourthNum.Font = New System.Drawing.Font("Segoe UI", 36.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFourthNum.ForeColor = System.Drawing.SystemColors.Info
-        Me.txtFourthNum.Location = New System.Drawing.Point(321, 210)
+        Me.txtFourthNum.Location = New System.Drawing.Point(321, 223)
         Me.txtFourthNum.Multiline = True
         Me.txtFourthNum.Name = "txtFourthNum"
         Me.txtFourthNum.Size = New System.Drawing.Size(73, 69)
@@ -230,7 +230,7 @@ Partial Class frmPasscode
         Me.btn1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn1.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn1.Location = New System.Drawing.Point(87, 317)
+        Me.btn1.Location = New System.Drawing.Point(87, 330)
         Me.btn1.Name = "btn1"
         Me.btn1.Size = New System.Drawing.Size(98, 58)
         Me.btn1.TabIndex = 18
@@ -244,7 +244,7 @@ Partial Class frmPasscode
         Me.btn2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn2.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn2.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn2.Location = New System.Drawing.Point(191, 317)
+        Me.btn2.Location = New System.Drawing.Point(191, 330)
         Me.btn2.Name = "btn2"
         Me.btn2.Size = New System.Drawing.Size(98, 58)
         Me.btn2.TabIndex = 19
@@ -258,7 +258,7 @@ Partial Class frmPasscode
         Me.btn3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn3.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn3.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn3.Location = New System.Drawing.Point(295, 317)
+        Me.btn3.Location = New System.Drawing.Point(295, 330)
         Me.btn3.Name = "btn3"
         Me.btn3.Size = New System.Drawing.Size(98, 58)
         Me.btn3.TabIndex = 20
@@ -272,7 +272,7 @@ Partial Class frmPasscode
         Me.btn6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn6.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn6.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn6.Location = New System.Drawing.Point(295, 381)
+        Me.btn6.Location = New System.Drawing.Point(295, 394)
         Me.btn6.Name = "btn6"
         Me.btn6.Size = New System.Drawing.Size(98, 58)
         Me.btn6.TabIndex = 23
@@ -286,7 +286,7 @@ Partial Class frmPasscode
         Me.btn5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn5.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn5.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn5.Location = New System.Drawing.Point(191, 381)
+        Me.btn5.Location = New System.Drawing.Point(191, 394)
         Me.btn5.Name = "btn5"
         Me.btn5.Size = New System.Drawing.Size(98, 58)
         Me.btn5.TabIndex = 22
@@ -300,7 +300,7 @@ Partial Class frmPasscode
         Me.btn4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn4.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn4.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn4.Location = New System.Drawing.Point(87, 381)
+        Me.btn4.Location = New System.Drawing.Point(87, 394)
         Me.btn4.Name = "btn4"
         Me.btn4.Size = New System.Drawing.Size(98, 58)
         Me.btn4.TabIndex = 21
@@ -314,7 +314,7 @@ Partial Class frmPasscode
         Me.btn9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn9.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn9.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn9.Location = New System.Drawing.Point(295, 445)
+        Me.btn9.Location = New System.Drawing.Point(295, 458)
         Me.btn9.Name = "btn9"
         Me.btn9.Size = New System.Drawing.Size(98, 58)
         Me.btn9.TabIndex = 26
@@ -328,7 +328,7 @@ Partial Class frmPasscode
         Me.btn8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn8.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn8.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn8.Location = New System.Drawing.Point(191, 445)
+        Me.btn8.Location = New System.Drawing.Point(191, 458)
         Me.btn8.Name = "btn8"
         Me.btn8.Size = New System.Drawing.Size(98, 58)
         Me.btn8.TabIndex = 25
@@ -342,7 +342,7 @@ Partial Class frmPasscode
         Me.btn7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn7.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn7.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn7.Location = New System.Drawing.Point(87, 445)
+        Me.btn7.Location = New System.Drawing.Point(87, 458)
         Me.btn7.Name = "btn7"
         Me.btn7.Size = New System.Drawing.Size(98, 58)
         Me.btn7.TabIndex = 24
@@ -356,7 +356,7 @@ Partial Class frmPasscode
         Me.btnDeletePasscode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeletePasscode.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDeletePasscode.ForeColor = System.Drawing.Color.Crimson
-        Me.btnDeletePasscode.Location = New System.Drawing.Point(295, 509)
+        Me.btnDeletePasscode.Location = New System.Drawing.Point(295, 522)
         Me.btnDeletePasscode.Name = "btnDeletePasscode"
         Me.btnDeletePasscode.Size = New System.Drawing.Size(98, 58)
         Me.btnDeletePasscode.TabIndex = 29
@@ -370,7 +370,7 @@ Partial Class frmPasscode
         Me.btn0.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn0.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btn0.ForeColor = System.Drawing.SystemColors.Control
-        Me.btn0.Location = New System.Drawing.Point(191, 509)
+        Me.btn0.Location = New System.Drawing.Point(191, 522)
         Me.btn0.Name = "btn0"
         Me.btn0.Size = New System.Drawing.Size(98, 58)
         Me.btn0.TabIndex = 28
@@ -384,7 +384,7 @@ Partial Class frmPasscode
         Me.btnClearPasscode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClearPasscode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClearPasscode.ForeColor = System.Drawing.Color.Gold
-        Me.btnClearPasscode.Location = New System.Drawing.Point(87, 509)
+        Me.btnClearPasscode.Location = New System.Drawing.Point(87, 522)
         Me.btnClearPasscode.Name = "btnClearPasscode"
         Me.btnClearPasscode.Size = New System.Drawing.Size(98, 58)
         Me.btnClearPasscode.TabIndex = 27
@@ -416,7 +416,7 @@ Partial Class frmPasscode
         Me.imgEmployeeIcon.BackColor = System.Drawing.Color.Transparent
         Me.imgEmployeeIcon.BackgroundImage = Global.TimeClock_Project.My.Resources.Resources.attendanceicon
         Me.imgEmployeeIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.imgEmployeeIcon.Location = New System.Drawing.Point(87, 84)
+        Me.imgEmployeeIcon.Location = New System.Drawing.Point(87, 97)
         Me.imgEmployeeIcon.Name = "imgEmployeeIcon"
         Me.imgEmployeeIcon.Size = New System.Drawing.Size(100, 100)
         Me.imgEmployeeIcon.TabIndex = 31

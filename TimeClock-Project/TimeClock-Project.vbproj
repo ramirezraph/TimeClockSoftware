@@ -109,6 +109,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmLoginAdmin.resx">
+      <DependentUpon>frmLoginAdmin.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPasscode.resx">
       <DependentUpon>frmPasscode.vb</DependentUpon>
     </EmbeddedResource>
@@ -136,6 +139,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\attendanceicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\admin_icon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
