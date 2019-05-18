@@ -73,6 +73,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseControl.vb" />
     <Compile Include="frmAdministrator.Designer.vb">
       <DependentUpon>frmAdministrator.vb</DependentUpon>
     </Compile>
@@ -113,11 +114,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="TimeClockProjectDataSet.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TimeClockProjectDataSet.xsd</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmAdministrator.resx">
@@ -150,17 +146,6 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
-    <None Include="TimeClockProjectDataSet.xsc">
-      <DependentUpon>TimeClockProjectDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="TimeClockProjectDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>TimeClockProjectDataSet.Designer.vb</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="TimeClockProjectDataSet.xss">
-      <DependentUpon>TimeClockProjectDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\frmpasscodebg.png" />
@@ -185,7 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TimeClockProject.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

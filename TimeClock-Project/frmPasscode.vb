@@ -225,4 +225,7 @@
         Me.Close()
     End Sub
 
+    Private Sub frmPasscode_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+    End Sub
 End Class

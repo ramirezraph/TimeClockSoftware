@@ -22,9 +22,8 @@ Partial Class frmAdministrator
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlNavBar = New System.Windows.Forms.Panel()
         Me.btnHomeIcon = New System.Windows.Forms.PictureBox()
         Me.btnDropdownIcon = New System.Windows.Forms.PictureBox()
@@ -86,6 +85,8 @@ Partial Class frmAdministrator
         Me.lblUnderline2 = New System.Windows.Forms.Label()
         Me.lblStaffAttendance = New System.Windows.Forms.Label()
         Me.pnlManageEmployee = New System.Windows.Forms.Panel()
+        Me.txtSearchEmployee = New System.Windows.Forms.TextBox()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.Label27 = New System.Windows.Forms.Label()
@@ -107,16 +108,6 @@ Partial Class frmAdministrator
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.dgvEmployees = New System.Windows.Forms.DataGridView()
-        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PasscodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FirstNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PositionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AddressDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GenderDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ContactNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TblEmployeeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TimeClockProjectDataSet = New TimeClock_Project.TimeClockProjectDataSet()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
@@ -125,7 +116,6 @@ Partial Class frmAdministrator
         Me.pnlSchedules = New System.Windows.Forms.Panel()
         Me.lblSchedules = New System.Windows.Forms.Label()
         Me.lblUnderline4 = New System.Windows.Forms.Label()
-        Me.TblEmployeeTableAdapter = New TimeClock_Project.TimeClockProjectDataSetTableAdapters.tblEmployeeTableAdapter()
         Me.pnlNavBar.SuspendLayout()
         CType(Me.btnHomeIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -146,8 +136,6 @@ Partial Class frmAdministrator
         Me.pnlStaffAttendance.SuspendLayout()
         Me.pnlManageEmployee.SuspendLayout()
         CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TblEmployeeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TimeClockProjectDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSchedules.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -839,6 +827,8 @@ Partial Class frmAdministrator
         'pnlManageEmployee
         '
         Me.pnlManageEmployee.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.pnlManageEmployee.Controls.Add(Me.txtSearchEmployee)
+        Me.pnlManageEmployee.Controls.Add(Me.Label28)
         Me.pnlManageEmployee.Controls.Add(Me.btnCancel)
         Me.pnlManageEmployee.Controls.Add(Me.btnSave)
         Me.pnlManageEmployee.Controls.Add(Me.Label27)
@@ -870,6 +860,23 @@ Partial Class frmAdministrator
         Me.pnlManageEmployee.Name = "pnlManageEmployee"
         Me.pnlManageEmployee.Size = New System.Drawing.Size(1031, 585)
         Me.pnlManageEmployee.TabIndex = 12
+        '
+        'txtSearchEmployee
+        '
+        Me.txtSearchEmployee.Location = New System.Drawing.Point(283, 32)
+        Me.txtSearchEmployee.Name = "txtSearchEmployee"
+        Me.txtSearchEmployee.Size = New System.Drawing.Size(249, 22)
+        Me.txtSearchEmployee.TabIndex = 27
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.Location = New System.Drawing.Point(233, 35)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(44, 13)
+        Me.Label28.TabIndex = 26
+        Me.Label28.Text = "Search:"
         '
         'btnCancel
         '
@@ -1078,24 +1085,21 @@ Partial Class frmAdministrator
         Me.dgvEmployees.AllowUserToDeleteRows = False
         Me.dgvEmployees.AllowUserToResizeColumns = False
         Me.dgvEmployees.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvEmployees.AutoGenerateColumns = False
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvEmployees.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvEmployees.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvEmployees.ColumnHeadersHeight = 25
         Me.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.dgvEmployees.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.PasscodeDataGridViewTextBoxColumn, Me.FirstNameDataGridViewTextBoxColumn, Me.LastNameDataGridViewTextBoxColumn, Me.PositionDataGridViewTextBoxColumn, Me.AddressDataGridViewTextBoxColumn, Me.GenderDataGridViewTextBoxColumn, Me.ContactNumberDataGridViewTextBoxColumn})
-        Me.dgvEmployees.DataSource = Me.TblEmployeeBindingSource
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvEmployees.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvEmployees.Location = New System.Drawing.Point(42, 334)
         Me.dgvEmployees.Name = "dgvEmployees"
@@ -1110,78 +1114,6 @@ Partial Class frmAdministrator
         Me.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvEmployees.Size = New System.Drawing.Size(901, 236)
         Me.dgvEmployees.TabIndex = 5
-        '
-        'IDDataGridViewTextBoxColumn
-        '
-        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
-        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
-        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
-        Me.IDDataGridViewTextBoxColumn.ReadOnly = True
-        Me.IDDataGridViewTextBoxColumn.Visible = False
-        '
-        'PasscodeDataGridViewTextBoxColumn
-        '
-        Me.PasscodeDataGridViewTextBoxColumn.DataPropertyName = "Passcode"
-        Me.PasscodeDataGridViewTextBoxColumn.HeaderText = "Passcode"
-        Me.PasscodeDataGridViewTextBoxColumn.Name = "PasscodeDataGridViewTextBoxColumn"
-        Me.PasscodeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'FirstNameDataGridViewTextBoxColumn
-        '
-        Me.FirstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName"
-        Me.FirstNameDataGridViewTextBoxColumn.HeaderText = "FirstName"
-        Me.FirstNameDataGridViewTextBoxColumn.Name = "FirstNameDataGridViewTextBoxColumn"
-        Me.FirstNameDataGridViewTextBoxColumn.ReadOnly = True
-        Me.FirstNameDataGridViewTextBoxColumn.Width = 130
-        '
-        'LastNameDataGridViewTextBoxColumn
-        '
-        Me.LastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName"
-        Me.LastNameDataGridViewTextBoxColumn.HeaderText = "LastName"
-        Me.LastNameDataGridViewTextBoxColumn.Name = "LastNameDataGridViewTextBoxColumn"
-        Me.LastNameDataGridViewTextBoxColumn.ReadOnly = True
-        Me.LastNameDataGridViewTextBoxColumn.Width = 130
-        '
-        'PositionDataGridViewTextBoxColumn
-        '
-        Me.PositionDataGridViewTextBoxColumn.DataPropertyName = "Position"
-        Me.PositionDataGridViewTextBoxColumn.HeaderText = "Position"
-        Me.PositionDataGridViewTextBoxColumn.Name = "PositionDataGridViewTextBoxColumn"
-        Me.PositionDataGridViewTextBoxColumn.ReadOnly = True
-        Me.PositionDataGridViewTextBoxColumn.Width = 140
-        '
-        'AddressDataGridViewTextBoxColumn
-        '
-        Me.AddressDataGridViewTextBoxColumn.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn.Name = "AddressDataGridViewTextBoxColumn"
-        Me.AddressDataGridViewTextBoxColumn.ReadOnly = True
-        Me.AddressDataGridViewTextBoxColumn.Width = 170
-        '
-        'GenderDataGridViewTextBoxColumn
-        '
-        Me.GenderDataGridViewTextBoxColumn.DataPropertyName = "Gender"
-        Me.GenderDataGridViewTextBoxColumn.HeaderText = "Gender"
-        Me.GenderDataGridViewTextBoxColumn.Name = "GenderDataGridViewTextBoxColumn"
-        Me.GenderDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ContactNumberDataGridViewTextBoxColumn
-        '
-        Me.ContactNumberDataGridViewTextBoxColumn.DataPropertyName = "ContactNumber"
-        Me.ContactNumberDataGridViewTextBoxColumn.HeaderText = "ContactNumber"
-        Me.ContactNumberDataGridViewTextBoxColumn.Name = "ContactNumberDataGridViewTextBoxColumn"
-        Me.ContactNumberDataGridViewTextBoxColumn.ReadOnly = True
-        Me.ContactNumberDataGridViewTextBoxColumn.Width = 120
-        '
-        'TblEmployeeBindingSource
-        '
-        Me.TblEmployeeBindingSource.DataMember = "tblEmployee"
-        Me.TblEmployeeBindingSource.DataSource = Me.TimeClockProjectDataSet
-        '
-        'TimeClockProjectDataSet
-        '
-        Me.TimeClockProjectDataSet.DataSetName = "TimeClockProjectDataSet"
-        Me.TimeClockProjectDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'btnDelete
         '
@@ -1271,10 +1203,6 @@ Partial Class frmAdministrator
         Me.lblUnderline4.TabIndex = 1
         Me.lblUnderline4.Text = "____________"
         '
-        'TblEmployeeTableAdapter
-        '
-        Me.TblEmployeeTableAdapter.ClearBeforeFill = True
-        '
         'frmAdministrator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1325,8 +1253,6 @@ Partial Class frmAdministrator
         Me.pnlManageEmployee.ResumeLayout(False)
         Me.pnlManageEmployee.PerformLayout()
         CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TblEmployeeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TimeClockProjectDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlSchedules.ResumeLayout(False)
         Me.pnlSchedules.PerformLayout()
         Me.ResumeLayout(False)
@@ -1420,17 +1346,8 @@ Partial Class frmAdministrator
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
     Friend WithEvents dgvEmployees As DataGridView
-    Friend WithEvents TimeClockProjectDataSet As TimeClockProjectDataSet
-    Friend WithEvents TblEmployeeBindingSource As BindingSource
-    Friend WithEvents TblEmployeeTableAdapter As TimeClockProjectDataSetTableAdapters.tblEmployeeTableAdapter
-    Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PasscodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents FirstNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents LastNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents PositionDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents AddressDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents GenderDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents ContactNumberDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents btnCancel As Button
     Friend WithEvents btnSave As Button
+    Friend WithEvents txtSearchEmployee As TextBox
+    Friend WithEvents Label28 As Label
 End Class

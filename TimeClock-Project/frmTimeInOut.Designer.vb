@@ -27,10 +27,10 @@ Partial Class frmTimeInOut
         Me.lblAppName = New System.Windows.Forms.Label()
         Me.pbUserImage = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.lbldCurrentTime = New System.Windows.Forms.Label()
-        Me.lblCurrentTime = New System.Windows.Forms.Label()
         Me.lblDateToday = New System.Windows.Forms.Label()
         Me.lbldDateToday = New System.Windows.Forms.Label()
+        Me.lblCurrentTime = New System.Windows.Forms.Label()
+        Me.lbldCurrentTime = New System.Windows.Forms.Label()
         Me.lblGreetings = New System.Windows.Forms.Label()
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.btnClockIn = New System.Windows.Forms.Button()
@@ -95,29 +95,6 @@ Partial Class frmTimeInOut
         Me.Panel1.Size = New System.Drawing.Size(486, 46)
         Me.Panel1.TabIndex = 35
         '
-        'lbldCurrentTime
-        '
-        Me.lbldCurrentTime.AutoSize = True
-        Me.lbldCurrentTime.BackColor = System.Drawing.Color.Transparent
-        Me.lbldCurrentTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbldCurrentTime.ForeColor = System.Drawing.Color.Silver
-        Me.lbldCurrentTime.Location = New System.Drawing.Point(304, 16)
-        Me.lbldCurrentTime.Name = "lbldCurrentTime"
-        Me.lbldCurrentTime.Size = New System.Drawing.Size(81, 15)
-        Me.lbldCurrentTime.TabIndex = 11
-        Me.lbldCurrentTime.Text = "Current Time:"
-        '
-        'lblCurrentTime
-        '
-        Me.lblCurrentTime.AutoSize = True
-        Me.lblCurrentTime.BackColor = System.Drawing.Color.Transparent
-        Me.lblCurrentTime.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCurrentTime.Location = New System.Drawing.Point(388, 11)
-        Me.lblCurrentTime.Name = "lblCurrentTime"
-        Me.lblCurrentTime.Size = New System.Drawing.Size(80, 25)
-        Me.lblCurrentTime.TabIndex = 12
-        Me.lblCurrentTime.Text = "8:54 AM"
-        '
         'lblDateToday
         '
         Me.lblDateToday.AutoSize = True
@@ -140,6 +117,29 @@ Partial Class frmTimeInOut
         Me.lbldDateToday.Size = New System.Drawing.Size(72, 15)
         Me.lbldDateToday.TabIndex = 13
         Me.lbldDateToday.Text = "Date Today:"
+        '
+        'lblCurrentTime
+        '
+        Me.lblCurrentTime.AutoSize = True
+        Me.lblCurrentTime.BackColor = System.Drawing.Color.Transparent
+        Me.lblCurrentTime.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCurrentTime.Location = New System.Drawing.Point(388, 11)
+        Me.lblCurrentTime.Name = "lblCurrentTime"
+        Me.lblCurrentTime.Size = New System.Drawing.Size(80, 25)
+        Me.lblCurrentTime.TabIndex = 12
+        Me.lblCurrentTime.Text = "8:54 AM"
+        '
+        'lbldCurrentTime
+        '
+        Me.lbldCurrentTime.AutoSize = True
+        Me.lbldCurrentTime.BackColor = System.Drawing.Color.Transparent
+        Me.lbldCurrentTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbldCurrentTime.ForeColor = System.Drawing.Color.Silver
+        Me.lbldCurrentTime.Location = New System.Drawing.Point(304, 16)
+        Me.lbldCurrentTime.Name = "lbldCurrentTime"
+        Me.lbldCurrentTime.Size = New System.Drawing.Size(81, 15)
+        Me.lbldCurrentTime.TabIndex = 11
+        Me.lbldCurrentTime.Text = "Current Time:"
         '
         'lblGreetings
         '

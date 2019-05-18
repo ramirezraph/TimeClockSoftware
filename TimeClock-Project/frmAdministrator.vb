@@ -1,5 +1,8 @@
 ﻿Public Class frmAdministrator
 
+    ' IMPORTANT
+    Private Access As New DatabaseControl
+
     ' drop down menu item functionalities
     Dim btnNavButtonIsActive = False
     Private Sub OpenMenuItem1()
@@ -43,15 +46,6 @@
 
     End Sub
 
-    Private Sub frmAdministrator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'TimeClockProjectDataSet.tblEmployee' table. You can move, or remove it, as needed.
-        Me.TblEmployeeTableAdapter.Fill(Me.TimeClockProjectDataSet.tblEmployee)
-        pnlDashboard.BringToFront()
-
-        dgvEmployees.ClearSelection()
-
-    End Sub
-
     Private Sub btnMenuDashboard_Click(sender As Object, e As EventArgs) Handles btnMenuDashboard.Click
         pnlDashboard.BringToFront()
         pnlStaffAttendance.SendToBack()
@@ -69,6 +63,7 @@
 
     Private Sub btnManageEmployee_Click(sender As Object, e As EventArgs) Handles btnManageEmployee.Click
         dgvEmployees.ClearSelection()
+        ClearEmployeeTextboxes()
         pnlDashboard.SendToBack()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.BringToFront()
@@ -151,6 +146,46 @@
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         dgvEmployees.ClearSelection()
+    End Sub
+
+    Private Sub frmAdministrator_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        ' Run Query
+        Access.ExecuteQuery("SELECT * FROM tblEmployee ORDER BY ID ASC")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        ' Fill DataGridView
+        dgvEmployees.DataSource = Access.DbDataTable
+
+        Try
+            dgvEmployees.Columns(2).HeaderText = "First Name"
+            dgvEmployees.Columns(3).HeaderText = "Last Name"
+            dgvEmployees.Columns(7).HeaderText = "Contact Number"
+            dgvEmployees.Columns("ID").Visible = False
+            dgvEmployees.Columns("Passcode").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
+        pnlDashboard.BringToFront()
+    End Sub
+
+    Private Sub txtSearchEmployee_TextChanged(sender As Object, e As EventArgs) Handles txtSearchEmployee.TextChanged
+        Dim t As TextBox = sender
+        SearchEmployee(t.Text.ToLower)
+
+    End Sub
+
+    Private Sub SearchEmployee(Name As String)
+        ' Add Param and Run Query
+        Access.AddParam("@name", "%" & Name & "%")
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY ID ASC")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+
+        ' Fill DataGridView
+        dgvEmployees.DataSource = Access.DbDataTable
+    End Sub
+
+    Private Sub ClearEmployeeTextboxes()
         txtFirstName.ReadOnly = True
         txtLastName.ReadOnly = True
         txtPosition.ReadOnly = True
