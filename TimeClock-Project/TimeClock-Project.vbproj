@@ -73,11 +73,23 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="frmLoginAdmin.Designer.vb">
+      <DependentUpon>frmLoginAdmin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmLoginAdmin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="frmPasscode.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPasscode.Designer.vb">
+      <DependentUpon>frmPasscode.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTimeInOut.Designer.vb">
+      <DependentUpon>frmTimeInOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTimeInOut.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -97,6 +109,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmPasscode.resx">
+      <DependentUpon>frmPasscode.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -115,6 +130,12 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frmpasscodebg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\attendanceicon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
