@@ -178,6 +178,10 @@
         ' begin passcode validation
         passcode = txtFirstNum.Text & txtSecondNum.Text & txtThirdNum.Text & txtFourthNum.Text
         If passcode = "1234" Then
+            txtFirstNum.Text = ""
+            txtSecondNum.Text = ""
+            txtThirdNum.Text = ""
+            txtFourthNum.Text = ""
             Me.Hide()
             frmTimeInOut.Show()
         Else
@@ -220,4 +224,5 @@
     Private Sub btnCloseApp_Click(sender As Object, e As EventArgs) Handles btnCloseApp.Click
         Me.Close()
     End Sub
+
 End Class

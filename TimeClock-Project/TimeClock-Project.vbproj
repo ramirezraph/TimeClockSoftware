@@ -115,6 +115,9 @@
     <EmbeddedResource Include="frmPasscode.resx">
       <DependentUpon>frmPasscode.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmTimeInOut.resx">
+      <DependentUpon>frmTimeInOut.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

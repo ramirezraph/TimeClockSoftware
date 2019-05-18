@@ -393,7 +393,7 @@ Partial Class frmPasscode
         '
         'tmrPasscode
         '
-        Me.tmrPasscode.Interval = 1000
+        Me.tmrPasscode.Interval = 700
         '
         'lblPasscodeNotFound
         '
