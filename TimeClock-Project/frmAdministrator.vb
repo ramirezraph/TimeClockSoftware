@@ -2,6 +2,7 @@
 
     ' IMPORTANT
     Private Access As New DatabaseControl
+    Dim selectedindex As Integer
 
     ' drop down menu item functionalities
     Dim btnNavButtonIsActive = False
@@ -63,11 +64,14 @@
 
     Private Sub btnManageEmployee_Click(sender As Object, e As EventArgs) Handles btnManageEmployee.Click
         dgvEmployees.ClearSelection()
+        selectedindex = -1
         ClearEmployeeTextboxes()
         pnlDashboard.SendToBack()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.BringToFront()
         pnlSchedules.SendToBack()
+        btnEdit.Enabled = False
+        btnDelete.Enabled = False
     End Sub
 
     Private Sub btnScheduling_Click(sender As Object, e As EventArgs) Handles btnScheduling.Click
@@ -86,14 +90,17 @@
         txtPasscode.ReadOnly = True
         rbMale.AutoCheck = False
         rbFemale.AutoCheck = False
-        btnSave.Visible = False
+        btnCommitAdd.Visible = False
+        btnCommitUpdate.Visible = False
         btnCancel.Visible = False
+        btnAdd.Enabled = True
+        btnDelete.Enabled = True
+        btnEdit.Enabled = True
         Try
-            Dim index As Integer
             Dim gender As String
-            index = e.RowIndex
+            selectedindex = e.RowIndex
             Dim selectedRow As DataGridViewRow
-            selectedRow = dgvEmployees.Rows(index)
+            selectedRow = dgvEmployees.Rows(selectedindex)
             ' first name
             txtFirstName.Text = selectedRow.Cells(2).Value.ToString
             ' last name
@@ -133,7 +140,7 @@
         txtContactNumber.ReadOnly = False
         txtPasscode.ReadOnly = False
 
-        btnSave.Visible = True
+        btnCommitAdd.Visible = True
         btnCancel.Visible = True
 
         txtFirstName.Text = ""
@@ -142,14 +149,25 @@
         txtAddress.Text = ""
         txtContactNumber.Text = ""
         txtPasscode.Text = ""
+
+        btnEdit.Enabled = False
+        btnDelete.Enabled = False
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         dgvEmployees.ClearSelection()
+        ClearEmployeeTextboxes()
+        btnEdit.Enabled = False
+        btnDelete.Enabled = False
+        selectedindex = -1
     End Sub
 
     Private Sub frmAdministrator_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        RefreshEmployeeTable()
+        pnlDashboard.BringToFront()
+    End Sub
 
+    Private Sub RefreshEmployeeTable()
         ' Run Query
         Access.ExecuteQuery("SELECT * FROM tblEmployee ORDER BY ID ASC")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
@@ -160,13 +178,15 @@
             dgvEmployees.Columns(2).HeaderText = "First Name"
             dgvEmployees.Columns(3).HeaderText = "Last Name"
             dgvEmployees.Columns(7).HeaderText = "Contact Number"
+            dgvEmployees.Columns("FirstName").Width = 130
+            dgvEmployees.Columns("LastName").Width = 130
+            dgvEmployees.Columns("Address").Width = 180
+            dgvEmployees.Columns("Position").Width = 130
             dgvEmployees.Columns("ID").Visible = False
             dgvEmployees.Columns("Passcode").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
-
-        pnlDashboard.BringToFront()
     End Sub
 
     Private Sub txtSearchEmployee_TextChanged(sender As Object, e As EventArgs) Handles txtSearchEmployee.TextChanged
@@ -197,7 +217,8 @@
         txtContactNumber.ReadOnly = True
         txtPasscode.ReadOnly = True
 
-        btnSave.Visible = False
+        btnCommitAdd.Visible = False
+        btnCommitUpdate.Visible = False
         btnCancel.Visible = False
 
         txtFirstName.Text = ""
@@ -206,5 +227,230 @@
         txtAddress.Text = ""
         txtContactNumber.Text = ""
         txtPasscode.Text = ""
+
+        btnEdit.Enabled = True
+        btnDelete.Enabled = True
+        btnAdd.Enabled = True
     End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnCommitAdd.Click
+        Dim gender As String = ""
+
+        If rbMale.Checked = True Then
+            gender &= "Male"
+        ElseIf rbFemale.Checked = True Then
+            gender &= "Female"
+        Else
+            gender = ""
+            DisplayToastMessage("Please complete the form to continue.", 2)
+            Exit Sub
+        End If
+
+        If txtPasscode.Text = "" Or txtFirstName.Text = "" Or txtLastName.Text = "" Or txtPosition.Text = "" Or txtAddress.Text = "" Or gender = "" Or txtContactNumber.Text = "" Then
+            DisplayToastMessage("Please complete the form to continue.", 2)
+            Exit Sub
+        End If
+
+        If Not txtPasscode.Text.Length = 4 Then
+            DisplayToastMessage("Invalid passcode. Try again.", 2)
+            txtPasscode.Text = ""
+            Exit Sub
+        End If
+
+        If CheckForAlphaCharacters(txtPasscode.Text) Then
+            'do stuff here if it contains letters
+            DisplayToastMessage("Invalid passcode. Try again.", 2)
+            txtPasscode.Text = ""
+            Exit Sub
+        End If
+
+        If CheckForDoubleEntryPasscode(txtPasscode.Text) Then
+            DisplayToastMessage("Passcode is already taken. Try again.", 2)
+            txtPasscode.Text = ""
+            Exit Sub
+        End If
+
+        AddEmployee(txtPasscode.Text, (txtFirstName.Text).Substring(0, 1).ToUpper & (txtFirstName.Text).Substring(1).ToLower, (txtLastName.Text).Substring(0, 1).ToUpper & (txtLastName.Text).Substring(1).ToLower, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out")
+    End Sub
+
+    Private Function CheckForAlphaCharacters(ByVal StringToCheck As String)
+        For i = 0 To StringToCheck.Length - 1
+            If Char.IsLetter(StringToCheck.Chars(i)) Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
+    Private Function CheckForDoubleEntryPasscode(Passcode As String)
+        Access.ExecuteQuery("SELECT Passcode FROM tblEmployee")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Return False
+
+        For Each R As DataRow In Access.DbDataTable.Rows
+            If Passcode = R("Passcode") Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
+
+    Private Sub AddEmployee(Passcode As String, FirstName As String,
+                            LastName As String, Position As String,
+                            Address As String, Gender As String,
+                            ContactNumber As String, Status As String)
+        Access.AddParam("@passcode", Passcode)
+        Access.AddParam("@firstname", FirstName)
+        Access.AddParam("@lastname", LastName)
+        Access.AddParam("@position", Position)
+        Access.AddParam("@address", Address)
+        Access.AddParam("@gender", Gender)
+        Access.AddParam("@contact", ContactNumber)
+        Access.AddParam("@status", Status)
+
+        Access.ExecuteQuery("INSERT INTO tblEmployee ([Passcode],[FirstName],[LastName],[Position],[Address],[Gender],[ContactNumber],[Status]) " &
+                            "VALUES (@passcode,@firstname,@lastname,@position,@address,@gender,@contact,@status)")
+
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+
+        DisplayToastMessage("Employee has been added successfully.", 1)
+        RefreshEmployeeTable()
+        ClearEmployeeTextboxes()
+        btnEdit.Enabled = False
+        btnDelete.Enabled = False
+    End Sub
+
+    Private Sub DisplayToastMessage(message As String, type As Integer)
+        tmrMessage.Start()
+
+        If type = 1 Then
+            ' success message
+            lblToastMessage.Text = message
+            lblToastMessage.BackColor = Color.FromArgb(38, 109, 204)
+            lblToastMessage.Visible = True
+        ElseIf type = 2 Then
+            ' error message
+            lblToastMessage.Text = message
+            lblToastMessage.BackColor = Color.Maroon
+            lblToastMessage.Visible = True
+        End If
+    End Sub
+
+    Private Sub tmrMessage_Tick(sender As Object, e As EventArgs) Handles tmrMessage.Tick
+        lblToastMessage.Text = ""
+        lblToastMessage.Visible = False
+        tmrMessage.Stop()
+    End Sub
+
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Dim selectedRow As DataGridViewRow
+        Try
+            selectedRow = dgvEmployees.Rows(selectedindex)
+        Catch ex As Exception
+            DisplayToastMessage("Please select the employee you want to delete.", 2)
+            Exit Sub
+        End Try
+
+        Dim id As String = selectedRow.Cells(0).Value.ToString
+
+        Dim confirm As Integer = MessageBox.Show("Are you sure you want to delete?", "Confirm", MessageBoxButtons.YesNo)
+        If confirm = DialogResult.Yes Then
+            Access.AddParam("@id", id)
+            Access.ExecuteQuery("DELETE * FROM tblEmployee WHERE [ID] = @id")
+            If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+            DisplayToastMessage("Employee deleted successfully.", 1)
+
+            RefreshEmployeeTable()
+            ClearEmployeeTextboxes()
+            btnEdit.Enabled = False
+            btnDelete.Enabled = False
+        End If
+    End Sub
+
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        btnCommitUpdate.Visible = True
+        btnCancel.Visible = True
+        btnAdd.Enabled = False
+        btnDelete.Enabled = False
+
+        txtFirstName.ReadOnly = False
+        txtLastName.ReadOnly = False
+        txtPosition.ReadOnly = False
+        txtAddress.ReadOnly = False
+        rbMale.AutoCheck = True
+        rbFemale.AutoCheck = True
+        txtContactNumber.ReadOnly = False
+        txtPasscode.ReadOnly = True
+    End Sub
+
+    Private Sub btnCommitUpdate_Click(sender As Object, e As EventArgs) Handles btnCommitUpdate.Click
+
+        Dim gender As String = ""
+
+        If rbMale.Checked = True Then
+            gender &= "Male"
+        ElseIf rbFemale.Checked = True Then
+            gender &= "Female"
+        Else
+            gender = ""
+            DisplayToastMessage("Please complete the form to continue.", 2)
+            Exit Sub
+        End If
+
+        If txtPasscode.Text = "" Or txtFirstName.Text = "" Or txtLastName.Text = "" Or txtPosition.Text = "" Or txtAddress.Text = "" Or gender = "" Or txtContactNumber.Text = "" Then
+            DisplayToastMessage("Please complete the form to continue.", 2)
+            Exit Sub
+        End If
+
+        Dim selectedRow As DataGridViewRow
+        Try
+            selectedRow = dgvEmployees.Rows(selectedindex)
+        Catch ex As Exception
+            DisplayToastMessage("Please select the employee you want to update.", 2)
+            Exit Sub
+        End Try
+
+        Dim id As String = selectedRow.Cells(0).Value.ToString
+        Dim confirm As Integer = MessageBox.Show("Are you sure you want to update?", "Confirm", MessageBoxButtons.YesNo)
+
+        If confirm = DialogResult.Yes Then
+            MessageBox.Show(txtPasscode.Text)
+            MessageBox.Show((txtFirstName.Text).Substring(0, 1).ToUpper & (txtFirstName.Text).Substring(1).ToLower)
+            MessageBox.Show((txtLastName.Text).Substring(0, 1).ToUpper & (txtLastName.Text).Substring(1).ToLower)
+            MessageBox.Show(txtPosition.Text)
+            MessageBox.Show(txtAddress.Text)
+            MessageBox.Show(gender)
+            MessageBox.Show(txtContactNumber.Text)
+            UpdateEmployee(txtPasscode.Text, (txtFirstName.Text).Substring(0, 1).ToUpper & (txtFirstName.Text).Substring(1).ToLower, (txtLastName.Text).Substring(0, 1).ToUpper & (txtLastName.Text).Substring(1).ToLower, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text)
+        End If
+
+
+    End Sub
+
+    Private Sub UpdateEmployee(Passcode As String, FirstName As String,
+                            LastName As String, Position As String,
+                            Address As String, Gender As String,
+                            ContactNumber As String)
+        Access.AddParam("@passcode", Passcode)
+        Access.AddParam("@firstname", FirstName)
+        Access.AddParam("@lastname", LastName)
+        Access.AddParam("@position", Position)
+        Access.AddParam("@address", Address)
+        Access.AddParam("@gender", Gender)
+        Access.AddParam("@contact", ContactNumber)
+
+        Access.ExecuteQuery("UPDATE tblEmployee SET [Passcode]=@passcode,[FirstName]=@firstname,[LastName]=@lastname," &
+            "[Position]=@position,[Address]=@address,[Gender]=@gender,[Contact]=@contact" &
+            " WHERE [Passcode] = @passcode")
+
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+
+        DisplayToastMessage("Employee has been updated successfully.", 1)
+        RefreshEmployeeTable()
+        ClearEmployeeTextboxes()
+        btnEdit.Enabled = False
+        btnDelete.Enabled = False
+    End Sub
+
 End Class

@@ -22,6 +22,7 @@ Partial Class frmAdministrator
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlNavBar = New System.Windows.Forms.Panel()
@@ -85,10 +86,11 @@ Partial Class frmAdministrator
         Me.lblUnderline2 = New System.Windows.Forms.Label()
         Me.lblStaffAttendance = New System.Windows.Forms.Label()
         Me.pnlManageEmployee = New System.Windows.Forms.Panel()
+        Me.btnCommitUpdate = New System.Windows.Forms.Button()
         Me.txtSearchEmployee = New System.Windows.Forms.TextBox()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnCommitAdd = New System.Windows.Forms.Button()
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.txtPasscode = New System.Windows.Forms.TextBox()
@@ -116,6 +118,8 @@ Partial Class frmAdministrator
         Me.pnlSchedules = New System.Windows.Forms.Panel()
         Me.lblSchedules = New System.Windows.Forms.Label()
         Me.lblUnderline4 = New System.Windows.Forms.Label()
+        Me.lblToastMessage = New System.Windows.Forms.Label()
+        Me.tmrMessage = New System.Windows.Forms.Timer(Me.components)
         Me.pnlNavBar.SuspendLayout()
         CType(Me.btnHomeIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -827,10 +831,11 @@ Partial Class frmAdministrator
         'pnlManageEmployee
         '
         Me.pnlManageEmployee.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.pnlManageEmployee.Controls.Add(Me.btnCommitUpdate)
         Me.pnlManageEmployee.Controls.Add(Me.txtSearchEmployee)
         Me.pnlManageEmployee.Controls.Add(Me.Label28)
         Me.pnlManageEmployee.Controls.Add(Me.btnCancel)
-        Me.pnlManageEmployee.Controls.Add(Me.btnSave)
+        Me.pnlManageEmployee.Controls.Add(Me.btnCommitAdd)
         Me.pnlManageEmployee.Controls.Add(Me.Label27)
         Me.pnlManageEmployee.Controls.Add(Me.Label26)
         Me.pnlManageEmployee.Controls.Add(Me.txtPasscode)
@@ -860,6 +865,19 @@ Partial Class frmAdministrator
         Me.pnlManageEmployee.Name = "pnlManageEmployee"
         Me.pnlManageEmployee.Size = New System.Drawing.Size(1031, 585)
         Me.pnlManageEmployee.TabIndex = 12
+        '
+        'btnCommitUpdate
+        '
+        Me.btnCommitUpdate.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.btnCommitUpdate.FlatAppearance.BorderSize = 0
+        Me.btnCommitUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCommitUpdate.Location = New System.Drawing.Point(717, 280)
+        Me.btnCommitUpdate.Name = "btnCommitUpdate"
+        Me.btnCommitUpdate.Size = New System.Drawing.Size(104, 25)
+        Me.btnCommitUpdate.TabIndex = 28
+        Me.btnCommitUpdate.Text = "Commit"
+        Me.btnCommitUpdate.UseVisualStyleBackColor = False
+        Me.btnCommitUpdate.Visible = False
         '
         'txtSearchEmployee
         '
@@ -892,18 +910,18 @@ Partial Class frmAdministrator
         Me.btnCancel.UseVisualStyleBackColor = False
         Me.btnCancel.Visible = False
         '
-        'btnSave
+        'btnCommitAdd
         '
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.btnSave.FlatAppearance.BorderSize = 0
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Location = New System.Drawing.Point(717, 280)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(104, 25)
-        Me.btnSave.TabIndex = 24
-        Me.btnSave.Text = "Commit"
-        Me.btnSave.UseVisualStyleBackColor = False
-        Me.btnSave.Visible = False
+        Me.btnCommitAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.btnCommitAdd.FlatAppearance.BorderSize = 0
+        Me.btnCommitAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCommitAdd.Location = New System.Drawing.Point(717, 280)
+        Me.btnCommitAdd.Name = "btnCommitAdd"
+        Me.btnCommitAdd.Size = New System.Drawing.Size(104, 25)
+        Me.btnCommitAdd.TabIndex = 24
+        Me.btnCommitAdd.Text = "Commit"
+        Me.btnCommitAdd.UseVisualStyleBackColor = False
+        Me.btnCommitAdd.Visible = False
         '
         'Label27
         '
@@ -941,9 +959,9 @@ Partial Class frmAdministrator
         Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.Location = New System.Drawing.Point(434, 202)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(76, 21)
+        Me.Label25.Size = New System.Drawing.Size(180, 21)
         Me.Label25.TabIndex = 20
-        Me.Label25.Text = "Passcode:"
+        Me.Label25.Text = "Passcode: (4 Digits Only)"
         '
         'txtContactNumber
         '
@@ -1102,6 +1120,7 @@ Partial Class frmAdministrator
         Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvEmployees.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvEmployees.Location = New System.Drawing.Point(42, 334)
+        Me.dgvEmployees.MultiSelect = False
         Me.dgvEmployees.Name = "dgvEmployees"
         Me.dgvEmployees.ReadOnly = True
         Me.dgvEmployees.RowHeadersVisible = False
@@ -1112,7 +1131,7 @@ Partial Class frmAdministrator
         Me.dgvEmployees.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvEmployees.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvEmployees.Size = New System.Drawing.Size(901, 236)
+        Me.dgvEmployees.Size = New System.Drawing.Size(968, 236)
         Me.dgvEmployees.TabIndex = 5
         '
         'btnDelete
@@ -1203,12 +1222,29 @@ Partial Class frmAdministrator
         Me.lblUnderline4.TabIndex = 1
         Me.lblUnderline4.Text = "____________"
         '
+        'lblToastMessage
+        '
+        Me.lblToastMessage.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(204, Byte), Integer))
+        Me.lblToastMessage.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblToastMessage.Location = New System.Drawing.Point(-2, 652)
+        Me.lblToastMessage.Name = "lblToastMessage"
+        Me.lblToastMessage.Size = New System.Drawing.Size(1287, 25)
+        Me.lblToastMessage.TabIndex = 14
+        Me.lblToastMessage.Text = "Sample Message Here"
+        Me.lblToastMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblToastMessage.Visible = False
+        '
+        'tmrMessage
+        '
+        Me.tmrMessage.Interval = 3500
+        '
         'frmAdministrator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(219, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1284, 661)
+        Me.ClientSize = New System.Drawing.Size(1284, 677)
+        Me.Controls.Add(Me.lblToastMessage)
         Me.Controls.Add(Me.pnlManageEmployee)
         Me.Controls.Add(Me.pnlSchedules)
         Me.Controls.Add(Me.pnlMenu)
@@ -1347,7 +1383,10 @@ Partial Class frmAdministrator
     Friend WithEvents Label27 As Label
     Friend WithEvents dgvEmployees As DataGridView
     Friend WithEvents btnCancel As Button
-    Friend WithEvents btnSave As Button
+    Friend WithEvents btnCommitAdd As Button
     Friend WithEvents txtSearchEmployee As TextBox
     Friend WithEvents Label28 As Label
+    Friend WithEvents lblToastMessage As Label
+    Friend WithEvents tmrMessage As Timer
+    Friend WithEvents btnCommitUpdate As Button
 End Class
