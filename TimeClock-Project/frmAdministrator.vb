@@ -47,6 +47,9 @@
         'TODO: This line of code loads data into the 'TimeClockProjectDataSet.tblEmployee' table. You can move, or remove it, as needed.
         Me.TblEmployeeTableAdapter.Fill(Me.TimeClockProjectDataSet.tblEmployee)
         pnlDashboard.BringToFront()
+
+        dgvEmployees.ClearSelection()
+
     End Sub
 
     Private Sub btnMenuDashboard_Click(sender As Object, e As EventArgs) Handles btnMenuDashboard.Click
@@ -65,6 +68,7 @@
     End Sub
 
     Private Sub btnManageEmployee_Click(sender As Object, e As EventArgs) Handles btnManageEmployee.Click
+        dgvEmployees.ClearSelection()
         pnlDashboard.SendToBack()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.BringToFront()
@@ -76,5 +80,96 @@
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
         pnlSchedules.BringToFront()
+    End Sub
+
+    Private Sub dgvEmployees_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmployees.RowEnter
+        txtFirstName.ReadOnly = True
+        txtLastName.ReadOnly = True
+        txtPosition.ReadOnly = True
+        txtAddress.ReadOnly = True
+        txtContactNumber.ReadOnly = True
+        txtPasscode.ReadOnly = True
+        rbMale.AutoCheck = False
+        rbFemale.AutoCheck = False
+        btnSave.Visible = False
+        btnCancel.Visible = False
+        Try
+            Dim index As Integer
+            Dim gender As String
+            index = e.RowIndex
+            Dim selectedRow As DataGridViewRow
+            selectedRow = dgvEmployees.Rows(index)
+            ' first name
+            txtFirstName.Text = selectedRow.Cells(2).Value.ToString
+            ' last name
+            txtLastName.Text = selectedRow.Cells(3).Value.ToString
+            ' position
+            txtPosition.Text = selectedRow.Cells(4).Value.ToString
+            ' address
+            txtAddress.Text = selectedRow.Cells(5).Value.ToString
+            ' contact number
+            txtContactNumber.Text = selectedRow.Cells(7).Value.ToString
+            ' passcode
+            txtPasscode.Text = selectedRow.Cells(1).Value.ToString
+            ' gender
+            gender = selectedRow.Cells(6).Value.ToString
+            If gender = "Male" Then
+                rbMale.Checked = True
+                rbFemale.Checked = False
+            ElseIf gender = "Female" Then
+                rbMale.Checked = False
+                rbFemale.Checked = True
+            End If
+        Catch ex As Exception
+            MessageBox.Show("An error occured.")
+        End Try
+    End Sub
+
+    Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        dgvEmployees.ClearSelection()
+        txtFirstName.ReadOnly = False
+        txtLastName.ReadOnly = False
+        txtPosition.ReadOnly = False
+        txtAddress.ReadOnly = False
+        rbMale.AutoCheck = True
+        rbFemale.AutoCheck = True
+        rbMale.Checked = False
+        rbFemale.Checked = False
+        txtContactNumber.ReadOnly = False
+        txtPasscode.ReadOnly = False
+
+        btnSave.Visible = True
+        btnCancel.Visible = True
+
+        txtFirstName.Text = ""
+        txtLastName.Text = ""
+        txtPosition.Text = ""
+        txtAddress.Text = ""
+        txtContactNumber.Text = ""
+        txtPasscode.Text = ""
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        dgvEmployees.ClearSelection()
+        txtFirstName.ReadOnly = True
+        txtLastName.ReadOnly = True
+        txtPosition.ReadOnly = True
+        txtAddress.ReadOnly = True
+        rbMale.AutoCheck = False
+        rbFemale.AutoCheck = False
+        rbMale.Checked = False
+        rbFemale.Checked = False
+        txtContactNumber.ReadOnly = True
+        txtPasscode.ReadOnly = True
+
+        btnSave.Visible = False
+        btnCancel.Visible = False
+
+        txtFirstName.Text = ""
+        txtLastName.Text = ""
+        txtPosition.Text = ""
+        txtAddress.Text = ""
+        txtContactNumber.Text = ""
+        txtPasscode.Text = ""
     End Sub
 End Class

@@ -23,6 +23,8 @@ Partial Class frmAdministrator
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlNavBar = New System.Windows.Forms.Panel()
         Me.btnHomeIcon = New System.Windows.Forms.PictureBox()
         Me.btnDropdownIcon = New System.Windows.Forms.PictureBox()
@@ -84,37 +86,27 @@ Partial Class frmAdministrator
         Me.lblUnderline2 = New System.Windows.Forms.Label()
         Me.lblStaffAttendance = New System.Windows.Forms.Label()
         Me.pnlManageEmployee = New System.Windows.Forms.Panel()
-        Me.lblEmployee = New System.Windows.Forms.Label()
-        Me.lblUnderline3 = New System.Windows.Forms.Label()
-        Me.pnlSchedules = New System.Windows.Forms.Panel()
-        Me.lblSchedules = New System.Windows.Forms.Label()
-        Me.lblUnderline4 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.dgvEmployees = New System.Windows.Forms.DataGridView()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.txtFirstName = New System.Windows.Forms.TextBox()
-        Me.txtPosition = New System.Windows.Forms.TextBox()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.txtLastName = New System.Windows.Forms.TextBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.txtAddress = New System.Windows.Forms.TextBox()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.rbMale = New System.Windows.Forms.RadioButton()
-        Me.rbFemale = New System.Windows.Forms.RadioButton()
-        Me.txtContactNumber = New System.Windows.Forms.TextBox()
-        Me.Label24 = New System.Windows.Forms.Label()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
         Me.txtPasscode = New System.Windows.Forms.TextBox()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.TimeClockProjectDataSet = New TimeClock_Project.TimeClockProjectDataSet()
-        Me.TimeClockProjectDataSetBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TblEmployeeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TblEmployeeTableAdapter = New TimeClock_Project.TimeClockProjectDataSetTableAdapters.tblEmployeeTableAdapter()
+        Me.txtContactNumber = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.rbFemale = New System.Windows.Forms.RadioButton()
+        Me.rbMale = New System.Windows.Forms.RadioButton()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.txtAddress = New System.Windows.Forms.TextBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.txtLastName = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.txtPosition = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.txtFirstName = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.dgvEmployees = New System.Windows.Forms.DataGridView()
         Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PasscodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FirstNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -123,6 +115,17 @@ Partial Class frmAdministrator
         Me.AddressDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GenderDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ContactNumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TblEmployeeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TimeClockProjectDataSet = New TimeClock_Project.TimeClockProjectDataSet()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnEdit = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.lblEmployee = New System.Windows.Forms.Label()
+        Me.lblUnderline3 = New System.Windows.Forms.Label()
+        Me.pnlSchedules = New System.Windows.Forms.Panel()
+        Me.lblSchedules = New System.Windows.Forms.Label()
+        Me.lblUnderline4 = New System.Windows.Forms.Label()
+        Me.TblEmployeeTableAdapter = New TimeClock_Project.TimeClockProjectDataSetTableAdapters.tblEmployeeTableAdapter()
         Me.pnlNavBar.SuspendLayout()
         CType(Me.btnHomeIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,11 +145,10 @@ Partial Class frmAdministrator
         Me.pnlMenu.SuspendLayout()
         Me.pnlStaffAttendance.SuspendLayout()
         Me.pnlManageEmployee.SuspendLayout()
-        Me.pnlSchedules.SuspendLayout()
         CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TimeClockProjectDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TimeClockProjectDataSetBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TblEmployeeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TimeClockProjectDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlSchedules.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlNavBar
@@ -837,6 +839,8 @@ Partial Class frmAdministrator
         'pnlManageEmployee
         '
         Me.pnlManageEmployee.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.pnlManageEmployee.Controls.Add(Me.btnCancel)
+        Me.pnlManageEmployee.Controls.Add(Me.btnSave)
         Me.pnlManageEmployee.Controls.Add(Me.Label27)
         Me.pnlManageEmployee.Controls.Add(Me.Label26)
         Me.pnlManageEmployee.Controls.Add(Me.txtPasscode)
@@ -856,9 +860,9 @@ Partial Class frmAdministrator
         Me.pnlManageEmployee.Controls.Add(Me.Label19)
         Me.pnlManageEmployee.Controls.Add(Me.Label17)
         Me.pnlManageEmployee.Controls.Add(Me.dgvEmployees)
-        Me.pnlManageEmployee.Controls.Add(Me.Button3)
-        Me.pnlManageEmployee.Controls.Add(Me.Button2)
-        Me.pnlManageEmployee.Controls.Add(Me.Button1)
+        Me.pnlManageEmployee.Controls.Add(Me.btnDelete)
+        Me.pnlManageEmployee.Controls.Add(Me.btnEdit)
+        Me.pnlManageEmployee.Controls.Add(Me.btnAdd)
         Me.pnlManageEmployee.Controls.Add(Me.lblEmployee)
         Me.pnlManageEmployee.Controls.Add(Me.lblUnderline3)
         Me.pnlManageEmployee.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -866,6 +870,355 @@ Partial Class frmAdministrator
         Me.pnlManageEmployee.Name = "pnlManageEmployee"
         Me.pnlManageEmployee.Size = New System.Drawing.Size(1031, 585)
         Me.pnlManageEmployee.TabIndex = 12
+        '
+        'btnCancel
+        '
+        Me.btnCancel.BackColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(31, Byte), Integer), CType(CType(31, Byte), Integer))
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnCancel.Location = New System.Drawing.Point(827, 280)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(104, 25)
+        Me.btnCancel.TabIndex = 25
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = False
+        Me.btnCancel.Visible = False
+        '
+        'btnSave
+        '
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.btnSave.FlatAppearance.BorderSize = 0
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Location = New System.Drawing.Point(717, 280)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(104, 25)
+        Me.btnSave.TabIndex = 24
+        Me.btnSave.Text = "Commit"
+        Me.btnSave.UseVisualStyleBackColor = False
+        Me.btnSave.Visible = False
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.Location = New System.Drawing.Point(44, 314)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(122, 17)
+        Me.Label27.TabIndex = 23
+        Me.Label27.Text = "List of Employee/s :"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.ForeColor = System.Drawing.Color.Red
+        Me.Label26.Location = New System.Drawing.Point(606, 237)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(70, 13)
+        Me.Label26.TabIndex = 22
+        Me.Label26.Text = "( Important )"
+        '
+        'txtPasscode
+        '
+        Me.txtPasscode.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPasscode.Location = New System.Drawing.Point(438, 226)
+        Me.txtPasscode.Name = "txtPasscode"
+        Me.txtPasscode.ReadOnly = True
+        Me.txtPasscode.Size = New System.Drawing.Size(162, 35)
+        Me.txtPasscode.TabIndex = 21
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.Location = New System.Drawing.Point(434, 202)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(76, 21)
+        Me.Label25.TabIndex = 20
+        Me.Label25.Text = "Passcode:"
+        '
+        'txtContactNumber
+        '
+        Me.txtContactNumber.Location = New System.Drawing.Point(117, 239)
+        Me.txtContactNumber.Name = "txtContactNumber"
+        Me.txtContactNumber.ReadOnly = True
+        Me.txtContactNumber.Size = New System.Drawing.Size(295, 22)
+        Me.txtContactNumber.TabIndex = 19
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Location = New System.Drawing.Point(47, 242)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(60, 13)
+        Me.Label24.TabIndex = 18
+        Me.Label24.Text = "Contact #:"
+        '
+        'rbFemale
+        '
+        Me.rbFemale.AutoCheck = False
+        Me.rbFemale.AutoSize = True
+        Me.rbFemale.Location = New System.Drawing.Point(187, 215)
+        Me.rbFemale.Name = "rbFemale"
+        Me.rbFemale.Size = New System.Drawing.Size(61, 17)
+        Me.rbFemale.TabIndex = 17
+        Me.rbFemale.TabStop = True
+        Me.rbFemale.Text = "Female"
+        Me.rbFemale.UseVisualStyleBackColor = True
+        '
+        'rbMale
+        '
+        Me.rbMale.AutoCheck = False
+        Me.rbMale.AutoSize = True
+        Me.rbMale.Location = New System.Drawing.Point(116, 215)
+        Me.rbMale.Name = "rbMale"
+        Me.rbMale.Size = New System.Drawing.Size(50, 17)
+        Me.rbMale.TabIndex = 16
+        Me.rbMale.TabStop = True
+        Me.rbMale.Text = "Male"
+        Me.rbMale.UseVisualStyleBackColor = True
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(46, 215)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(48, 13)
+        Me.Label23.TabIndex = 15
+        Me.Label23.Text = "Gender:"
+        '
+        'txtAddress
+        '
+        Me.txtAddress.Location = New System.Drawing.Point(116, 182)
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.ReadOnly = True
+        Me.txtAddress.Size = New System.Drawing.Size(295, 22)
+        Me.txtAddress.TabIndex = 14
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.Location = New System.Drawing.Point(46, 185)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(51, 13)
+        Me.Label22.TabIndex = 13
+        Me.Label22.Text = "Address:"
+        '
+        'txtLastName
+        '
+        Me.txtLastName.Location = New System.Drawing.Point(370, 111)
+        Me.txtLastName.Name = "txtLastName"
+        Me.txtLastName.ReadOnly = True
+        Me.txtLastName.Size = New System.Drawing.Size(162, 22)
+        Me.txtLastName.TabIndex = 12
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label21.Location = New System.Drawing.Point(300, 114)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(62, 13)
+        Me.Label21.TabIndex = 11
+        Me.Label21.Text = "Last Name:"
+        '
+        'txtPosition
+        '
+        Me.txtPosition.Location = New System.Drawing.Point(117, 147)
+        Me.txtPosition.Name = "txtPosition"
+        Me.txtPosition.ReadOnly = True
+        Me.txtPosition.Size = New System.Drawing.Size(294, 22)
+        Me.txtPosition.TabIndex = 10
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Location = New System.Drawing.Point(46, 150)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(52, 13)
+        Me.Label20.TabIndex = 9
+        Me.Label20.Text = "Position:"
+        '
+        'txtFirstName
+        '
+        Me.txtFirstName.Location = New System.Drawing.Point(116, 111)
+        Me.txtFirstName.Name = "txtFirstName"
+        Me.txtFirstName.ReadOnly = True
+        Me.txtFirstName.Size = New System.Drawing.Size(162, 22)
+        Me.txtFirstName.TabIndex = 8
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Location = New System.Drawing.Point(46, 114)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(64, 13)
+        Me.Label19.TabIndex = 7
+        Me.Label19.Text = "First Name:"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Location = New System.Drawing.Point(46, 77)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(163, 17)
+        Me.Label17.TabIndex = 6
+        Me.Label17.Text = "- Employee's Information -"
+        '
+        'dgvEmployees
+        '
+        Me.dgvEmployees.AllowUserToAddRows = False
+        Me.dgvEmployees.AllowUserToDeleteRows = False
+        Me.dgvEmployees.AllowUserToResizeColumns = False
+        Me.dgvEmployees.AllowUserToResizeRows = False
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvEmployees.AutoGenerateColumns = False
+        Me.dgvEmployees.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.dgvEmployees.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvEmployees.ColumnHeadersHeight = 25
+        Me.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        Me.dgvEmployees.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.PasscodeDataGridViewTextBoxColumn, Me.FirstNameDataGridViewTextBoxColumn, Me.LastNameDataGridViewTextBoxColumn, Me.PositionDataGridViewTextBoxColumn, Me.AddressDataGridViewTextBoxColumn, Me.GenderDataGridViewTextBoxColumn, Me.ContactNumberDataGridViewTextBoxColumn})
+        Me.dgvEmployees.DataSource = Me.TblEmployeeBindingSource
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvEmployees.GridColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.dgvEmployees.Location = New System.Drawing.Point(42, 334)
+        Me.dgvEmployees.Name = "dgvEmployees"
+        Me.dgvEmployees.ReadOnly = True
+        Me.dgvEmployees.RowHeadersVisible = False
+        Me.dgvEmployees.RowHeadersWidth = 60
+        Me.dgvEmployees.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvEmployees.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvEmployees.RowTemplate.Height = 35
+        Me.dgvEmployees.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployees.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvEmployees.Size = New System.Drawing.Size(901, 236)
+        Me.dgvEmployees.TabIndex = 5
+        '
+        'IDDataGridViewTextBoxColumn
+        '
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        Me.IDDataGridViewTextBoxColumn.ReadOnly = True
+        Me.IDDataGridViewTextBoxColumn.Visible = False
+        '
+        'PasscodeDataGridViewTextBoxColumn
+        '
+        Me.PasscodeDataGridViewTextBoxColumn.DataPropertyName = "Passcode"
+        Me.PasscodeDataGridViewTextBoxColumn.HeaderText = "Passcode"
+        Me.PasscodeDataGridViewTextBoxColumn.Name = "PasscodeDataGridViewTextBoxColumn"
+        Me.PasscodeDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'FirstNameDataGridViewTextBoxColumn
+        '
+        Me.FirstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName"
+        Me.FirstNameDataGridViewTextBoxColumn.HeaderText = "FirstName"
+        Me.FirstNameDataGridViewTextBoxColumn.Name = "FirstNameDataGridViewTextBoxColumn"
+        Me.FirstNameDataGridViewTextBoxColumn.ReadOnly = True
+        Me.FirstNameDataGridViewTextBoxColumn.Width = 130
+        '
+        'LastNameDataGridViewTextBoxColumn
+        '
+        Me.LastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName"
+        Me.LastNameDataGridViewTextBoxColumn.HeaderText = "LastName"
+        Me.LastNameDataGridViewTextBoxColumn.Name = "LastNameDataGridViewTextBoxColumn"
+        Me.LastNameDataGridViewTextBoxColumn.ReadOnly = True
+        Me.LastNameDataGridViewTextBoxColumn.Width = 130
+        '
+        'PositionDataGridViewTextBoxColumn
+        '
+        Me.PositionDataGridViewTextBoxColumn.DataPropertyName = "Position"
+        Me.PositionDataGridViewTextBoxColumn.HeaderText = "Position"
+        Me.PositionDataGridViewTextBoxColumn.Name = "PositionDataGridViewTextBoxColumn"
+        Me.PositionDataGridViewTextBoxColumn.ReadOnly = True
+        Me.PositionDataGridViewTextBoxColumn.Width = 140
+        '
+        'AddressDataGridViewTextBoxColumn
+        '
+        Me.AddressDataGridViewTextBoxColumn.DataPropertyName = "Address"
+        Me.AddressDataGridViewTextBoxColumn.HeaderText = "Address"
+        Me.AddressDataGridViewTextBoxColumn.Name = "AddressDataGridViewTextBoxColumn"
+        Me.AddressDataGridViewTextBoxColumn.ReadOnly = True
+        Me.AddressDataGridViewTextBoxColumn.Width = 170
+        '
+        'GenderDataGridViewTextBoxColumn
+        '
+        Me.GenderDataGridViewTextBoxColumn.DataPropertyName = "Gender"
+        Me.GenderDataGridViewTextBoxColumn.HeaderText = "Gender"
+        Me.GenderDataGridViewTextBoxColumn.Name = "GenderDataGridViewTextBoxColumn"
+        Me.GenderDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'ContactNumberDataGridViewTextBoxColumn
+        '
+        Me.ContactNumberDataGridViewTextBoxColumn.DataPropertyName = "ContactNumber"
+        Me.ContactNumberDataGridViewTextBoxColumn.HeaderText = "ContactNumber"
+        Me.ContactNumberDataGridViewTextBoxColumn.Name = "ContactNumberDataGridViewTextBoxColumn"
+        Me.ContactNumberDataGridViewTextBoxColumn.ReadOnly = True
+        Me.ContactNumberDataGridViewTextBoxColumn.Width = 120
+        '
+        'TblEmployeeBindingSource
+        '
+        Me.TblEmployeeBindingSource.DataMember = "tblEmployee"
+        Me.TblEmployeeBindingSource.DataSource = Me.TimeClockProjectDataSet
+        '
+        'TimeClockProjectDataSet
+        '
+        Me.TimeClockProjectDataSet.DataSetName = "TimeClockProjectDataSet"
+        Me.TimeClockProjectDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'btnDelete
+        '
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(31, Byte), Integer), CType(CType(31, Byte), Integer))
+        Me.btnDelete.FlatAppearance.BorderSize = 0
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnDelete.Location = New System.Drawing.Point(297, 279)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(104, 25)
+        Me.btnDelete.TabIndex = 4
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
+        '
+        'btnEdit
+        '
+        Me.btnEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(126, Byte), Integer), CType(CType(17, Byte), Integer))
+        Me.btnEdit.FlatAppearance.BorderSize = 0
+        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEdit.Location = New System.Drawing.Point(187, 279)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(104, 25)
+        Me.btnEdit.TabIndex = 3
+        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.UseVisualStyleBackColor = False
+        '
+        'btnAdd
+        '
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.btnAdd.FlatAppearance.BorderSize = 0
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Location = New System.Drawing.Point(43, 280)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(138, 25)
+        Me.btnAdd.TabIndex = 2
+        Me.btnAdd.Text = "Add Employee"
+        Me.btnAdd.UseVisualStyleBackColor = False
         '
         'lblEmployee
         '
@@ -918,310 +1271,9 @@ Partial Class frmAdministrator
         Me.lblUnderline4.TabIndex = 1
         Me.lblUnderline4.Text = "____________"
         '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(43, 280)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(138, 25)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Add"
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(126, Byte), Integer), CType(CType(17, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(187, 279)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(104, 25)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Edit"
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(222, Byte), Integer), CType(CType(31, Byte), Integer), CType(CType(31, Byte), Integer))
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.ForeColor = System.Drawing.SystemColors.Control
-        Me.Button3.Location = New System.Drawing.Point(297, 279)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(104, 25)
-        Me.Button3.TabIndex = 4
-        Me.Button3.Text = "Delete"
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'dgvEmployees
-        '
-        Me.dgvEmployees.AllowUserToAddRows = False
-        Me.dgvEmployees.AllowUserToDeleteRows = False
-        Me.dgvEmployees.AllowUserToResizeColumns = False
-        Me.dgvEmployees.AllowUserToResizeRows = False
-        Me.dgvEmployees.AutoGenerateColumns = False
-        Me.dgvEmployees.BackgroundColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.dgvEmployees.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvEmployees.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.PasscodeDataGridViewTextBoxColumn, Me.FirstNameDataGridViewTextBoxColumn, Me.LastNameDataGridViewTextBoxColumn, Me.PositionDataGridViewTextBoxColumn, Me.AddressDataGridViewTextBoxColumn, Me.GenderDataGridViewTextBoxColumn, Me.ContactNumberDataGridViewTextBoxColumn})
-        Me.dgvEmployees.DataSource = Me.TblEmployeeBindingSource
-        Me.dgvEmployees.GridColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.dgvEmployees.Location = New System.Drawing.Point(42, 334)
-        Me.dgvEmployees.Name = "dgvEmployees"
-        Me.dgvEmployees.RowHeadersVisible = False
-        Me.dgvEmployees.RowHeadersWidth = 60
-        Me.dgvEmployees.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.dgvEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvEmployees.Size = New System.Drawing.Size(901, 236)
-        Me.dgvEmployees.TabIndex = 5
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(46, 77)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(163, 17)
-        Me.Label17.TabIndex = 6
-        Me.Label17.Text = "- Employee's Information -"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(46, 114)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(64, 13)
-        Me.Label19.TabIndex = 7
-        Me.Label19.Text = "First Name:"
-        '
-        'txtFirstName
-        '
-        Me.txtFirstName.Location = New System.Drawing.Point(116, 111)
-        Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(162, 22)
-        Me.txtFirstName.TabIndex = 8
-        '
-        'txtPosition
-        '
-        Me.txtPosition.Location = New System.Drawing.Point(117, 147)
-        Me.txtPosition.Name = "txtPosition"
-        Me.txtPosition.Size = New System.Drawing.Size(294, 22)
-        Me.txtPosition.TabIndex = 10
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(46, 150)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(52, 13)
-        Me.Label20.TabIndex = 9
-        Me.Label20.Text = "Position:"
-        '
-        'txtLastName
-        '
-        Me.txtLastName.Location = New System.Drawing.Point(370, 111)
-        Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(162, 22)
-        Me.txtLastName.TabIndex = 12
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(300, 114)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(62, 13)
-        Me.Label21.TabIndex = 11
-        Me.Label21.Text = "Last Name:"
-        '
-        'txtAddress
-        '
-        Me.txtAddress.Location = New System.Drawing.Point(116, 182)
-        Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Size = New System.Drawing.Size(295, 22)
-        Me.txtAddress.TabIndex = 14
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(46, 185)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(51, 13)
-        Me.Label22.TabIndex = 13
-        Me.Label22.Text = "Address:"
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(46, 215)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(48, 13)
-        Me.Label23.TabIndex = 15
-        Me.Label23.Text = "Gender:"
-        '
-        'rbMale
-        '
-        Me.rbMale.AutoSize = True
-        Me.rbMale.Location = New System.Drawing.Point(116, 215)
-        Me.rbMale.Name = "rbMale"
-        Me.rbMale.Size = New System.Drawing.Size(50, 17)
-        Me.rbMale.TabIndex = 16
-        Me.rbMale.TabStop = True
-        Me.rbMale.Text = "Male"
-        Me.rbMale.UseVisualStyleBackColor = True
-        '
-        'rbFemale
-        '
-        Me.rbFemale.AutoSize = True
-        Me.rbFemale.Location = New System.Drawing.Point(187, 215)
-        Me.rbFemale.Name = "rbFemale"
-        Me.rbFemale.Size = New System.Drawing.Size(61, 17)
-        Me.rbFemale.TabIndex = 17
-        Me.rbFemale.TabStop = True
-        Me.rbFemale.Text = "Female"
-        Me.rbFemale.UseVisualStyleBackColor = True
-        '
-        'txtContactNumber
-        '
-        Me.txtContactNumber.Location = New System.Drawing.Point(117, 239)
-        Me.txtContactNumber.Name = "txtContactNumber"
-        Me.txtContactNumber.Size = New System.Drawing.Size(295, 22)
-        Me.txtContactNumber.TabIndex = 19
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(47, 242)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(60, 13)
-        Me.Label24.TabIndex = 18
-        Me.Label24.Text = "Contact #:"
-        '
-        'txtPasscode
-        '
-        Me.txtPasscode.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtPasscode.Location = New System.Drawing.Point(438, 226)
-        Me.txtPasscode.Name = "txtPasscode"
-        Me.txtPasscode.Size = New System.Drawing.Size(162, 35)
-        Me.txtPasscode.TabIndex = 21
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(434, 202)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(76, 21)
-        Me.Label25.TabIndex = 20
-        Me.Label25.Text = "Passcode:"
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.ForeColor = System.Drawing.Color.Red
-        Me.Label26.Location = New System.Drawing.Point(606, 237)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(70, 13)
-        Me.Label26.TabIndex = 22
-        Me.Label26.Text = "( Important )"
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(44, 314)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(122, 17)
-        Me.Label27.TabIndex = 23
-        Me.Label27.Text = "List of Employee/s :"
-        '
-        'TimeClockProjectDataSet
-        '
-        Me.TimeClockProjectDataSet.DataSetName = "TimeClockProjectDataSet"
-        Me.TimeClockProjectDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'TimeClockProjectDataSetBindingSource
-        '
-        Me.TimeClockProjectDataSetBindingSource.DataSource = Me.TimeClockProjectDataSet
-        Me.TimeClockProjectDataSetBindingSource.Position = 0
-        '
-        'TblEmployeeBindingSource
-        '
-        Me.TblEmployeeBindingSource.DataMember = "tblEmployee"
-        Me.TblEmployeeBindingSource.DataSource = Me.TimeClockProjectDataSetBindingSource
-        '
         'TblEmployeeTableAdapter
         '
         Me.TblEmployeeTableAdapter.ClearBeforeFill = True
-        '
-        'IDDataGridViewTextBoxColumn
-        '
-        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
-        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
-        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
-        Me.IDDataGridViewTextBoxColumn.ReadOnly = True
-        Me.IDDataGridViewTextBoxColumn.Width = 50
-        '
-        'PasscodeDataGridViewTextBoxColumn
-        '
-        Me.PasscodeDataGridViewTextBoxColumn.DataPropertyName = "Passcode"
-        Me.PasscodeDataGridViewTextBoxColumn.HeaderText = "Passcode"
-        Me.PasscodeDataGridViewTextBoxColumn.Name = "PasscodeDataGridViewTextBoxColumn"
-        Me.PasscodeDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'FirstNameDataGridViewTextBoxColumn
-        '
-        Me.FirstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName"
-        Me.FirstNameDataGridViewTextBoxColumn.HeaderText = "FirstName"
-        Me.FirstNameDataGridViewTextBoxColumn.Name = "FirstNameDataGridViewTextBoxColumn"
-        Me.FirstNameDataGridViewTextBoxColumn.ReadOnly = True
-        Me.FirstNameDataGridViewTextBoxColumn.Width = 130
-        '
-        'LastNameDataGridViewTextBoxColumn
-        '
-        Me.LastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName"
-        Me.LastNameDataGridViewTextBoxColumn.HeaderText = "LastName"
-        Me.LastNameDataGridViewTextBoxColumn.Name = "LastNameDataGridViewTextBoxColumn"
-        Me.LastNameDataGridViewTextBoxColumn.ReadOnly = True
-        Me.LastNameDataGridViewTextBoxColumn.Width = 130
-        '
-        'PositionDataGridViewTextBoxColumn
-        '
-        Me.PositionDataGridViewTextBoxColumn.DataPropertyName = "Position"
-        Me.PositionDataGridViewTextBoxColumn.HeaderText = "Position"
-        Me.PositionDataGridViewTextBoxColumn.Name = "PositionDataGridViewTextBoxColumn"
-        Me.PositionDataGridViewTextBoxColumn.ReadOnly = True
-        Me.PositionDataGridViewTextBoxColumn.Width = 130
-        '
-        'AddressDataGridViewTextBoxColumn
-        '
-        Me.AddressDataGridViewTextBoxColumn.DataPropertyName = "Address"
-        Me.AddressDataGridViewTextBoxColumn.HeaderText = "Address"
-        Me.AddressDataGridViewTextBoxColumn.Name = "AddressDataGridViewTextBoxColumn"
-        Me.AddressDataGridViewTextBoxColumn.ReadOnly = True
-        Me.AddressDataGridViewTextBoxColumn.Width = 160
-        '
-        'GenderDataGridViewTextBoxColumn
-        '
-        Me.GenderDataGridViewTextBoxColumn.DataPropertyName = "Gender"
-        Me.GenderDataGridViewTextBoxColumn.HeaderText = "Gender"
-        Me.GenderDataGridViewTextBoxColumn.Name = "GenderDataGridViewTextBoxColumn"
-        Me.GenderDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'ContactNumberDataGridViewTextBoxColumn
-        '
-        Me.ContactNumberDataGridViewTextBoxColumn.DataPropertyName = "ContactNumber"
-        Me.ContactNumberDataGridViewTextBoxColumn.HeaderText = "ContactNumber"
-        Me.ContactNumberDataGridViewTextBoxColumn.Name = "ContactNumberDataGridViewTextBoxColumn"
-        Me.ContactNumberDataGridViewTextBoxColumn.ReadOnly = True
         '
         'frmAdministrator
         '
@@ -1272,12 +1324,11 @@ Partial Class frmAdministrator
         Me.pnlStaffAttendance.PerformLayout()
         Me.pnlManageEmployee.ResumeLayout(False)
         Me.pnlManageEmployee.PerformLayout()
+        CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TblEmployeeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TimeClockProjectDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlSchedules.ResumeLayout(False)
         Me.pnlSchedules.PerformLayout()
-        CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TimeClockProjectDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TimeClockProjectDataSetBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TblEmployeeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1347,10 +1398,9 @@ Partial Class frmAdministrator
     Friend WithEvents pnlSchedules As Panel
     Friend WithEvents lblSchedules As Label
     Friend WithEvents lblUnderline4 As Label
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents dgvEmployees As DataGridView
+    Friend WithEvents btnAdd As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnEdit As Button
     Friend WithEvents Label17 As Label
     Friend WithEvents Label19 As Label
     Friend WithEvents txtFirstName As TextBox
@@ -1369,7 +1419,7 @@ Partial Class frmAdministrator
     Friend WithEvents Label25 As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
-    Friend WithEvents TimeClockProjectDataSetBindingSource As BindingSource
+    Friend WithEvents dgvEmployees As DataGridView
     Friend WithEvents TimeClockProjectDataSet As TimeClockProjectDataSet
     Friend WithEvents TblEmployeeBindingSource As BindingSource
     Friend WithEvents TblEmployeeTableAdapter As TimeClockProjectDataSetTableAdapters.tblEmployeeTableAdapter
@@ -1381,4 +1431,6 @@ Partial Class frmAdministrator
     Friend WithEvents AddressDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents GenderDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ContactNumberDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnSave As Button
 End Class

@@ -58,7 +58,7 @@ Namespace My
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\TimeClockProject.ac"& _ 
-            "cdb;Persist Security Info=True;Jet OLEDB:Database Password=123")>  _
+            "cdb;Jet OLEDB:Database Password=123")>  _
         Public ReadOnly Property TimeClockProjectConnectionString() As String
             Get
                 Return CType(Me("TimeClockProjectConnectionString"),String)
