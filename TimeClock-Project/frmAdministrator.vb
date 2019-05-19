@@ -316,19 +316,23 @@
                 modifiedFirstName &= " " & fnameSplit(i).Substring(0, 1).ToUpper & fnameSplit(i).Substring(1).ToLower
             Catch ex As IndexOutOfRangeException
                 Exit For
+            Catch ex As ArgumentOutOfRangeException
+                Exit For
             End Try
         Next
         Dim lnameSplit() As String = Split(txtLastName.Text)
         Dim modifiedLastName As String = ""
-        For i = 0 To 5
+        For x = 0 To 5
             Try
-                modifiedLastName &= " " & lnameSplit(i).Substring(0, 1).ToUpper & lnameSplit(i).Substring(1).ToLower
+                modifiedLastName &= " " & lnameSplit(x).Substring(0, 1).ToUpper & lnameSplit(x).Substring(1).ToLower
             Catch ex As IndexOutOfRangeException
+                Exit For
+            Catch ex As ArgumentOutOfRangeException
                 Exit For
             End Try
         Next
 
-        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out")
+        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName.Trim, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out")
     End Sub
 
     Private Function CheckForAlphaCharacters(ByVal StringToCheck As String)
@@ -480,14 +484,21 @@
                 modifiedFirstName &= " " & fnameSplit(i).Substring(0, 1).ToUpper & fnameSplit(i).Substring(1).ToLower
             Catch ex As IndexOutOfRangeException
                 Exit For
+            Catch ex As ArgumentOutOfRangeException
+                MessageBox.Show("An error occured. Please try again.")
+                Exit For
             End Try
         Next
+
         Dim lnameSplit() As String = Split(txtLastName.Text)
         Dim modifiedLastName As String = ""
-        For i = 0 To 5
+        For x = 0 To 5
             Try
-                modifiedLastName &= " " & lnameSplit(i).Substring(0, 1).ToUpper & lnameSplit(i).Substring(1).ToLower
+                modifiedLastName &= " " & lnameSplit(x).Substring(0, 1).ToUpper & lnameSplit(x).Substring(1).ToLower
             Catch ex As IndexOutOfRangeException
+                Exit For
+            Catch ex As ArgumentOutOfRangeException
+                MessageBox.Show("An error occured. Please try again.")
                 Exit For
             End Try
         Next
@@ -574,5 +585,9 @@
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
         pnlSchedules.SendToBack()
+    End Sub
+
+    Private Sub btnEditAttendance_Click(sender As Object, e As EventArgs) Handles btnEditAttendance.Click
+        frmEditAttendance.Show()
     End Sub
 End Class

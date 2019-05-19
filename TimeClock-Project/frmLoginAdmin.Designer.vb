@@ -217,7 +217,7 @@ Partial Class frmLoginAdmin
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmLoginAdmin"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmLoginAdmin"
+        Me.Text = "Time Clock Software"
         Me.pnlAppbar.ResumeLayout(False)
         Me.pnlAppbar.PerformLayout()
         Me.ResumeLayout(False)

@@ -52,6 +52,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -78,6 +79,12 @@
       <DependentUpon>frmAdministrator.vb</DependentUpon>
     </Compile>
     <Compile Include="frmAdministrator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEditAttendance.Designer.vb">
+      <DependentUpon>frmEditAttendance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmEditAttendance.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLoginAdmin.Designer.vb">
@@ -118,6 +125,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmAdministrator.resx">
       <DependentUpon>frmAdministrator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEditAttendance.resx">
+      <DependentUpon>frmEditAttendance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLoginAdmin.resx">
       <DependentUpon>frmLoginAdmin.vb</DependentUpon>

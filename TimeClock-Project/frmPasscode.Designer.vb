@@ -467,7 +467,7 @@ Partial Class frmPasscode
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmPasscode"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Time Clock "
+        Me.Text = "Time Clock Software"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
