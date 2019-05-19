@@ -107,8 +107,6 @@
         End If
     End Sub
 
-
-
     Private Sub RefreshCurrentDateTime()
         Dim todaysdate As String = String.Format(DateFormat, Date.Now)
         lblCurrentTime.Text = TimeOfDay.ToString("h:mm tt")
@@ -133,6 +131,7 @@
 
     Private Sub btnClockIn_Click(sender As Object, e As EventArgs) Handles btnClockIn.Click
         ' Check Schedule
+        ' soon
 
         ' DATA: date, passcode, empname, position, in, out, lunchin, lunchout, hours, overtime, notes
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
@@ -147,6 +146,8 @@
         UpdateEmployeeStatus("In", EMP_PASSCODE)
 
         MessageBox.Show("Clocked in successfully.")
+        timer = 15
+        tmrCurrentTime.Stop()
         Me.Hide()
         frmPasscode.Show()
 
@@ -156,8 +157,9 @@
 
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
         Dim strclockin As String = ""
+        Dim totalbreak As String = ""
 
-        ' GET CLOCK IN TIME
+        ' GET CLOCK IN TIME AND TOTAL BREAK
         Access.AddParam("@passcode", EMP_PASSCODE)
         Access.AddParam("@date", todaysdate)
         Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Passcode]=@passcode AND [Date]=@date")
@@ -165,6 +167,11 @@
         For Each R As DataRow In Access.DbDataTable.Rows
             Try
                 strclockin = R("In")
+                If String.IsNullOrEmpty(R("TotalBreak").ToString) Then
+                    totalbreak = "00:00:00"
+                Else
+                    totalbreak = R("TotalBreak").ToString
+                End If
             Catch ex As Exception
                 MessageBox.Show("An error occured. HINT: Null values")
                 Exit Sub
@@ -174,15 +181,20 @@
         ' CALCULATE
         Dim clockout As DateTime
         Dim clockin As DateTime
-        Dim totalHour As TimeSpan
+        Dim hour As TimeSpan
+        Dim totalhour As TimeSpan
         clockin = New DateTime
         clockout = New DateTime
         clockin = Convert.ToDateTime(strclockin)
         clockout = Convert.ToDateTime(lblCurrentTime.Text)
-        totalHour = clockout.Subtract(clockin)
+        hour = clockout.Subtract(clockin)
+        totalhour = hour.Subtract(TimeSpan.Parse(totalbreak))
+
+        ' Check values
+        'MessageBox.Show(hour.ToString & " : " & totalbreak & " = " & totalhour.ToString)
 
         ' REGISTER OUT
-        Access.AddParam("@totalhour", totalHour.ToString)
+        Access.AddParam("@totalhour", totalhour.ToString)
         Access.AddParam("@out", lblCurrentTime.Text)
         Access.AddParam("@passcode", EMP_PASSCODE)
         Access.AddParam("@date", todaysdate)
@@ -194,6 +206,8 @@
         UpdateEmployeeStatus("Out", EMP_PASSCODE)
 
         MessageBox.Show("Clocked out successfully.")
+        timer = 15
+        tmrCurrentTime.Stop()
         Me.Hide()
         frmPasscode.Show()
 
@@ -211,7 +225,7 @@
         Dim addedbreak As Integer = 0
         Dim totalBreak As Integer = 0
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
-        Dim oldbreaktotal As TimeSpan
+        Dim oldbreaktotal As String = ""
 
         If btnBreak.Text = "Clock Out - Start Break" Then
             ' UPDATE ATTENDANCE - BreakOut
@@ -221,9 +235,17 @@
             Access.ExecuteQuery("UPDATE tblAttendance SET [BreakOut]=@breakout" &
                 " WHERE [Passcode]=@passcode AND [Date]=@date")
             If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
-            MessageBox.Show("Break started successfully.")
+
             ' UPDATE STATUS - break
             UpdateEmployeeStatus("break", EMP_PASSCODE)
+
+            ' REPORT
+            MessageBox.Show("Break started successfully.")
+            timer = 15
+            tmrCurrentTime.Stop()
+            Me.Hide()
+            frmPasscode.Show()
+
         ElseIf btnBreak.Text = "Clock Out - End Break" Then
             Dim strstartbreak As String = ""
             ' GET CLOCK IN TIME
@@ -234,9 +256,14 @@
             For Each R As DataRow In Access.DbDataTable.Rows
                 Try
                     strstartbreak = R("BreakOut")
-                    oldbreaktotal = R("TotalBreak")
+                    If String.IsNullOrEmpty(R("TotalBreak").ToString) Then
+                        oldbreaktotal = "00:00:00"
+                    Else
+                        oldbreaktotal = R("TotalBreak").ToString
+                    End If
                 Catch ex As Exception
-                    oldbreaktotal = TimeSpan.Zero
+                    MessageBox.Show(ex.Message)
+                    Exit Sub
                 End Try
             Next
 
@@ -252,7 +279,7 @@
             endbreak = Convert.ToDateTime(lblCurrentTime.Text)
             totalBreakTotal = endbreak.Subtract(startbreak)
 
-            newBreakTotal = totalBreakTotal.Add(oldbreaktotal)
+            newBreakTotal = totalBreakTotal.Add(TimeSpan.Parse(oldbreaktotal))
 
             ' UPDATE ATTENDANCE - BreakIn
             Access.AddParam("@breakin", lblCurrentTime.Text)
@@ -273,7 +300,12 @@
             ' UPDATE STATUS - break
             UpdateEmployeeStatus("In", EMP_PASSCODE)
 
+            ' REPORT
             MessageBox.Show("Break ended successfuly.")
+            timer = 15
+            tmrCurrentTime.Stop()
+            Me.Hide()
+            frmPasscode.Show()
         End If
     End Sub
 End Class
