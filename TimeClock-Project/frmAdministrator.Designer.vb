@@ -23,10 +23,10 @@ Partial Class frmAdministrator
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlNavBar = New System.Windows.Forms.Panel()
         Me.btnHomeIcon = New System.Windows.Forms.PictureBox()
         Me.btnDropdownIcon = New System.Windows.Forms.PictureBox()
@@ -128,6 +128,7 @@ Partial Class frmAdministrator
         Me.lblUnderline4 = New System.Windows.Forms.Label()
         Me.lblToastMessage = New System.Windows.Forms.Label()
         Me.tmrMessage = New System.Windows.Forms.Timer(Me.components)
+        Me.tmrTime = New System.Windows.Forms.Timer(Me.components)
         Me.pnlNavBar.SuspendLayout()
         CType(Me.btnHomeIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -305,7 +306,7 @@ Partial Class frmAdministrator
         Me.pnlDropDownBtn1.Controls.Add(Me.menuItmAccount)
         Me.pnlDropDownBtn1.Location = New System.Drawing.Point(998, 49)
         Me.pnlDropDownBtn1.Name = "pnlDropDownBtn1"
-        Me.pnlDropDownBtn1.Size = New System.Drawing.Size(187, 0)
+        Me.pnlDropDownBtn1.Size = New System.Drawing.Size(187, 115)
         Me.pnlDropDownBtn1.TabIndex = 3
         Me.pnlDropDownBtn1.Visible = False
         '
@@ -772,6 +773,7 @@ Partial Class frmAdministrator
         Me.btnScheduling.TabIndex = 3
         Me.btnScheduling.Text = "Scheduling"
         Me.btnScheduling.UseVisualStyleBackColor = False
+        Me.btnScheduling.Visible = False
         '
         'btnManageEmployee
         '
@@ -840,23 +842,22 @@ Partial Class frmAdministrator
         '
         Me.dgvAttendance.AllowUserToAddRows = False
         Me.dgvAttendance.AllowUserToDeleteRows = False
-        Me.dgvAttendance.AllowUserToResizeColumns = False
         Me.dgvAttendance.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
         Me.dgvAttendance.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvAttendance.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvAttendance.ColumnHeadersHeight = 25
         Me.dgvAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle10
         Me.dgvAttendance.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvAttendance.Location = New System.Drawing.Point(21, 72)
         Me.dgvAttendance.MultiSelect = False
@@ -905,12 +906,12 @@ Partial Class frmAdministrator
         Me.dtpAttendance.CalendarTitleForeColor = System.Drawing.SystemColors.Control
         Me.dtpAttendance.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpAttendance.Location = New System.Drawing.Point(342, 34)
-        Me.dtpAttendance.MaxDate = New Date(2019, 5, 18, 0, 0, 0, 0)
+        Me.dtpAttendance.MaxDate = New Date(2030, 1, 1, 0, 0, 0, 0)
         Me.dtpAttendance.MinDate = New Date(2017, 1, 1, 0, 0, 0, 0)
         Me.dtpAttendance.Name = "dtpAttendance"
         Me.dtpAttendance.Size = New System.Drawing.Size(248, 27)
         Me.dtpAttendance.TabIndex = 3
-        Me.dtpAttendance.Value = New Date(2019, 5, 18, 0, 0, 0, 0)
+        Me.dtpAttendance.Value = New Date(2019, 5, 19, 0, 0, 0, 0)
         '
         'btnGenerateReport
         '
@@ -1221,21 +1222,21 @@ Partial Class frmAdministrator
         Me.dgvEmployees.AllowUserToDeleteRows = False
         Me.dgvEmployees.AllowUserToResizeColumns = False
         Me.dgvEmployees.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
         Me.dgvEmployees.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvEmployees.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvEmployees.ColumnHeadersHeight = 25
         Me.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle12
         Me.dgvEmployees.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvEmployees.Location = New System.Drawing.Point(42, 270)
         Me.dgvEmployees.MultiSelect = False
@@ -1358,18 +1359,22 @@ Partial Class frmAdministrator
         '
         Me.tmrMessage.Interval = 3500
         '
+        'tmrTime
+        '
+        Me.tmrTime.Interval = 1000
+        '
         'frmAdministrator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(219, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1284, 677)
+        Me.Controls.Add(Me.pnlDropDownBtn1)
         Me.Controls.Add(Me.pnlStaffAttendance)
         Me.Controls.Add(Me.pnlManageEmployee)
         Me.Controls.Add(Me.lblToastMessage)
         Me.Controls.Add(Me.pnlSchedules)
         Me.Controls.Add(Me.pnlMenu)
-        Me.Controls.Add(Me.pnlDropDownBtn1)
         Me.Controls.Add(Me.pnlNavBar)
         Me.Controls.Add(Me.pnlDashboard)
         Me.ForeColor = System.Drawing.SystemColors.Control
@@ -1516,4 +1521,5 @@ Partial Class frmAdministrator
     Friend WithEvents btnLoadAttendance As Button
     Friend WithEvents dgvAttendance As DataGridView
     Friend WithEvents Button1 As Button
+    Friend WithEvents tmrTime As Timer
 End Class

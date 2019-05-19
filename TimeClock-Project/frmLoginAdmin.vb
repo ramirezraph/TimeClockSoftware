@@ -1,6 +1,7 @@
 ﻿Public Class frmLoginAdmin
 
-
+    ' IMPORTANT
+    Private Access As New DatabaseControl
 
     Private Sub btnCloseApp_Click(sender As Object, e As EventArgs) Handles btnCloseApp.Click
         Me.Close()
@@ -19,14 +20,22 @@
         If username = "" Or password = "" Then
             ShowMessage("Please complete the form.")
         Else
-            If username = "admin" And password = "123" Then
-                Me.Hide()
-                frmAdministrator.Show()
-            Else
-                ShowMessage("Incorrect username or password. Try again.")
-                txtPassword.Text = ""
-            End If
+            Access.AddParam("@username", username)
+            Access.AddParam("@password", password)
+            Access.ExecuteQuery("SELECT * FROM tblAccount WHERE [userlevel]='Administrator' AND [username]=@username AND [password]=@password")
+            If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+            For Each R As DataRow In Access.DbDataTable.Rows
+                If username = R("username") And password = R("password") And R("userlevel") = "Administrator" Then
+                    Me.Hide()
+                    'Dim frmAdmin As New frmAdministrator(R("name").ToString, R("userlevel"))
+                    'frmAdmin.Show()
+                End If
+            Next
+
+            ShowMessage("Incorrect credential. Try again.")
         End If
+
+
     End Sub
     Private Sub ShowMessage(msg As String)
         tmrMessage.Start()
@@ -37,5 +46,10 @@
     Private Sub tmrMessage_Tick(sender As Object, e As EventArgs) Handles tmrMessage.Tick
         lblMessage.Visible = False
         tmrMessage.Stop()
+    End Sub
+
+    Private Sub frmLoginAdmin_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        txtUsername.Text = ""
+        txtPassword.Text = ""
     End Sub
 End Class

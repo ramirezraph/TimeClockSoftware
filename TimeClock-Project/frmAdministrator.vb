@@ -3,6 +3,22 @@
     ' IMPORTANT
     Private Access As New DatabaseControl
     Dim selectedindex As Integer
+    Private Const DateFormat As String = "{0:MMM dd, yyyy}"
+
+    Dim USER_NAME As String
+    Dim USER_USERLEVEL As String
+
+    'Public Sub New(name As String, userlevel As String)
+
+    '    ' This call is required by the designer.
+    '    InitializeComponent()
+
+    '    USER_NAME = name
+    '    USER_USERLEVEL = userlevel
+
+    '    ' Add any initialization after the InitializeComponent() call.
+
+    'End Sub
 
     ' drop down menu item functionalities
     Dim btnNavButtonIsActive = False
@@ -16,6 +32,17 @@
         btnNavButtonIsActive = False
     End Sub
     ' end
+
+    Private Sub RefreshCurrentDateTime()
+        Dim todaysdate As String = String.Format(DateFormat, Date.Now)
+        lblDate.Text = todaysdate
+        lblTime.Text = TimeOfDay.ToString("h:mm tt")
+        tmrTime.Start()
+    End Sub
+
+    Private Sub tmrTime_Tick(sender As Object, e As EventArgs) Handles tmrTime.Tick
+        RefreshCurrentDateTime()
+    End Sub
 
     Private Sub btnCloseForm_Click(sender As Object, e As EventArgs) Handles btnCloseForm.Click
         Me.Close()
@@ -52,7 +79,6 @@
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
         pnlSchedules.SendToBack()
-
     End Sub
 
     Private Sub btnMenuAttendance_Click(sender As Object, e As EventArgs) Handles btnMenuAttendance.Click
@@ -60,6 +86,10 @@
         pnlStaffAttendance.BringToFront()
         pnlManageEmployee.SendToBack()
         pnlSchedules.SendToBack()
+
+        dtpAttendance.Value = Date.Now
+        Dim selectedDate As String = dtpAttendance.Value.Month & "/" & dtpAttendance.Value.Day & "/" & dtpAttendance.Value.Year
+        RefreshAttendanceTable(selectedDate)
     End Sub
 
     Private Sub btnManageEmployee_Click(sender As Object, e As EventArgs) Handles btnManageEmployee.Click
@@ -163,8 +193,15 @@
     End Sub
 
     Private Sub frmAdministrator_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        RefreshCurrentDateTime()
         RefreshEmployeeTable()
         pnlDashboard.BringToFront()
+
+        'lblUserName.Text = USER_NAME
+        'Dim TestSplit() As String = Split(USER_NAME)
+        'Dim first As String = TestSplit(0).Substring(0, 1).ToUpper
+        'Dim second As String = TestSplit(1).Substring(0, 1).ToUpper
+        'btnUserInitial.Text = first & second
     End Sub
 
     Private Sub RefreshEmployeeTable()
@@ -178,10 +215,12 @@
             dgvEmployees.Columns(2).HeaderText = "First Name"
             dgvEmployees.Columns(3).HeaderText = "Last Name"
             dgvEmployees.Columns(7).HeaderText = "Contact Number"
+            dgvEmployees.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvEmployees.Columns("FirstName").Width = 130
             dgvEmployees.Columns("LastName").Width = 130
             dgvEmployees.Columns("Address").Width = 180
-            dgvEmployees.Columns("Position").Width = 130
+            dgvEmployees.Columns("Status").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvEmployees.Columns("Position").Visible = False
             dgvEmployees.Columns("ID").Visible = False
             dgvEmployees.Columns("Passcode").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Catch ex As Exception
@@ -269,8 +308,27 @@
             txtPasscode.Text = ""
             Exit Sub
         End If
+        ' FORMAL NAME
+        Dim fnameSplit() As String = Split(txtFirstName.Text)
+        Dim modifiedFirstName As String = ""
+        For i = 0 To 5
+            Try
+                modifiedFirstName &= " " & fnameSplit(i).Substring(0, 1).ToUpper & fnameSplit(i).Substring(1).ToLower
+            Catch ex As IndexOutOfRangeException
+                Exit For
+            End Try
+        Next
+        Dim lnameSplit() As String = Split(txtLastName.Text)
+        Dim modifiedLastName As String = ""
+        For i = 0 To 5
+            Try
+                modifiedLastName &= " " & lnameSplit(i).Substring(0, 1).ToUpper & lnameSplit(i).Substring(1).ToLower
+            Catch ex As IndexOutOfRangeException
+                Exit For
+            End Try
+        Next
 
-        AddEmployee(txtPasscode.Text, (txtFirstName.Text).Substring(0, 1).ToUpper & (txtFirstName.Text).Substring(1).ToLower, (txtLastName.Text).Substring(0, 1).ToUpper & (txtLastName.Text).Substring(1).ToLower, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out")
+        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out")
     End Sub
 
     Private Function CheckForAlphaCharacters(ByVal StringToCheck As String)
@@ -414,8 +472,28 @@
         Dim id As String = selectedRow.Cells(0).Value.ToString
         Dim confirm As Integer = MessageBox.Show("Are you sure you want to update?", "Confirm", MessageBoxButtons.YesNo)
 
+        ' FORMAL NAME
+        Dim fnameSplit() As String = Split(txtFirstName.Text)
+        Dim modifiedFirstName As String = ""
+        For i = 0 To 5
+            Try
+                modifiedFirstName &= " " & fnameSplit(i).Substring(0, 1).ToUpper & fnameSplit(i).Substring(1).ToLower
+            Catch ex As IndexOutOfRangeException
+                Exit For
+            End Try
+        Next
+        Dim lnameSplit() As String = Split(txtLastName.Text)
+        Dim modifiedLastName As String = ""
+        For i = 0 To 5
+            Try
+                modifiedLastName &= " " & lnameSplit(i).Substring(0, 1).ToUpper & lnameSplit(i).Substring(1).ToLower
+            Catch ex As IndexOutOfRangeException
+                Exit For
+            End Try
+        Next
+
         If confirm = DialogResult.Yes Then
-            UpdateEmployee(txtPasscode.Text, (txtFirstName.Text).Substring(0, 1).ToUpper & (txtFirstName.Text).Substring(1).ToLower, (txtLastName.Text).Substring(0, 1).ToUpper & (txtLastName.Text).Substring(1).ToLower, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text)
+            UpdateEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName.Trim, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text)
         End If
 
 
@@ -447,7 +525,54 @@
         btnDelete.Enabled = False
     End Sub
 
-    Private Sub btnLoadAttendance_Click(sender As Object, e As EventArgs) Handles btnLoadAttendance.Click
+    ' ATTENDANCE PANEL
 
+    Private Sub btnLoadAttendance_Click(sender As Object, e As EventArgs) Handles btnLoadAttendance.Click
+        Dim selectedDate As String = dtpAttendance.Value.Month & "/" & dtpAttendance.Value.Day & "/" & dtpAttendance.Value.Year
+        RefreshAttendanceTable(selectedDate)
+    End Sub
+
+    Private Sub RefreshAttendanceTable(datetime As String)
+        ' Run Query
+        Access.AddParam("@date", datetime)
+        Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Date]=@date ORDER BY ID ASC")
+
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        ' Fill DataGridView
+        dgvAttendance.DataSource = Access.DbDataTable
+
+        Try
+            dgvAttendance.Columns(0).Visible = False
+            dgvAttendance.Columns(2).Visible = False
+            dgvAttendance.Columns(3).Width = 150
+            dgvAttendance.Columns(12).Width = 150
+            dgvAttendance.Columns(4).Visible = False
+            dgvAttendance.Columns(11).Visible = False
+            dgvAttendance.Columns(3).HeaderText = "Employee"
+            dgvAttendance.Columns(5).HeaderText = "Time In"
+            dgvAttendance.Columns(6).HeaderText = "Time Out"
+            dgvAttendance.Columns(7).HeaderText = "Break Start"
+            dgvAttendance.Columns(8).HeaderText = "Break End"
+            dgvAttendance.Columns(9).HeaderText = "Break Total"
+            dgvAttendance.Columns(10).HeaderText = "Hour/s"
+            dgvAttendance.Columns(5).DefaultCellStyle.Format = "hh:mm:tt"
+            dgvAttendance.Columns(6).DefaultCellStyle.Format = "hh:mm:tt"
+            dgvAttendance.Columns(7).DefaultCellStyle.Format = "hh:mm:tt"
+            dgvAttendance.Columns(8).DefaultCellStyle.Format = "hh:mm:tt"
+            dgvAttendance.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnHomeIcon_Click(sender As Object, e As EventArgs) Handles btnHomeIcon.Click
+        pnlDashboard.BringToFront()
+        pnlStaffAttendance.SendToBack()
+        pnlManageEmployee.SendToBack()
+        pnlSchedules.SendToBack()
     End Sub
 End Class
