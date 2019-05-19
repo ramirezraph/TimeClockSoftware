@@ -23,10 +23,10 @@ Partial Class frmAdministrator
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlNavBar = New System.Windows.Forms.Panel()
         Me.btnHomeIcon = New System.Windows.Forms.PictureBox()
         Me.btnDropdownIcon = New System.Windows.Forms.PictureBox()
@@ -85,6 +85,12 @@ Partial Class frmAdministrator
         Me.btnMenuAttendance = New System.Windows.Forms.Button()
         Me.btnMenuDashboard = New System.Windows.Forms.Button()
         Me.pnlStaffAttendance = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.dgvAttendance = New System.Windows.Forms.DataGridView()
+        Me.btnLoadAttendance = New System.Windows.Forms.Button()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.dtpAttendance = New System.Windows.Forms.DateTimePicker()
+        Me.btnGenerateReport = New System.Windows.Forms.Button()
         Me.lblUnderline2 = New System.Windows.Forms.Label()
         Me.lblStaffAttendance = New System.Windows.Forms.Label()
         Me.pnlManageEmployee = New System.Windows.Forms.Panel()
@@ -122,12 +128,6 @@ Partial Class frmAdministrator
         Me.lblUnderline4 = New System.Windows.Forms.Label()
         Me.lblToastMessage = New System.Windows.Forms.Label()
         Me.tmrMessage = New System.Windows.Forms.Timer(Me.components)
-        Me.btnGenerateReport = New System.Windows.Forms.Button()
-        Me.dtpAttendance = New System.Windows.Forms.DateTimePicker()
-        Me.Label29 = New System.Windows.Forms.Label()
-        Me.btnLoadAttendance = New System.Windows.Forms.Button()
-        Me.dgvAttendance = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.pnlNavBar.SuspendLayout()
         CType(Me.btnHomeIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -146,10 +146,10 @@ Partial Class frmAdministrator
         Me.pnlNoOfEmployee.SuspendLayout()
         Me.pnlMenu.SuspendLayout()
         Me.pnlStaffAttendance.SuspendLayout()
+        CType(Me.dgvAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlManageEmployee.SuspendLayout()
         CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlSchedules.SuspendLayout()
-        CType(Me.dgvAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlNavBar
@@ -823,6 +823,108 @@ Partial Class frmAdministrator
         Me.pnlStaffAttendance.Size = New System.Drawing.Size(1031, 585)
         Me.pnlStaffAttendance.TabIndex = 11
         '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(126, Byte), Integer), CType(CType(17, Byte), Integer))
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.White
+        Me.Button1.Location = New System.Drawing.Point(758, 34)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(93, 27)
+        Me.Button1.TabIndex = 7
+        Me.Button1.Text = "Edit"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'dgvAttendance
+        '
+        Me.dgvAttendance.AllowUserToAddRows = False
+        Me.dgvAttendance.AllowUserToDeleteRows = False
+        Me.dgvAttendance.AllowUserToResizeColumns = False
+        Me.dgvAttendance.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvAttendance.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.dgvAttendance.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvAttendance.ColumnHeadersHeight = 25
+        Me.dgvAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvAttendance.GridColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.dgvAttendance.Location = New System.Drawing.Point(21, 72)
+        Me.dgvAttendance.MultiSelect = False
+        Me.dgvAttendance.Name = "dgvAttendance"
+        Me.dgvAttendance.ReadOnly = True
+        Me.dgvAttendance.RowHeadersVisible = False
+        Me.dgvAttendance.RowHeadersWidth = 60
+        Me.dgvAttendance.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvAttendance.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvAttendance.RowTemplate.Height = 35
+        Me.dgvAttendance.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvAttendance.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvAttendance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvAttendance.Size = New System.Drawing.Size(987, 510)
+        Me.dgvAttendance.TabIndex = 6
+        '
+        'btnLoadAttendance
+        '
+        Me.btnLoadAttendance.BackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.btnLoadAttendance.FlatAppearance.BorderSize = 0
+        Me.btnLoadAttendance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLoadAttendance.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.btnLoadAttendance.Location = New System.Drawing.Point(598, 34)
+        Me.btnLoadAttendance.Name = "btnLoadAttendance"
+        Me.btnLoadAttendance.Size = New System.Drawing.Size(93, 27)
+        Me.btnLoadAttendance.TabIndex = 5
+        Me.btnLoadAttendance.Text = "Load"
+        Me.btnLoadAttendance.UseVisualStyleBackColor = False
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label29.ForeColor = System.Drawing.Color.Silver
+        Me.Label29.Location = New System.Drawing.Point(285, 39)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(57, 17)
+        Me.Label29.TabIndex = 4
+        Me.Label29.Text = "Browse: "
+        '
+        'dtpAttendance
+        '
+        Me.dtpAttendance.CalendarForeColor = System.Drawing.SystemColors.Control
+        Me.dtpAttendance.CalendarMonthBackground = System.Drawing.Color.Transparent
+        Me.dtpAttendance.CalendarTitleBackColor = System.Drawing.Color.Transparent
+        Me.dtpAttendance.CalendarTitleForeColor = System.Drawing.SystemColors.Control
+        Me.dtpAttendance.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpAttendance.Location = New System.Drawing.Point(342, 34)
+        Me.dtpAttendance.MaxDate = New Date(2019, 5, 18, 0, 0, 0, 0)
+        Me.dtpAttendance.MinDate = New Date(2017, 1, 1, 0, 0, 0, 0)
+        Me.dtpAttendance.Name = "dtpAttendance"
+        Me.dtpAttendance.Size = New System.Drawing.Size(248, 27)
+        Me.dtpAttendance.TabIndex = 3
+        Me.dtpAttendance.Value = New Date(2019, 5, 18, 0, 0, 0, 0)
+        '
+        'btnGenerateReport
+        '
+        Me.btnGenerateReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(204, Byte), Integer))
+        Me.btnGenerateReport.FlatAppearance.BorderSize = 0
+        Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
+        Me.btnGenerateReport.Location = New System.Drawing.Point(857, 34)
+        Me.btnGenerateReport.Name = "btnGenerateReport"
+        Me.btnGenerateReport.Size = New System.Drawing.Size(152, 27)
+        Me.btnGenerateReport.TabIndex = 2
+        Me.btnGenerateReport.Text = "Generate Report"
+        Me.btnGenerateReport.UseVisualStyleBackColor = False
+        '
         'lblUnderline2
         '
         Me.lblUnderline2.AutoSize = True
@@ -1119,21 +1221,21 @@ Partial Class frmAdministrator
         Me.dgvEmployees.AllowUserToDeleteRows = False
         Me.dgvEmployees.AllowUserToResizeColumns = False
         Me.dgvEmployees.AllowUserToResizeRows = False
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.dgvEmployees.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvEmployees.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvEmployees.ColumnHeadersHeight = 25
         Me.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvEmployees.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvEmployees.Location = New System.Drawing.Point(42, 270)
         Me.dgvEmployees.MultiSelect = False
@@ -1256,104 +1358,6 @@ Partial Class frmAdministrator
         '
         Me.tmrMessage.Interval = 3500
         '
-        'btnGenerateReport
-        '
-        Me.btnGenerateReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(204, Byte), Integer))
-        Me.btnGenerateReport.FlatAppearance.BorderSize = 0
-        Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
-        Me.btnGenerateReport.Location = New System.Drawing.Point(857, 34)
-        Me.btnGenerateReport.Name = "btnGenerateReport"
-        Me.btnGenerateReport.Size = New System.Drawing.Size(152, 27)
-        Me.btnGenerateReport.TabIndex = 2
-        Me.btnGenerateReport.Text = "Generate Report"
-        Me.btnGenerateReport.UseVisualStyleBackColor = False
-        '
-        'dtpAttendance
-        '
-        Me.dtpAttendance.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpAttendance.Location = New System.Drawing.Point(342, 34)
-        Me.dtpAttendance.MaxDate = New Date(2019, 5, 18, 0, 0, 0, 0)
-        Me.dtpAttendance.MinDate = New Date(2017, 1, 1, 0, 0, 0, 0)
-        Me.dtpAttendance.Name = "dtpAttendance"
-        Me.dtpAttendance.Size = New System.Drawing.Size(248, 27)
-        Me.dtpAttendance.TabIndex = 3
-        Me.dtpAttendance.Value = New Date(2019, 5, 18, 0, 0, 0, 0)
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.ForeColor = System.Drawing.Color.Silver
-        Me.Label29.Location = New System.Drawing.Point(285, 39)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(57, 17)
-        Me.Label29.TabIndex = 4
-        Me.Label29.Text = "Browse: "
-        '
-        'btnLoadAttendance
-        '
-        Me.btnLoadAttendance.BackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer))
-        Me.btnLoadAttendance.FlatAppearance.BorderSize = 0
-        Me.btnLoadAttendance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLoadAttendance.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.btnLoadAttendance.Location = New System.Drawing.Point(598, 34)
-        Me.btnLoadAttendance.Name = "btnLoadAttendance"
-        Me.btnLoadAttendance.Size = New System.Drawing.Size(93, 27)
-        Me.btnLoadAttendance.TabIndex = 5
-        Me.btnLoadAttendance.Text = "Load"
-        Me.btnLoadAttendance.UseVisualStyleBackColor = False
-        '
-        'dgvAttendance
-        '
-        Me.dgvAttendance.AllowUserToAddRows = False
-        Me.dgvAttendance.AllowUserToDeleteRows = False
-        Me.dgvAttendance.AllowUserToResizeColumns = False
-        Me.dgvAttendance.AllowUserToResizeRows = False
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
-        Me.dgvAttendance.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.dgvAttendance.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvAttendance.ColumnHeadersHeight = 25
-        Me.dgvAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle8
-        Me.dgvAttendance.GridColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.dgvAttendance.Location = New System.Drawing.Point(21, 72)
-        Me.dgvAttendance.MultiSelect = False
-        Me.dgvAttendance.Name = "dgvAttendance"
-        Me.dgvAttendance.ReadOnly = True
-        Me.dgvAttendance.RowHeadersVisible = False
-        Me.dgvAttendance.RowHeadersWidth = 60
-        Me.dgvAttendance.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgvAttendance.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dgvAttendance.RowTemplate.Height = 35
-        Me.dgvAttendance.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvAttendance.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.dgvAttendance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvAttendance.Size = New System.Drawing.Size(987, 510)
-        Me.dgvAttendance.TabIndex = 6
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(126, Byte), Integer), CType(CType(17, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(758, 34)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(93, 27)
-        Me.Button1.TabIndex = 7
-        Me.Button1.Text = "Edit"
-        Me.Button1.UseVisualStyleBackColor = False
-        '
         'frmAdministrator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1402,12 +1406,12 @@ Partial Class frmAdministrator
         Me.pnlMenu.ResumeLayout(False)
         Me.pnlStaffAttendance.ResumeLayout(False)
         Me.pnlStaffAttendance.PerformLayout()
+        CType(Me.dgvAttendance, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlManageEmployee.ResumeLayout(False)
         Me.pnlManageEmployee.PerformLayout()
         CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlSchedules.ResumeLayout(False)
         Me.pnlSchedules.PerformLayout()
-        CType(Me.dgvAttendance, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

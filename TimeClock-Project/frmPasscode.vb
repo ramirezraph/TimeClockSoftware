@@ -1,6 +1,14 @@
 ﻿Public Class frmPasscode
-
+    Private Const DateFormat As String = "{0:MMM dd\, yyyy}"
     Dim passcode As String
+    Dim passcodetime As Integer = 0
+    Dim messagetime As Integer = 0
+    Dim TIME_THREESECONDS As Integer = 3
+    Dim TIME_TWOSECONDS As Integer = 2
+    Dim TIME_ONESECOND As Integer = 1
+
+    ' IMPORTANT
+    Private Access As New DatabaseControl
 
     Private Sub txtFirstNum_TextChanged(sender As Object, e As EventArgs) Handles txtFirstNum.TextChanged
         If txtFirstNum.Text = "" Then
@@ -27,6 +35,8 @@
     End Sub
 
     Private Sub txtFourthNum_TextChanged(sender As Object, e As EventArgs) Handles txtFourthNum.TextChanged
+        passcodetime = 0
+        tmrPasscode.Enabled = True
         tmrPasscode.Start()
         If txtFourthNum.Text = "" Then
             pnl4Indic.BackColor = Color.FromArgb(26, 26, 26)
@@ -175,29 +185,61 @@
     End Sub
 
     Private Sub tmrPasscode_Tick(sender As Object, e As EventArgs) Handles tmrPasscode.Tick
-        ' begin passcode validation
-        passcode = txtFirstNum.Text & txtSecondNum.Text & txtThirdNum.Text & txtFourthNum.Text
-        If passcode = "1234" Then
-            txtFirstNum.Text = ""
-            txtSecondNum.Text = ""
-            txtThirdNum.Text = ""
-            txtFourthNum.Text = ""
-            Me.Hide()
-            frmTimeInOut.Show()
-        Else
-            tmrMessage.Start()
-            txtFirstNum.Text = ""
-            txtSecondNum.Text = ""
-            txtThirdNum.Text = ""
-            txtFourthNum.Text = ""
-            lblPasscodeNotFound.Visible = True
+        Dim name As String = ""
+        Dim status As String = ""
+        Dim position As String = ""
+
+        passcodetime += 1
+        If passcodetime = TIME_ONESECOND Then
+            ' begin passcode validation
+            passcode = txtFirstNum.Text & txtSecondNum.Text & txtThirdNum.Text & txtFourthNum.Text
+
+            If CheckPasscodeIfExists(passcode) Then
+                Access.AddParam("@passcode", passcode)
+                Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE [Passcode]=@passcode")
+                If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+                For Each R As DataRow In Access.DbDataTable.Rows
+                    Try
+                        name = R("FirstName") & " " & R("LastName")
+                        status = R("Status")
+                        position = R("Position")
+                    Catch ex As Exception
+                        txtFirstNum.Text = ""
+                        txtSecondNum.Text = ""
+                        txtThirdNum.Text = ""
+                        txtFourthNum.Text = ""
+                        MessageBox.Show("An error occured. HINT: Null values")
+                        Exit Sub
+                    End Try
+                Next
+                txtFirstNum.Text = ""
+                txtSecondNum.Text = ""
+                txtThirdNum.Text = ""
+                txtFourthNum.Text = ""
+                tmrPasscode.Enabled = False
+                Me.Hide()
+                Dim frmTimeInOut As New frmTimeInOut(name, status, position, passcode)
+                frmTimeInOut.Show()
+                Exit Sub
+            Else
+                messagetime = 0
+                lblPasscodeNotFound.Visible = True
+                tmrMessage.Start()
+                txtFirstNum.Text = ""
+                txtSecondNum.Text = ""
+                txtThirdNum.Text = ""
+                txtFourthNum.Text = ""
+            End If
+            tmrPasscode.Stop()
         End If
-        tmrPasscode.Stop()
     End Sub
 
     Private Sub tmrMessage_Tick(sender As Object, e As EventArgs) Handles tmrMessage.Tick
-        lblPasscodeNotFound.Visible = False
-        tmrMessage.Stop()
+        messagetime += 1
+        If messagetime = TIME_TWOSECONDS Then
+            lblPasscodeNotFound.Visible = False
+            tmrMessage.Stop()
+        End If
     End Sub
 
     Private Sub lblPasscodeNotFound_Click(sender As Object, e As EventArgs) Handles lblPasscodeNotFound.Click
@@ -225,7 +267,32 @@
         Me.Close()
     End Sub
 
+    Private Function CheckPasscodeIfExists(Passcode As String)
+        Access.ExecuteQuery("SELECT Passcode FROM tblEmployee")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Return False
+
+        For Each R As DataRow In Access.DbDataTable.Rows
+            If Passcode = R("Passcode") Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+
     Private Sub frmPasscode_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        Dim todaysdate As String = String.Format(DateFormat, Date.Now)
+        lblDate.Text = todaysdate
+        lblTime.Text = TimeOfDay.ToString("h:mm")
+        lblAMPM.Text = TimeOfDay.ToString("tt")
+        tmrCurrentTime.Start()
 
     End Sub
+
+    Private Sub tmrCurrentTime_Tick(sender As Object, e As EventArgs) Handles tmrCurrentTime.Tick
+        Dim todaysdate As String = String.Format(DateFormat, Date.Now)
+        lblDate.Text = todaysdate
+        lblTime.Text = TimeOfDay.ToString("h:mm")
+        lblAMPM.Text = TimeOfDay.ToString("tt")
+    End Sub
+
 End Class

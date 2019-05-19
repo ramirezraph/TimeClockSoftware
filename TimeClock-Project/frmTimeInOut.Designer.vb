@@ -22,7 +22,9 @@ Partial Class frmTimeInOut
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.pnlAppbar = New System.Windows.Forms.Panel()
+        Me.lblTimer = New System.Windows.Forms.Label()
         Me.lblAppTitle = New System.Windows.Forms.Label()
         Me.lblAppName = New System.Windows.Forms.Label()
         Me.pbUserImage = New System.Windows.Forms.PictureBox()
@@ -36,6 +38,8 @@ Partial Class frmTimeInOut
         Me.btnClockIn = New System.Windows.Forms.Button()
         Me.btnClockOut = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.tmrCurrentTime = New System.Windows.Forms.Timer(Me.components)
+        Me.btnBreak = New System.Windows.Forms.Button()
         Me.pnlAppbar.SuspendLayout()
         CType(Me.pbUserImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -44,12 +48,25 @@ Partial Class frmTimeInOut
         'pnlAppbar
         '
         Me.pnlAppbar.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        Me.pnlAppbar.Controls.Add(Me.lblTimer)
         Me.pnlAppbar.Controls.Add(Me.lblAppTitle)
         Me.pnlAppbar.Controls.Add(Me.lblAppName)
         Me.pnlAppbar.Location = New System.Drawing.Point(0, 0)
         Me.pnlAppbar.Name = "pnlAppbar"
         Me.pnlAppbar.Size = New System.Drawing.Size(486, 46)
         Me.pnlAppbar.TabIndex = 33
+        '
+        'lblTimer
+        '
+        Me.lblTimer.BackColor = System.Drawing.Color.Transparent
+        Me.lblTimer.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTimer.ForeColor = System.Drawing.Color.White
+        Me.lblTimer.Location = New System.Drawing.Point(440, 7)
+        Me.lblTimer.Name = "lblTimer"
+        Me.lblTimer.Size = New System.Drawing.Size(44, 30)
+        Me.lblTimer.TabIndex = 11
+        Me.lblTimer.Text = "15"
+        Me.lblTimer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblAppTitle
         '
@@ -76,9 +93,9 @@ Partial Class frmTimeInOut
         '
         Me.pbUserImage.BackColor = System.Drawing.Color.Transparent
         Me.pbUserImage.Image = Global.TimeClock_Project.My.Resources.Resources.attendanceicon
-        Me.pbUserImage.Location = New System.Drawing.Point(139, 64)
+        Me.pbUserImage.Location = New System.Drawing.Point(0, 82)
         Me.pbUserImage.Name = "pbUserImage"
-        Me.pbUserImage.Size = New System.Drawing.Size(200, 200)
+        Me.pbUserImage.Size = New System.Drawing.Size(486, 171)
         Me.pbUserImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.pbUserImage.TabIndex = 34
         Me.pbUserImage.TabStop = False
@@ -143,25 +160,25 @@ Partial Class frmTimeInOut
         '
         'lblGreetings
         '
-        Me.lblGreetings.AutoSize = True
         Me.lblGreetings.BackColor = System.Drawing.Color.Transparent
         Me.lblGreetings.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblGreetings.Location = New System.Drawing.Point(94, 267)
+        Me.lblGreetings.Location = New System.Drawing.Point(0, 256)
         Me.lblGreetings.Name = "lblGreetings"
-        Me.lblGreetings.Size = New System.Drawing.Size(299, 32)
+        Me.lblGreetings.Size = New System.Drawing.Size(486, 32)
         Me.lblGreetings.TabIndex = 36
         Me.lblGreetings.Text = "Good afternoon, John Doe"
+        Me.lblGreetings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblStatus
         '
-        Me.lblStatus.AutoSize = True
         Me.lblStatus.BackColor = System.Drawing.Color.Transparent
         Me.lblStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblStatus.Location = New System.Drawing.Point(146, 299)
+        Me.lblStatus.Location = New System.Drawing.Point(0, 288)
         Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(177, 17)
+        Me.lblStatus.Size = New System.Drawing.Size(486, 17)
         Me.lblStatus.TabIndex = 37
         Me.lblStatus.Text = "You are currently clocked out"
+        Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'btnClockIn
         '
@@ -170,7 +187,7 @@ Partial Class frmTimeInOut
         Me.btnClockIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClockIn.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClockIn.ForeColor = System.Drawing.Color.White
-        Me.btnClockIn.Location = New System.Drawing.Point(118, 344)
+        Me.btnClockIn.Location = New System.Drawing.Point(118, 329)
         Me.btnClockIn.Name = "btnClockIn"
         Me.btnClockIn.Size = New System.Drawing.Size(250, 90)
         Me.btnClockIn.TabIndex = 38
@@ -185,7 +202,7 @@ Partial Class frmTimeInOut
         Me.btnClockOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClockOut.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClockOut.ForeColor = System.Drawing.Color.Black
-        Me.btnClockOut.Location = New System.Drawing.Point(118, 440)
+        Me.btnClockOut.Location = New System.Drawing.Point(118, 425)
         Me.btnClockOut.Name = "btnClockOut"
         Me.btnClockOut.Size = New System.Drawing.Size(250, 60)
         Me.btnClockOut.TabIndex = 39
@@ -206,12 +223,32 @@ Partial Class frmTimeInOut
         Me.btnCancel.Text = "CANCEL"
         Me.btnCancel.UseVisualStyleBackColor = False
         '
+        'tmrCurrentTime
+        '
+        Me.tmrCurrentTime.Interval = 1000
+        '
+        'btnBreak
+        '
+        Me.btnBreak.BackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.btnBreak.Enabled = False
+        Me.btnBreak.FlatAppearance.BorderSize = 0
+        Me.btnBreak.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnBreak.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBreak.ForeColor = System.Drawing.Color.Black
+        Me.btnBreak.Location = New System.Drawing.Point(118, 491)
+        Me.btnBreak.Name = "btnBreak"
+        Me.btnBreak.Size = New System.Drawing.Size(250, 40)
+        Me.btnBreak.TabIndex = 41
+        Me.btnBreak.Text = "BREAK"
+        Me.btnBreak.UseVisualStyleBackColor = False
+        '
         'frmTimeInOut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = Global.TimeClock_Project.My.Resources.Resources.frmpasscodebg
         Me.ClientSize = New System.Drawing.Size(484, 661)
+        Me.Controls.Add(Me.btnBreak)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnClockOut)
         Me.Controls.Add(Me.btnClockIn)
@@ -224,14 +261,13 @@ Partial Class frmTimeInOut
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmTimeInOut"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "frmTimeInOut"
+        Me.Text = "Time Clock Software"
         Me.pnlAppbar.ResumeLayout(False)
         Me.pnlAppbar.PerformLayout()
         CType(Me.pbUserImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -249,4 +285,7 @@ Partial Class frmTimeInOut
     Friend WithEvents btnClockIn As Button
     Friend WithEvents btnClockOut As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents tmrCurrentTime As Timer
+    Friend WithEvents lblTimer As Label
+    Friend WithEvents btnBreak As Button
 End Class

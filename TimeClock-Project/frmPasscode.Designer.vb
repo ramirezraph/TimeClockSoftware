@@ -54,6 +54,7 @@ Partial Class frmPasscode
         Me.lblPasscodeNotFound = New System.Windows.Forms.Label()
         Me.tmrMessage = New System.Windows.Forms.Timer(Me.components)
         Me.imgEmployeeIcon = New System.Windows.Forms.Panel()
+        Me.tmrCurrentTime = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'lblAppName
@@ -92,21 +93,21 @@ Partial Class frmPasscode
         '
         'lblTime
         '
-        Me.lblTime.AutoSize = True
         Me.lblTime.BackColor = System.Drawing.Color.Transparent
         Me.lblTime.Font = New System.Drawing.Font("Segoe UI", 48.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTime.Location = New System.Drawing.Point(193, 88)
+        Me.lblTime.Location = New System.Drawing.Point(172, 84)
         Me.lblTime.Name = "lblTime"
-        Me.lblTime.Size = New System.Drawing.Size(156, 86)
+        Me.lblTime.Size = New System.Drawing.Size(201, 86)
         Me.lblTime.TabIndex = 3
-        Me.lblTime.Text = "8:54"
+        Me.lblTime.Text = "10:54"
+        Me.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblAMPM
         '
         Me.lblAMPM.AutoSize = True
         Me.lblAMPM.BackColor = System.Drawing.Color.Transparent
         Me.lblAMPM.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAMPM.Location = New System.Drawing.Point(321, 110)
+        Me.lblAMPM.Location = New System.Drawing.Point(345, 101)
         Me.lblAMPM.Name = "lblAMPM"
         Me.lblAMPM.Size = New System.Drawing.Size(58, 37)
         Me.lblAMPM.TabIndex = 4
@@ -114,14 +115,14 @@ Partial Class frmPasscode
         '
         'lblDate
         '
-        Me.lblDate.AutoSize = True
         Me.lblDate.BackColor = System.Drawing.Color.Transparent
         Me.lblDate.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDate.Location = New System.Drawing.Point(217, 167)
+        Me.lblDate.Location = New System.Drawing.Point(187, 161)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(105, 21)
+        Me.lblDate.Size = New System.Drawing.Size(186, 21)
         Me.lblDate.TabIndex = 5
-        Me.lblDate.Text = "May 19, 2019"
+        Me.lblDate.Text = "December 12, 2019"
+        Me.lblDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtFirstNum
         '
@@ -393,7 +394,7 @@ Partial Class frmPasscode
         '
         'tmrPasscode
         '
-        Me.tmrPasscode.Interval = 700
+        Me.tmrPasscode.Interval = 500
         '
         'lblPasscodeNotFound
         '
@@ -409,7 +410,7 @@ Partial Class frmPasscode
         '
         'tmrMessage
         '
-        Me.tmrMessage.Interval = 3000
+        Me.tmrMessage.Interval = 1000
         '
         'imgEmployeeIcon
         '
@@ -420,6 +421,10 @@ Partial Class frmPasscode
         Me.imgEmployeeIcon.Name = "imgEmployeeIcon"
         Me.imgEmployeeIcon.Size = New System.Drawing.Size(100, 100)
         Me.imgEmployeeIcon.TabIndex = 31
+        '
+        'tmrCurrentTime
+        '
+        Me.tmrCurrentTime.Interval = 1000
         '
         'frmPasscode
         '
@@ -499,4 +504,5 @@ Partial Class frmPasscode
     Friend WithEvents lblPasscodeNotFound As Label
     Friend WithEvents tmrMessage As Timer
     Friend WithEvents imgEmployeeIcon As Panel
+    Friend WithEvents tmrCurrentTime As Timer
 End Class
