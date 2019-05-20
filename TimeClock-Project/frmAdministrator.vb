@@ -500,7 +500,7 @@
             Exit Sub
         End Try
 
-        Dim confirm As Integer = MessageBox.Show("Are you sure you want to delete?", "Confirm", MessageBoxButtons.YesNo)
+        Dim confirm As Integer = MessageBox.Show("Are you sure you want to delete?" & vbCrLf & "NOTE: This action cannot be undone.", "Confirm", MessageBoxButtons.YesNo)
         If confirm = DialogResult.Yes Then
             For Each tobedeleted As String In idList
                 If Not String.IsNullOrEmpty(tobedeleted) Then
@@ -985,5 +985,20 @@
     Private Sub btnManageSchedule_Click(sender As Object, e As EventArgs) Handles btnManageSchedule.Click
         Dim ShowSched As New frmManageEmployeeSchedule(txtPasscodeSched.Text, txtFirstNameSched.Text, txtLastNameSched.Text)
         ShowSched.ShowDialog()
+    End Sub
+
+    Private Sub txtSearchOnSchedule_TextChanged(sender As Object, e As EventArgs) Handles txtSearchOnSchedule.TextChanged
+        Dim t As TextBox = sender
+        SearchEmployeeOnSchedule(t.Text.ToLower)
+    End Sub
+
+    Private Sub SearchEmployeeOnSchedule(Name As String)
+        ' Add Param and Run Query
+        Access.AddParam("@name", "%" & Name & "%")
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY ID DESC")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+
+        ' Fill DataGridView
+        dgvEmployeeSched.DataSource = Access.DbDataTable
     End Sub
 End Class

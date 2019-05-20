@@ -106,7 +106,7 @@
         For Each R As DataRow In Access.DbDataTable.Rows
             If R("Day") = cbDayOfWeek.SelectedItem Then
                 MsgBox("The selected day already exists in a schedule")
-                Exit For
+                Exit Sub
             End If
         Next
         If txtBreakDurationAdd.Text = "" Then
@@ -234,7 +234,7 @@
     End Sub
 
     Private Sub btnCommitEditSched_Click(sender As Object, e As EventArgs) Handles btnCommitEditSched.Click
-        MsgBox(txtDayEdit.Text)
+        'MsgBox(txtDayEdit.Text)
         ' Update to Sched
         Access.AddParam("@in", dtpEditIn.Value.ToString)
         Access.AddParam("@out", dtpEditOut.Value.ToString)

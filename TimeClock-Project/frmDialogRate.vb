@@ -26,6 +26,13 @@
     End Sub
 
     Private Sub btnApply_Click(sender As Object, e As EventArgs) Handles btnApply.Click
+
+        If CheckForAlphaCharacters(txtPaymentRate.Text) Then
+            'do stuff here if it contains letters
+            MessageBox.Show("Invalid rate. Try again.")
+            Exit Sub
+        End If
+
         Access.AddParam("@rate", txtPaymentRate.Text)
         Access.AddParam("@code", EMP_PASSCODE)
         Access.ExecuteQuery("UPDATE tblEmployee SET Rate=@rate WHERE Passcode=@code")
@@ -39,4 +46,14 @@
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Me.Close()
     End Sub
+
+    Private Function CheckForAlphaCharacters(ByVal StringToCheck As String)
+        For i = 0 To StringToCheck.Length - 1
+            If Char.IsLetter(StringToCheck.Chars(i)) Then
+                Return True
+            End If
+        Next
+
+        Return False
+    End Function
 End Class

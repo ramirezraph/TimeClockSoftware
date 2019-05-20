@@ -3,6 +3,7 @@
     ' IMPORTANT
     Private Access As New DatabaseControl
     Private Const ClockInOutDateFormat As String = "{0:MM\/dd\/yyyy}"
+    Private Const ClockInOutTimeFormat As String = "{hh:mm:tt}"
 
     Dim EMP_PASSCODE As String
     Dim EMP_NAME As String
@@ -131,6 +132,29 @@
 
     Private Sub btnClockIn_Click(sender As Object, e As EventArgs) Handles btnClockIn.Click
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
+        Dim daytoday As String = Date.Now.DayOfWeek.ToString
+        ' CHECK SCHEDULE
+        Dim todayin As String = ""
+        Dim todayout As String = ""
+        Access.AddParam("@passcode", EMP_PASSCODE)
+        Access.AddParam("@day", daytoday)
+        Access.ExecuteQuery("SELECT * FROM tblTimeCard WHERE [Passcode]=@passcode AND [Day]=@day")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        If Access.DbDataTable.Rows.Count = 0 Then
+            MessageBox.Show("You do not have a schedule for today." & vbCrLf & "NOTE: Please refer to the admin if this is a mistake.")
+            Exit Sub
+        Else
+            For Each R As DataRow In Access.DbDataTable.Rows
+                todayin = R("In")
+                todayout = R("Out")
+                Exit For
+            Next
+        End If
+
+        ' test value if schedule found
+        'MsgBox(todayin)
+        'MsgBox(todayout)
+
         ' CHECK IF SECOND TIME IN
         Access.AddParam("@passcode", EMP_PASSCODE)
         Access.AddParam("@date", todaysdate)
@@ -209,6 +233,9 @@
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         UpdateEmployeeStatus("In", EMP_PASSCODE)
 
+        ' CHECK FOR LATE
+        GetEmployeeLate()
+
         ' INSERT LOG: passcode, date, employee, time, type
         UpdateLog(EMP_PASSCODE, todaysdate, lblCurrentTime.Text, EMP_NAME, "In")
 
@@ -220,6 +247,46 @@
 
     End Sub
 
+    Private Sub GetEmployeeLate()
+        Dim lategrace As TimeSpan = New TimeSpan(0, 0, 30, 0, 0) ' 30 minutes grace period for lates
+        Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
+        Dim daytoday As String = Date.Now.DayOfWeek.ToString
+        ' GET TIME IN SCHEDULE
+        'MsgBox(daytoday)
+        Dim todayin As String = ""
+        Access.AddParam("@passcode", EMP_PASSCODE)
+        Access.AddParam("@day", daytoday)
+        Access.ExecuteQuery("SELECT * FROM tblTimeCard WHERE [Passcode]=@passcode AND [Day]=@day")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        If Access.DbDataTable.Rows.Count = 0 Then
+            MessageBox.Show("You do not have a schedule for today." & vbCrLf & "NOTE: Please refer to the admin if this is a mistake.")
+            Exit Sub
+        Else
+            For Each R As DataRow In Access.DbDataTable.Rows
+                todayin = R("In")
+                Exit For
+            Next
+        End If
+
+        Dim shouldin As DateTime = Convert.ToDateTime(todayin)
+        Dim nowin As DateTime = Convert.ToDateTime(lblCurrentTime.Text)
+        Dim schedin As New DateTime(2019, 1, 1, shouldin.Hour, shouldin.Minute, 0)     ' hh:mm:ss tt
+        Dim schedin2 As New DateTime(2019, 1, 1, nowin.Hour, nowin.Minute, 0)
+
+        Dim late As TimeSpan = schedin2.Subtract(schedin)
+        Dim compare As Integer = TimeSpan.Compare(late, lategrace) ' t1, t2
+        'MsgBox(late.ToString) ' check late value
+        If compare = 1 Then
+            ' 30 minutes and above late
+            ' UPDATE Late
+            Access.AddParam("@late", late.ToString)
+            Access.AddParam("@passcode", EMP_PASSCODE)
+            Access.AddParam("@date", todaysdate)
+            Access.ExecuteQuery("UPDATE tblAttendance SET [Late]=@late WHERE [Passcode]=@passcode AND [Date]=@date")
+            If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show("Late Error") : Exit Sub
+        End If
+    End Sub
+
     Private Sub btnClockOut_Click(sender As Object, e As EventArgs) Handles btnClockOut.Click
 
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
@@ -227,6 +294,8 @@
         Dim totalbreak As String = ""
         Dim rate As Double = 0
         Dim pay As Double = 0
+
+        ' CHECK SCHEDULE
 
         ' GET CLOCK IN TIME AND TOTAL BREAK AND TOTAL HOUR
         Access.AddParam("@passcode", EMP_PASSCODE)
@@ -282,12 +351,46 @@
         ' INSERT LOG: passcode, date, employee, time, type
         UpdateLog(EMP_PASSCODE, todaysdate, lblCurrentTime.Text, EMP_NAME, "Out")
 
+        ' LATE DEDUCTIONS
+        SubmitLateDeduction(rate, todaysdate, pay)
+
         MessageBox.Show("Clocked out successfully.")
         timer = 15
         tmrCurrentTime.Stop()
         Me.Hide()
         frmPasscode.Show()
+    End Sub
 
+    Private Sub SubmitLateDeduction(rate As Double, todaysdate As String, paybeforededuction As Double)
+        Dim timelate As TimeSpan
+        Dim deduction As Double
+        Dim deductedpay As Double
+        Access.AddParam("@passcode", EMP_PASSCODE)
+        Access.AddParam("@date", todaysdate)
+        Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Passcode]=@passcode AND [Date]=@date")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        For Each R As DataRow In Access.DbDataTable.Rows
+            Try
+                If R("Late") = "" Then
+                    timelate = Nothing
+                Else
+                    timelate = TimeSpan.Parse(R("Late"))
+                End If
+            Catch ex As Exception
+
+            End Try
+        Next
+        deduction = (rate / 60) * timelate.TotalMinutes
+        'MessageBox.Show(deduction)
+        'MessageBox.Show(timelate.TotalMinutes)
+
+        ' DEDUCT PAY
+        deductedpay = paybeforededuction - deduction
+        Access.AddParam("@passcode", EMP_PASSCODE)
+        Access.AddParam("@date", todaysdate)
+        Access.ExecuteQuery("UPDATE tblAttendance SET [Pay]='" & deductedpay & "',[Deductions]='" & deduction & "'" &
+            " WHERE [Passcode]=@passcode AND [Date]=@date")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show("Error on updating deductions.") : Exit Sub
     End Sub
 
     Private Sub UpdateLog(passcode As String, logdate As DateTime, time As DateTime, employee As String, type As String)
