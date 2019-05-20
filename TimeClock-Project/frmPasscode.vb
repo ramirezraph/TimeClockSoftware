@@ -264,7 +264,7 @@
     End Sub
 
     Private Sub btnCloseApp_Click(sender As Object, e As EventArgs) Handles btnCloseApp.Click
-        Me.Close()
+        End
     End Sub
 
     Private Function CheckPasscodeIfExists(Passcode As String)

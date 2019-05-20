@@ -11,17 +11,17 @@
     Dim USER_NAME As String
     Dim USER_USERLEVEL As String
 
-    'Public Sub New(name As String, userlevel As String)
+    Public Sub New(name As String, userlevel As String)
 
-    '    ' This call is required by the designer.
-    '    InitializeComponent()
+        ' This call is required by the designer.
+        InitializeComponent()
 
-    '    USER_NAME = name
-    '    USER_USERLEVEL = userlevel
+        USER_NAME = name
+        USER_USERLEVEL = userlevel
 
-    '    ' Add any initialization after the InitializeComponent() call.
+        ' Add any initialization after the InitializeComponent() call.
 
-    'End Sub
+    End Sub
 
     ' drop down menu item functionalities
     Dim btnNavButtonIsActive = False
@@ -48,7 +48,7 @@
     End Sub
 
     Private Sub btnCloseForm_Click(sender As Object, e As EventArgs) Handles btnCloseForm.Click
-        Me.Close()
+        End
     End Sub
 
     Private Sub btnDropdownIcon_Click(sender As Object, e As EventArgs) Handles btnDropdownIcon.Click
@@ -82,6 +82,7 @@
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
         pnlSchedules.SendToBack()
+        RefreshCurrentlyWorkingEmployee()
     End Sub
 
     Private Sub btnMenuAttendance_Click(sender As Object, e As EventArgs) Handles btnMenuAttendance.Click
@@ -199,13 +200,14 @@
         RefreshCurrentDateTime()
         RefreshEmployeeTable()
         RefreshCurrentlyWorkingEmployee()
+        GetEmployeeTotal()
         pnlDashboard.BringToFront()
 
-        'lblUserName.Text = USER_NAME
-        'Dim TestSplit() As String = Split(USER_NAME)
-        'Dim first As String = TestSplit(0).Substring(0, 1).ToUpper
-        'Dim second As String = TestSplit(1).Substring(0, 1).ToUpper
-        'btnUserInitial.Text = first & second
+        lblUserName.Text = USER_NAME
+        Dim TestSplit() As String = Split(USER_NAME)
+        Dim first As String = TestSplit(0).Substring(0, 1).ToUpper
+        Dim second As String = TestSplit(1).Substring(0, 1).ToUpper
+        btnUserInitial.Text = first & second
     End Sub
 
     Private Sub RefreshEmployeeTable()
@@ -674,9 +676,20 @@
             dgvCurrentlyWorking.Columns(3).Width = 140
             dgvCurrentlyWorking.Columns(8).HeaderText = "Current Status"
             dgvCurrentlyWorking.Columns(8).Width = 445
+            dgvCurrentlyWorking.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvCurrentlyWorking.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvCurrentlyWorking.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+            dgvCurrentlyWorking.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
             dgvCurrentlyWorking.ClearSelection()
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
+    End Sub
+
+    Private Sub GetEmployeeTotal()
+        Dim employeecount As Integer = dgvEmployees.Rows.Count()
+        lblNumberOfEmployee.Text = employeecount
     End Sub
 End Class

@@ -4,7 +4,7 @@
     Private Access As New DatabaseControl
 
     Private Sub btnCloseApp_Click(sender As Object, e As EventArgs) Handles btnCloseApp.Click
-        Me.Close()
+        End
     End Sub
 
     Private Sub btnBackToEmpLogin_Click(sender As Object, e As EventArgs) Handles btnBackToEmpLogin.Click
@@ -27,8 +27,8 @@
             For Each R As DataRow In Access.DbDataTable.Rows
                 If username = R("username") And password = R("password") And R("userlevel") = "Administrator" Then
                     Me.Hide()
-                    'Dim frmAdmin As New frmAdministrator(R("name").ToString, R("userlevel"))
-                    'frmAdmin.Show()
+                    Dim frmAdmin As New frmAdministrator(R("name").ToString, R("userlevel"))
+                    frmAdmin.Show()
                 End If
             Next
 
