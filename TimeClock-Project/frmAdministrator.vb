@@ -1,8 +1,11 @@
 ﻿Public Class frmAdministrator
 
+
+
     ' IMPORTANT
     Private Access As New DatabaseControl
-    Dim selectedindex As Integer
+    Dim selectedindexatemployee As Integer
+    Dim selectedindexatattendance As Integer
     Private Const DateFormat As String = "{0:MMM dd, yyyy}"
 
     Dim USER_NAME As String
@@ -94,7 +97,7 @@
 
     Private Sub btnManageEmployee_Click(sender As Object, e As EventArgs) Handles btnManageEmployee.Click
         dgvEmployees.ClearSelection()
-        selectedindex = -1
+        selectedindexatemployee = -1
         ClearEmployeeTextboxes()
         pnlDashboard.SendToBack()
         pnlStaffAttendance.SendToBack()
@@ -128,9 +131,9 @@
         btnEdit.Enabled = True
         Try
             Dim gender As String
-            selectedindex = e.RowIndex
+            selectedindexatemployee = e.RowIndex
             Dim selectedRow As DataGridViewRow
-            selectedRow = dgvEmployees.Rows(selectedindex)
+            selectedRow = dgvEmployees.Rows(selectedindexatemployee)
             ' first name
             txtFirstName.Text = selectedRow.Cells(2).Value.ToString
             ' last name
@@ -189,12 +192,13 @@
         ClearEmployeeTextboxes()
         btnEdit.Enabled = False
         btnDelete.Enabled = False
-        selectedindex = -1
+        selectedindexatemployee = -1
     End Sub
 
     Private Sub frmAdministrator_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         RefreshCurrentDateTime()
         RefreshEmployeeTable()
+        RefreshCurrentlyWorkingEmployee()
         pnlDashboard.BringToFront()
 
         'lblUserName.Text = USER_NAME
@@ -408,7 +412,7 @@
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim selectedRow As DataGridViewRow
         Try
-            selectedRow = dgvEmployees.Rows(selectedindex)
+            selectedRow = dgvEmployees.Rows(selectedindexatemployee)
         Catch ex As Exception
             DisplayToastMessage("Please select the employee you want to delete.", 2)
             Exit Sub
@@ -467,7 +471,7 @@
 
         Dim selectedRow As DataGridViewRow
         Try
-            selectedRow = dgvEmployees.Rows(selectedindex)
+            selectedRow = dgvEmployees.Rows(selectedindexatemployee)
         Catch ex As Exception
             DisplayToastMessage("Please select the employee you want to update.", 2)
             Exit Sub
@@ -575,6 +579,9 @@
             dgvAttendance.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvAttendance.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvAttendance.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -588,6 +595,88 @@
     End Sub
 
     Private Sub btnEditAttendance_Click(sender As Object, e As EventArgs) Handles btnEditAttendance.Click
-        frmEditAttendance.Show()
+        Dim sid As String
+        Dim sdate As String
+        Dim spasscode As String
+        Dim semployee As String
+        Dim sposition As String
+        Dim sin As DateTime
+        Dim sout As DateTime
+        Dim sbreakout As DateTime
+        Dim sbreakin As DateTime
+        Dim stotalbreak As String
+        Dim stotalhour As String
+
+        ' GET SELECTED ROW VALUES
+        Dim selectedRow As DataGridViewRow
+        Try
+            selectedRow = dgvAttendance.Rows(selectedindexatattendance)
+        Catch ex As Exception
+            DisplayToastMessage("Please select the employee you want to delete.", 2)
+            Exit Sub
+        End Try
+
+        sid = selectedRow.Cells(0).Value.ToString
+        sdate = selectedRow.Cells(1).Value.ToString
+        spasscode = selectedRow.Cells(2).Value.ToString
+        semployee = selectedRow.Cells(3).Value.ToString
+        sposition = selectedRow.Cells(4).Value.ToString
+        sin = Convert.ToDateTime(selectedRow.Cells(5).Value.ToString)
+        Try
+            sout = Convert.ToDateTime(selectedRow.Cells(6).Value.ToString)
+        Catch ex As Exception
+            sout = Nothing
+        End Try
+        Try
+            sbreakout = Convert.ToDateTime(selectedRow.Cells(7).Value.ToString)
+        Catch ex As Exception
+            sbreakout = Nothing
+        End Try
+        Try
+            sbreakin = Convert.ToDateTime(selectedRow.Cells(8).Value.ToString)
+        Catch ex As Exception
+            sbreakin = Nothing
+        End Try
+        stotalbreak = selectedRow.Cells(9).Value.ToString
+        stotalhour = selectedRow.Cells(10).Value.ToString
+        Dim frmEditAttendance As New frmEditAttendance(sid, sdate, spasscode, semployee,
+                                                       sposition, sin, sout, sbreakout,
+                                                       sbreakin, stotalbreak, stotalhour)
+        frmEditAttendance.ShowDialog()
+    End Sub
+
+    Private Sub dgvAttendance_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAttendance.RowEnter
+        Try
+            selectedindexatattendance = e.RowIndex
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    ' DASHBOARD
+    Private Sub RefreshCurrentlyWorkingEmployee()
+        ' Run Query
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE [Status]='In' OR [Status]='break'")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        ' Fill DataGridView
+        dgvCurrentlyWorking.DataSource = Access.DbDataTable
+        Try
+            dgvCurrentlyWorking.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvCurrentlyWorking.Columns(0).Visible = False
+            dgvCurrentlyWorking.Columns(1).Visible = False
+            dgvCurrentlyWorking.Columns(4).Visible = False
+            dgvCurrentlyWorking.Columns(5).Visible = False
+            dgvCurrentlyWorking.Columns(6).Visible = False
+            dgvCurrentlyWorking.Columns(7).Visible = False
+            dgvCurrentlyWorking.Columns(2).HeaderText = "First Name"
+            dgvCurrentlyWorking.Columns(2).Width = 140
+            dgvCurrentlyWorking.Columns(3).HeaderText = "Last Name"
+            dgvCurrentlyWorking.Columns(3).Width = 140
+            dgvCurrentlyWorking.Columns(8).HeaderText = "Current Status"
+            dgvCurrentlyWorking.Columns(8).Width = 445
+            dgvCurrentlyWorking.ClearSelection()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 End Class

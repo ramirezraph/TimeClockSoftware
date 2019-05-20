@@ -27,6 +27,8 @@ Partial Class frmAdministrator
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlNavBar = New System.Windows.Forms.Panel()
         Me.btnHomeIcon = New System.Windows.Forms.PictureBox()
         Me.btnDropdownIcon = New System.Windows.Forms.PictureBox()
@@ -46,6 +48,10 @@ Partial Class frmAdministrator
         Me.menuItmAccount = New System.Windows.Forms.Button()
         Me.lblDashboard = New System.Windows.Forms.Label()
         Me.pnlDashboard = New System.Windows.Forms.Panel()
+        Me.pnlCurrentlyWorking = New System.Windows.Forms.Panel()
+        Me.dgvCurrentlyWorking = New System.Windows.Forms.DataGridView()
+        Me.pnlTopCurrentlyWorking = New System.Windows.Forms.Panel()
+        Me.Label39 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.dgvAttendanceLog = New System.Windows.Forms.DataGridView()
         Me.Time = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -134,6 +140,9 @@ Partial Class frmAdministrator
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlDropDownBtn1.SuspendLayout()
         Me.pnlDashboard.SuspendLayout()
+        Me.pnlCurrentlyWorking.SuspendLayout()
+        CType(Me.dgvCurrentlyWorking, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlTopCurrentlyWorking.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.dgvAttendanceLog, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -386,6 +395,7 @@ Partial Class frmAdministrator
         'pnlDashboard
         '
         Me.pnlDashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.pnlDashboard.Controls.Add(Me.pnlCurrentlyWorking)
         Me.pnlDashboard.Controls.Add(Me.Panel1)
         Me.pnlDashboard.Controls.Add(Me.Panel7)
         Me.pnlDashboard.Controls.Add(Me.Panel4)
@@ -399,6 +409,74 @@ Partial Class frmAdministrator
         Me.pnlDashboard.Name = "pnlDashboard"
         Me.pnlDashboard.Size = New System.Drawing.Size(1031, 585)
         Me.pnlDashboard.TabIndex = 5
+        '
+        'pnlCurrentlyWorking
+        '
+        Me.pnlCurrentlyWorking.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
+        Me.pnlCurrentlyWorking.Controls.Add(Me.dgvCurrentlyWorking)
+        Me.pnlCurrentlyWorking.Controls.Add(Me.pnlTopCurrentlyWorking)
+        Me.pnlCurrentlyWorking.Location = New System.Drawing.Point(41, 373)
+        Me.pnlCurrentlyWorking.Name = "pnlCurrentlyWorking"
+        Me.pnlCurrentlyWorking.Size = New System.Drawing.Size(725, 212)
+        Me.pnlCurrentlyWorking.TabIndex = 11
+        '
+        'dgvCurrentlyWorking
+        '
+        Me.dgvCurrentlyWorking.AllowUserToAddRows = False
+        Me.dgvCurrentlyWorking.AllowUserToDeleteRows = False
+        Me.dgvCurrentlyWorking.AllowUserToResizeRows = False
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvCurrentlyWorking.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvCurrentlyWorking.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.dgvCurrentlyWorking.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvCurrentlyWorking.ColumnHeadersHeight = 25
+        Me.dgvCurrentlyWorking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvCurrentlyWorking.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvCurrentlyWorking.Enabled = False
+        Me.dgvCurrentlyWorking.GridColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.dgvCurrentlyWorking.Location = New System.Drawing.Point(0, 27)
+        Me.dgvCurrentlyWorking.MultiSelect = False
+        Me.dgvCurrentlyWorking.Name = "dgvCurrentlyWorking"
+        Me.dgvCurrentlyWorking.ReadOnly = True
+        Me.dgvCurrentlyWorking.RowHeadersVisible = False
+        Me.dgvCurrentlyWorking.RowHeadersWidth = 60
+        Me.dgvCurrentlyWorking.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvCurrentlyWorking.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvCurrentlyWorking.RowTemplate.Height = 35
+        Me.dgvCurrentlyWorking.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvCurrentlyWorking.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvCurrentlyWorking.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvCurrentlyWorking.Size = New System.Drawing.Size(725, 189)
+        Me.dgvCurrentlyWorking.TabIndex = 7
+        '
+        'pnlTopCurrentlyWorking
+        '
+        Me.pnlTopCurrentlyWorking.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(42, Byte), Integer), CType(CType(92, Byte), Integer))
+        Me.pnlTopCurrentlyWorking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlTopCurrentlyWorking.Controls.Add(Me.Label39)
+        Me.pnlTopCurrentlyWorking.Location = New System.Drawing.Point(-1, -1)
+        Me.pnlTopCurrentlyWorking.Name = "pnlTopCurrentlyWorking"
+        Me.pnlTopCurrentlyWorking.Size = New System.Drawing.Size(840, 28)
+        Me.pnlTopCurrentlyWorking.TabIndex = 6
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label39.ForeColor = System.Drawing.Color.Gainsboro
+        Me.Label39.Location = New System.Drawing.Point(7, 7)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(125, 13)
+        Me.Label39.TabIndex = 5
+        Me.Label39.Text = "CURRENTLY WORKING"
         '
         'Panel1
         '
@@ -590,7 +668,7 @@ Partial Class frmAdministrator
         Me.pnlHoursSummary.Controls.Add(Me.Label7)
         Me.pnlHoursSummary.Controls.Add(Me.pnlHoursSummaryTop)
         Me.pnlHoursSummary.Controls.Add(Me.Label8)
-        Me.pnlHoursSummary.Location = New System.Drawing.Point(43, 232)
+        Me.pnlHoursSummary.Location = New System.Drawing.Point(42, 213)
         Me.pnlHoursSummary.Name = "pnlHoursSummary"
         Me.pnlHoursSummary.Size = New System.Drawing.Size(725, 154)
         Me.pnlHoursSummary.TabIndex = 5
@@ -843,21 +921,21 @@ Partial Class frmAdministrator
         Me.dgvAttendance.AllowUserToAddRows = False
         Me.dgvAttendance.AllowUserToDeleteRows = False
         Me.dgvAttendance.AllowUserToResizeRows = False
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.dgvAttendance.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvAttendance.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvAttendance.ColumnHeadersHeight = 25
         Me.dgvAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvAttendance.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvAttendance.Location = New System.Drawing.Point(21, 72)
         Me.dgvAttendance.MultiSelect = False
@@ -1222,21 +1300,21 @@ Partial Class frmAdministrator
         Me.dgvEmployees.AllowUserToDeleteRows = False
         Me.dgvEmployees.AllowUserToResizeColumns = False
         Me.dgvEmployees.AllowUserToResizeRows = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvEmployees.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvEmployees.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvEmployees.ColumnHeadersHeight = 25
         Me.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvEmployees.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvEmployees.Location = New System.Drawing.Point(42, 270)
         Me.dgvEmployees.MultiSelect = False
@@ -1369,14 +1447,14 @@ Partial Class frmAdministrator
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(219, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1284, 677)
+        Me.Controls.Add(Me.pnlDashboard)
+        Me.Controls.Add(Me.pnlStaffAttendance)
         Me.Controls.Add(Me.pnlManageEmployee)
         Me.Controls.Add(Me.pnlDropDownBtn1)
-        Me.Controls.Add(Me.pnlStaffAttendance)
         Me.Controls.Add(Me.lblToastMessage)
         Me.Controls.Add(Me.pnlSchedules)
         Me.Controls.Add(Me.pnlMenu)
         Me.Controls.Add(Me.pnlNavBar)
-        Me.Controls.Add(Me.pnlDashboard)
         Me.ForeColor = System.Drawing.SystemColors.Control
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmAdministrator"
@@ -1389,6 +1467,10 @@ Partial Class frmAdministrator
         Me.pnlDropDownBtn1.ResumeLayout(False)
         Me.pnlDashboard.ResumeLayout(False)
         Me.pnlDashboard.PerformLayout()
+        Me.pnlCurrentlyWorking.ResumeLayout(False)
+        CType(Me.dgvCurrentlyWorking, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlTopCurrentlyWorking.ResumeLayout(False)
+        Me.pnlTopCurrentlyWorking.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         CType(Me.dgvAttendanceLog, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
@@ -1522,4 +1604,8 @@ Partial Class frmAdministrator
     Friend WithEvents dgvAttendance As DataGridView
     Friend WithEvents btnEditAttendance As Button
     Friend WithEvents tmrTime As Timer
+    Friend WithEvents pnlCurrentlyWorking As Panel
+    Friend WithEvents pnlTopCurrentlyWorking As Panel
+    Friend WithEvents Label39 As Label
+    Friend WithEvents dgvCurrentlyWorking As DataGridView
 End Class
