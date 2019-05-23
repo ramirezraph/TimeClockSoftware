@@ -12,14 +12,11 @@
     Dim USER_USERLEVEL As String
 
     Public Sub New(name As String, userlevel As String)
-
         ' This call is required by the designer.
         InitializeComponent()
-
+        ' Add any initialization after the InitializeComponent() call.
         USER_NAME = name
         USER_USERLEVEL = userlevel
-
-        ' Add any initialization after the InitializeComponent() call.
 
     End Sub
 
@@ -122,11 +119,13 @@
         txtAddress.ReadOnly = True
         txtContactNumber.ReadOnly = True
         txtPasscode.ReadOnly = True
+        txtRate.ReadOnly = True
         rbMale.AutoCheck = False
         rbFemale.AutoCheck = False
         btnCommitAdd.Visible = False
         btnCommitUpdate.Visible = False
         btnCancel.Visible = False
+        btnGeneratePasscode.Visible = False
         btnAdd.Enabled = True
         btnDelete.Enabled = True
         btnEdit.Enabled = True
@@ -156,6 +155,8 @@
                 rbMale.Checked = False
                 rbFemale.Checked = True
             End If
+            ' rate
+            txtRate.Text = selectedRow.Cells(9).Value.ToString
         Catch ex As Exception
             MessageBox.Show("An error occured.")
         End Try
@@ -172,10 +173,12 @@
         rbMale.Checked = False
         rbFemale.Checked = False
         txtContactNumber.ReadOnly = False
-        txtPasscode.ReadOnly = False
+        txtPasscode.ReadOnly = True
+        txtRate.ReadOnly = False
 
         btnCommitAdd.Visible = True
         btnCancel.Visible = True
+        btnGeneratePasscode.Visible = True
 
         txtFirstName.Text = ""
         txtLastName.Text = ""
@@ -183,6 +186,7 @@
         txtAddress.Text = ""
         txtContactNumber.Text = ""
         txtPasscode.Text = ""
+        txtRate.Text = ""
 
         btnEdit.Enabled = False
         btnDelete.Enabled = False
@@ -212,7 +216,7 @@
 
     Private Sub RefreshEmployeeTable()
         ' Run Query
-        Access.ExecuteQuery("SELECT * FROM tblEmployee ORDER BY ID ASC")
+        Access.ExecuteQuery("SELECT * FROM tblEmployee ORDER BY ID DESC")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         ' Fill DataGridView
         dgvEmployees.DataSource = Access.DbDataTable
@@ -224,9 +228,11 @@
             dgvEmployees.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvEmployees.Columns("FirstName").Width = 130
             dgvEmployees.Columns("LastName").Width = 130
-            dgvEmployees.Columns("Address").Width = 180
+            dgvEmployees.Columns("Address").Visible = False
             dgvEmployees.Columns("Status").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            dgvEmployees.Columns("Position").Visible = False
+            dgvEmployees.Columns("Position").Visible = True
+            dgvEmployees.Columns("Rate").Visible = False
+            dgvEmployees.Columns("Position").Width = 180
             dgvEmployees.Columns("ID").Visible = False
             dgvEmployees.Columns("Passcode").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Catch ex As Exception
@@ -261,10 +267,12 @@
         rbFemale.Checked = False
         txtContactNumber.ReadOnly = True
         txtPasscode.ReadOnly = True
+        txtRate.ReadOnly = True
 
         btnCommitAdd.Visible = False
         btnCommitUpdate.Visible = False
         btnCancel.Visible = False
+        btnGeneratePasscode.Visible = False
 
         txtFirstName.Text = ""
         txtLastName.Text = ""
@@ -272,6 +280,7 @@
         txtAddress.Text = ""
         txtContactNumber.Text = ""
         txtPasscode.Text = ""
+        txtRate.Text = ""
 
         btnEdit.Enabled = True
         btnDelete.Enabled = True
@@ -309,6 +318,13 @@
             Exit Sub
         End If
 
+        If CheckForAlphaCharacters(txtRate.Text) Then
+            'do stuff here if it contains letters
+            DisplayToastMessage("Invalid rate value. Try again.", 2)
+            txtRate.Text = ""
+            Exit Sub
+        End If
+
         If CheckForDoubleEntryPasscode(txtPasscode.Text) Then
             DisplayToastMessage("Passcode is already taken. Try again.", 2)
             txtPasscode.Text = ""
@@ -338,7 +354,7 @@
             End Try
         Next
 
-        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName.Trim, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out")
+        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName.Trim, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out", txtRate.Text)
     End Sub
 
     Private Function CheckForAlphaCharacters(ByVal StringToCheck As String)
@@ -367,7 +383,7 @@
     Private Sub AddEmployee(Passcode As String, FirstName As String,
                             LastName As String, Position As String,
                             Address As String, Gender As String,
-                            ContactNumber As String, Status As String)
+                            ContactNumber As String, Status As String, Rate As String)
         Access.AddParam("@passcode", Passcode)
         Access.AddParam("@firstname", FirstName)
         Access.AddParam("@lastname", LastName)
@@ -376,9 +392,10 @@
         Access.AddParam("@gender", Gender)
         Access.AddParam("@contact", ContactNumber)
         Access.AddParam("@status", Status)
+        Access.AddParam("@rate", Rate)
 
-        Access.ExecuteQuery("INSERT INTO tblEmployee ([Passcode],[FirstName],[LastName],[Position],[Address],[Gender],[ContactNumber],[Status]) " &
-                            "VALUES (@passcode,@firstname,@lastname,@position,@address,@gender,@contact,@status)")
+        Access.ExecuteQuery("INSERT INTO tblEmployee ([Passcode],[FirstName],[LastName],[Position],[Address],[Gender],[ContactNumber],[Status],[Rate]) " &
+                            "VALUES (@passcode,@firstname,@lastname,@position,@address,@gender,@contact,@status,@rate)")
 
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
 
@@ -412,28 +429,61 @@
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        Dim selectedRow As DataGridViewRow
+        Dim id, index As Integer
+        Dim idList(100)
         Try
-            selectedRow = dgvEmployees.Rows(selectedindexatemployee)
+            For Each selected As DataGridViewRow In dgvEmployees.SelectedRows
+                'show ids of multiple selected rows
+                id = selected.Cells(0).Value
+                idList(index) = id
+                index += 1
+            Next selected
         Catch ex As Exception
             DisplayToastMessage("Please select the employee you want to delete.", 2)
             Exit Sub
         End Try
 
-        Dim id As String = selectedRow.Cells(0).Value.ToString
-
         Dim confirm As Integer = MessageBox.Show("Are you sure you want to delete?", "Confirm", MessageBoxButtons.YesNo)
         If confirm = DialogResult.Yes Then
-            Access.AddParam("@id", id)
-            Access.ExecuteQuery("DELETE * FROM tblEmployee WHERE [ID] = @id")
-            If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
-            DisplayToastMessage("Employee deleted successfully.", 1)
-
-            RefreshEmployeeTable()
-            ClearEmployeeTextboxes()
-            btnEdit.Enabled = False
-            btnDelete.Enabled = False
+            For Each tobedeleted As String In idList
+                If Not String.IsNullOrEmpty(tobedeleted) Then
+                    Access.AddParam("@id", tobedeleted)
+                    Access.ExecuteQuery("DELETE * FROM tblEmployee WHERE [ID] = @id")
+                    If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+                Else
+                    Exit For
+                End If
+            Next
         End If
+
+        DisplayToastMessage("Employee deleted successfully.", 1)
+        RefreshEmployeeTable()
+        ClearEmployeeTextboxes()
+        btnEdit.Enabled = False
+        btnDelete.Enabled = False
+
+        'Dim selectedRow As DataGridViewRow
+        'Try
+        '    selectedRow = dgvEmployees.Rows(selectedindexatemployee)
+        'Catch ex As Exception
+        '    DisplayToastMessage("Please select the employee you want to delete.", 2)
+        '    Exit Sub
+        'End Try
+
+        'Dim id As String = selectedRow.Cells(0).Value.ToString
+
+        'Dim confirm As Integer = MessageBox.Show("Are you sure you want to delete?", "Confirm", MessageBoxButtons.YesNo)
+        'If confirm = DialogResult.Yes Then
+        '    Access.AddParam("@id", id)
+        '    Access.ExecuteQuery("DELETE * FROM tblEmployee WHERE [ID] = @id")
+        '    If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        '    DisplayToastMessage("Employee deleted successfully.", 1)
+
+        '    RefreshEmployeeTable()
+        '    ClearEmployeeTextboxes()
+        '    btnEdit.Enabled = False
+        '    btnDelete.Enabled = False
+        'End If
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
@@ -641,7 +691,7 @@
         End Try
         stotalbreak = selectedRow.Cells(9).Value.ToString
         stotalhour = selectedRow.Cells(10).Value.ToString
-        Dim frmEditAttendance As New frmEditAttendance(sid, sdate, spasscode, semployee,
+        Dim frmEditAttendance As New frmViewAttendance(sid, sdate, spasscode, semployee,
                                                        sposition, sin, sout, sbreakout,
                                                        sbreakin, stotalbreak, stotalhour)
         frmEditAttendance.ShowDialog()
@@ -692,4 +742,27 @@
         Dim employeecount As Integer = dgvEmployees.Rows.Count()
         lblNumberOfEmployee.Text = employeecount
     End Sub
+
+    Private Sub btnGeneratePasscode_Click(sender As Object, e As EventArgs) Handles btnGeneratePasscode.Click
+        While True
+            Dim valid As Boolean = True
+            Dim firstdigit As Double = Math.Floor(Rnd() * 9)
+            Dim seconddigit As Double = Math.Floor(Rnd() * 9)
+            Dim thirddigit As Double = Math.Floor(Rnd() * 9)
+            Dim fourthdigit As Double = Math.Floor(Rnd() * 9)
+            Dim newpasscode As String = firstdigit.ToString & seconddigit.ToString & thirddigit.ToString & fourthdigit.ToString
+
+            For counter As Integer = 0 To dgvEmployees.Rows.Count - 1
+                If newpasscode = dgvEmployees.Rows(counter).Cells(1).Value.ToString Then
+                    valid = False
+                    Exit For
+                End If
+            Next
+            If valid And Not newpasscode = "0143" Then
+                txtPasscode.Text = newpasscode
+                Exit Sub
+            End If
+        End While
+    End Sub
+
 End Class

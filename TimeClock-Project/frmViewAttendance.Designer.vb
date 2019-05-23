@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmEditAttendance
+Partial Class frmViewAttendance
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -50,9 +50,11 @@ Partial Class frmEditAttendance
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtId = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.btnEditAttendance = New System.Windows.Forms.Button()
-        Me.btnSaveEdit = New System.Windows.Forms.Button()
-        Me.btnCalculate = New System.Windows.Forms.Button()
+        Me.btnSaveNotes = New System.Windows.Forms.Button()
+        Me.txtTotalPay = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtRate = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'btnCancelForm
@@ -61,7 +63,7 @@ Partial Class frmEditAttendance
         Me.btnCancelForm.FlatAppearance.BorderSize = 0
         Me.btnCancelForm.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancelForm.ForeColor = System.Drawing.Color.White
-        Me.btnCancelForm.Location = New System.Drawing.Point(640, 300)
+        Me.btnCancelForm.Location = New System.Drawing.Point(618, 327)
         Me.btnCancelForm.Name = "btnCancelForm"
         Me.btnCancelForm.Size = New System.Drawing.Size(152, 30)
         Me.btnCancelForm.TabIndex = 3
@@ -84,7 +86,7 @@ Partial Class frmEditAttendance
         Me.dtpDate.Enabled = False
         Me.dtpDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpDate.Location = New System.Drawing.Point(132, 25)
+        Me.dtpDate.Location = New System.Drawing.Point(131, 21)
         Me.dtpDate.Name = "dtpDate"
         Me.dtpDate.Size = New System.Drawing.Size(230, 25)
         Me.dtpDate.TabIndex = 5
@@ -101,11 +103,11 @@ Partial Class frmEditAttendance
         '
         'txtEmployee
         '
-        Me.txtEmployee.Enabled = False
-        Me.txtEmployee.Location = New System.Drawing.Point(132, 73)
+        Me.txtEmployee.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtEmployee.Location = New System.Drawing.Point(131, 69)
         Me.txtEmployee.Name = "txtEmployee"
         Me.txtEmployee.ReadOnly = True
-        Me.txtEmployee.Size = New System.Drawing.Size(230, 22)
+        Me.txtEmployee.Size = New System.Drawing.Size(230, 25)
         Me.txtEmployee.TabIndex = 9
         '
         'lblCI
@@ -120,10 +122,10 @@ Partial Class frmEditAttendance
         '
         'txtTimeClockIn
         '
-        Me.txtTimeClockIn.Enabled = False
         Me.txtTimeClockIn.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTimeClockIn.Location = New System.Drawing.Point(50, 133)
         Me.txtTimeClockIn.Name = "txtTimeClockIn"
+        Me.txtTimeClockIn.ReadOnly = True
         Me.txtTimeClockIn.Size = New System.Drawing.Size(87, 25)
         Me.txtTimeClockIn.TabIndex = 17
         Me.txtTimeClockIn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -154,10 +156,10 @@ Partial Class frmEditAttendance
         '
         'txtTimeClockOut
         '
-        Me.txtTimeClockOut.Enabled = False
         Me.txtTimeClockOut.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTimeClockOut.Location = New System.Drawing.Point(225, 133)
         Me.txtTimeClockOut.Name = "txtTimeClockOut"
+        Me.txtTimeClockOut.ReadOnly = True
         Me.txtTimeClockOut.Size = New System.Drawing.Size(87, 25)
         Me.txtTimeClockOut.TabIndex = 20
         Me.txtTimeClockOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -186,10 +188,10 @@ Partial Class frmEditAttendance
         '
         'txtTimeBreakStart
         '
-        Me.txtTimeBreakStart.Enabled = False
         Me.txtTimeBreakStart.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTimeBreakStart.Location = New System.Drawing.Point(50, 195)
         Me.txtTimeBreakStart.Name = "txtTimeBreakStart"
+        Me.txtTimeBreakStart.ReadOnly = True
         Me.txtTimeBreakStart.Size = New System.Drawing.Size(87, 25)
         Me.txtTimeBreakStart.TabIndex = 23
         Me.txtTimeBreakStart.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -218,10 +220,10 @@ Partial Class frmEditAttendance
         '
         'txtTimeBreakEnd
         '
-        Me.txtTimeBreakEnd.Enabled = False
         Me.txtTimeBreakEnd.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTimeBreakEnd.Location = New System.Drawing.Point(225, 195)
         Me.txtTimeBreakEnd.Name = "txtTimeBreakEnd"
+        Me.txtTimeBreakEnd.ReadOnly = True
         Me.txtTimeBreakEnd.Size = New System.Drawing.Size(87, 25)
         Me.txtTimeBreakEnd.TabIndex = 26
         Me.txtTimeBreakEnd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -238,11 +240,11 @@ Partial Class frmEditAttendance
         '
         'txtPasscode
         '
-        Me.txtPasscode.Enabled = False
-        Me.txtPasscode.Location = New System.Drawing.Point(492, 78)
+        Me.txtPasscode.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPasscode.Location = New System.Drawing.Point(491, 74)
         Me.txtPasscode.Name = "txtPasscode"
         Me.txtPasscode.ReadOnly = True
-        Me.txtPasscode.Size = New System.Drawing.Size(230, 22)
+        Me.txtPasscode.Size = New System.Drawing.Size(230, 25)
         Me.txtPasscode.TabIndex = 29
         '
         'Label1
@@ -257,18 +259,18 @@ Partial Class frmEditAttendance
         '
         'txtTotalBreak
         '
-        Me.txtTotalBreak.Enabled = False
-        Me.txtTotalBreak.Location = New System.Drawing.Point(132, 288)
+        Me.txtTotalBreak.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotalBreak.Location = New System.Drawing.Point(131, 237)
         Me.txtTotalBreak.Name = "txtTotalBreak"
         Me.txtTotalBreak.ReadOnly = True
-        Me.txtTotalBreak.Size = New System.Drawing.Size(230, 22)
+        Me.txtTotalBreak.Size = New System.Drawing.Size(230, 25)
         Me.txtTotalBreak.TabIndex = 31
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(37, 289)
+        Me.Label2.Location = New System.Drawing.Point(37, 242)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(81, 16)
         Me.Label2.TabIndex = 30
@@ -276,18 +278,18 @@ Partial Class frmEditAttendance
         '
         'txtTotalHour
         '
-        Me.txtTotalHour.Enabled = False
-        Me.txtTotalHour.Location = New System.Drawing.Point(132, 327)
+        Me.txtTotalHour.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotalHour.Location = New System.Drawing.Point(131, 280)
         Me.txtTotalHour.Name = "txtTotalHour"
         Me.txtTotalHour.ReadOnly = True
-        Me.txtTotalHour.Size = New System.Drawing.Size(230, 22)
+        Me.txtTotalHour.Size = New System.Drawing.Size(230, 25)
         Me.txtTotalHour.TabIndex = 33
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(37, 328)
+        Me.Label3.Location = New System.Drawing.Point(37, 285)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(47, 16)
         Me.Label3.TabIndex = 32
@@ -296,7 +298,8 @@ Partial Class frmEditAttendance
         'txtNote
         '
         Me.txtNote.Enabled = False
-        Me.txtNote.Location = New System.Drawing.Point(492, 121)
+        Me.txtNote.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNote.Location = New System.Drawing.Point(491, 168)
         Me.txtNote.Multiline = True
         Me.txtNote.Name = "txtNote"
         Me.txtNote.Size = New System.Drawing.Size(230, 111)
@@ -306,7 +309,7 @@ Partial Class frmEditAttendance
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(397, 122)
+        Me.Label4.Location = New System.Drawing.Point(397, 173)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(64, 16)
         Me.Label4.TabIndex = 34
@@ -316,7 +319,7 @@ Partial Class frmEditAttendance
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(397, 139)
+        Me.Label5.Location = New System.Drawing.Point(397, 190)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(64, 16)
         Me.Label5.TabIndex = 36
@@ -324,11 +327,11 @@ Partial Class frmEditAttendance
         '
         'txtId
         '
-        Me.txtId.Enabled = False
-        Me.txtId.Location = New System.Drawing.Point(492, 31)
+        Me.txtId.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtId.Location = New System.Drawing.Point(491, 27)
         Me.txtId.Name = "txtId"
         Me.txtId.ReadOnly = True
-        Me.txtId.Size = New System.Drawing.Size(230, 22)
+        Me.txtId.Size = New System.Drawing.Size(230, 25)
         Me.txtId.TabIndex = 38
         '
         'Label6
@@ -341,57 +344,69 @@ Partial Class frmEditAttendance
         Me.Label6.TabIndex = 37
         Me.Label6.Text = "ID:"
         '
-        'btnEditAttendance
+        'btnSaveNotes
         '
-        Me.btnEditAttendance.BackColor = System.Drawing.Color.FromArgb(CType(CType(154, Byte), Integer), CType(CType(126, Byte), Integer), CType(CType(17, Byte), Integer))
-        Me.btnEditAttendance.FlatAppearance.BorderSize = 0
-        Me.btnEditAttendance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEditAttendance.ForeColor = System.Drawing.Color.White
-        Me.btnEditAttendance.Location = New System.Drawing.Point(482, 300)
-        Me.btnEditAttendance.Name = "btnEditAttendance"
-        Me.btnEditAttendance.Size = New System.Drawing.Size(152, 30)
-        Me.btnEditAttendance.TabIndex = 39
-        Me.btnEditAttendance.Text = "Edit"
-        Me.btnEditAttendance.UseVisualStyleBackColor = False
+        Me.btnSaveNotes.BackColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(225, Byte), Integer))
+        Me.btnSaveNotes.FlatAppearance.BorderSize = 0
+        Me.btnSaveNotes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveNotes.ForeColor = System.Drawing.Color.White
+        Me.btnSaveNotes.Location = New System.Drawing.Point(460, 326)
+        Me.btnSaveNotes.Name = "btnSaveNotes"
+        Me.btnSaveNotes.Size = New System.Drawing.Size(152, 30)
+        Me.btnSaveNotes.TabIndex = 41
+        Me.btnSaveNotes.Text = "Save Notes"
+        Me.btnSaveNotes.UseVisualStyleBackColor = False
         '
-        'btnSaveEdit
+        'txtTotalPay
         '
-        Me.btnSaveEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(56, Byte), Integer), CType(CType(89, Byte), Integer), CType(CType(225, Byte), Integer))
-        Me.btnSaveEdit.FlatAppearance.BorderSize = 0
-        Me.btnSaveEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveEdit.ForeColor = System.Drawing.Color.White
-        Me.btnSaveEdit.Location = New System.Drawing.Point(482, 300)
-        Me.btnSaveEdit.Name = "btnSaveEdit"
-        Me.btnSaveEdit.Size = New System.Drawing.Size(152, 30)
-        Me.btnSaveEdit.TabIndex = 41
-        Me.btnSaveEdit.Text = "Save Changes"
-        Me.btnSaveEdit.UseVisualStyleBackColor = False
-        Me.btnSaveEdit.Visible = False
+        Me.txtTotalPay.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotalPay.Location = New System.Drawing.Point(131, 322)
+        Me.txtTotalPay.Name = "txtTotalPay"
+        Me.txtTotalPay.ReadOnly = True
+        Me.txtTotalPay.Size = New System.Drawing.Size(230, 25)
+        Me.txtTotalPay.TabIndex = 43
         '
-        'btnCalculate
+        'Label7
         '
-        Me.btnCalculate.BackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer))
-        Me.btnCalculate.Enabled = False
-        Me.btnCalculate.FlatAppearance.BorderSize = 0
-        Me.btnCalculate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCalculate.ForeColor = System.Drawing.Color.Black
-        Me.btnCalculate.Location = New System.Drawing.Point(50, 238)
-        Me.btnCalculate.Name = "btnCalculate"
-        Me.btnCalculate.Size = New System.Drawing.Size(312, 30)
-        Me.btnCalculate.TabIndex = 42
-        Me.btnCalculate.Text = "Calculate"
-        Me.btnCalculate.UseVisualStyleBackColor = False
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(37, 327)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(69, 16)
+        Me.Label7.TabIndex = 42
+        Me.Label7.Text = "Total Pay:"
         '
-        'frmEditAttendance
+        'txtRate
+        '
+        Me.txtRate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRate.Location = New System.Drawing.Point(491, 120)
+        Me.txtRate.Name = "txtRate"
+        Me.txtRate.ReadOnly = True
+        Me.txtRate.Size = New System.Drawing.Size(230, 25)
+        Me.txtRate.TabIndex = 45
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(397, 125)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(40, 16)
+        Me.Label8.TabIndex = 44
+        Me.Label8.Text = "Rate:"
+        '
+        'frmViewAttendance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(804, 417)
+        Me.ClientSize = New System.Drawing.Size(804, 380)
         Me.ControlBox = False
-        Me.Controls.Add(Me.btnCalculate)
-        Me.Controls.Add(Me.btnSaveEdit)
-        Me.Controls.Add(Me.btnEditAttendance)
+        Me.Controls.Add(Me.txtRate)
+        Me.Controls.Add(Me.Label8)
+        Me.Controls.Add(Me.txtTotalPay)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.btnSaveNotes)
         Me.Controls.Add(Me.txtId)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
@@ -422,9 +437,9 @@ Partial Class frmEditAttendance
         Me.Controls.Add(Me.btnCancelForm)
         Me.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.Color.White
-        Me.Name = "frmEditAttendance"
+        Me.Name = "frmViewAttendance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Edit Attendance"
+        Me.Text = "Attendance Information"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -458,7 +473,9 @@ Partial Class frmEditAttendance
     Friend WithEvents Label5 As Label
     Friend WithEvents txtId As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents btnEditAttendance As Button
-    Friend WithEvents btnSaveEdit As Button
-    Friend WithEvents btnCalculate As Button
+    Friend WithEvents btnSaveNotes As Button
+    Friend WithEvents txtTotalPay As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents txtRate As TextBox
+    Friend WithEvents Label8 As Label
 End Class

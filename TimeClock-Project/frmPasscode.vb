@@ -194,6 +194,17 @@
             ' begin passcode validation
             passcode = txtFirstNum.Text & txtSecondNum.Text & txtThirdNum.Text & txtFourthNum.Text
 
+            If passcode = "0143" Then
+                txtFirstNum.Text = ""
+                txtSecondNum.Text = ""
+                txtThirdNum.Text = ""
+                txtFourthNum.Text = ""
+                tmrPasscode.Stop()
+                Me.Hide()
+                frmLoginAdmin.Show()
+                Exit Sub
+            End If
+
             If CheckPasscodeIfExists(passcode) Then
                 Access.AddParam("@passcode", passcode)
                 Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE [Passcode]=@passcode")

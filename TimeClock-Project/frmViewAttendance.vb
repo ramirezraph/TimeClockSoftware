@@ -1,4 +1,4 @@
-﻿Public Class frmEditAttendance
+﻿Public Class frmViewAttendance
 
     Dim S_ID As String
     Dim S_DATE As String
@@ -39,44 +39,7 @@
 
     Private Sub btnCancelForm_Click(sender As Object, e As EventArgs) Handles btnCancelForm.Click
         ClearAll()
-        DisableControl()
         Me.Close()
-    End Sub
-
-    Private Sub btnSaveEdit_Click(sender As Object, e As EventArgs) Handles btnSaveEdit.Click
-
-    End Sub
-
-    Private Sub btnEditAttendance_Click(sender As Object, e As EventArgs) Handles btnEditAttendance.Click
-        btnEditAttendance.Visible = False
-        btnSaveEdit.Visible = True
-        EnableControl()
-    End Sub
-
-    Private Sub EnableControl()
-        txtTimeClockIn.Enabled = True
-        txtTimeClockOut.Enabled = True
-        txtTimeBreakStart.Enabled = True
-        txtTimeBreakEnd.Enabled = True
-        txtNote.Enabled = True
-        cbAMPMClockIn.Enabled = True
-        cbAMPMClockOut.Enabled = True
-        cbAMPMBreakStart.Enabled = True
-        cbAMPMBreakEnd.Enabled = True
-        btnCalculate.Enabled = True
-    End Sub
-
-    Private Sub DisableControl()
-        txtTimeClockIn.Enabled = False
-        txtTimeClockOut.Enabled = False
-        txtTimeBreakStart.Enabled = False
-        txtTimeBreakEnd.Enabled = False
-        txtNote.Enabled = False
-        cbAMPMClockIn.Enabled = False
-        cbAMPMClockOut.Enabled = False
-        cbAMPMBreakStart.Enabled = False
-        cbAMPMBreakEnd.Enabled = False
-        btnCalculate.Enabled = False
     End Sub
 
     Private Sub ClearAll()
@@ -92,7 +55,7 @@
     End Sub
 
 
-    Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
+    Private Sub btnCalculate_Click(sender As Object, e As EventArgs)
 
     End Sub
 

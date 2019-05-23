@@ -223,6 +223,7 @@ Partial Class frmPasscode
         Me.btnLoginAdmin.TabIndex = 17
         Me.btnLoginAdmin.Text = "ADMIN"
         Me.btnLoginAdmin.UseVisualStyleBackColor = False
+        Me.btnLoginAdmin.Visible = False
         '
         'btn1
         '

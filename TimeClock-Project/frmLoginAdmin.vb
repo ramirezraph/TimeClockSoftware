@@ -26,6 +26,8 @@
             If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
             For Each R As DataRow In Access.DbDataTable.Rows
                 If username = R("username") And password = R("password") And R("userlevel") = "Administrator" Then
+                    txtUsername.Text = ""
+                    txtPassword.Text = ""
                     Me.Hide()
                     Dim frmAdmin As New frmAdministrator(R("name").ToString, R("userlevel"))
                     frmAdmin.Show()
@@ -33,6 +35,7 @@
             Next
 
             ShowMessage("Incorrect credential. Try again.")
+            txtPassword.Text = ""
         End If
 
 
