@@ -133,6 +133,24 @@
         ' Check Schedule
         ' soon
 
+        ' GET RATE AND SalaryBalance
+        Dim Rate As String = ""
+        Access.AddParam("@passcode", EMP_PASSCODE)
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE [Passcode]=@passcode")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        For Each R As DataRow In Access.DbDataTable.Rows
+            Try
+                If String.IsNullOrEmpty(R("Rate")) Then
+                    MessageBox.Show("Hi, your rate is not yet registered. Please refer to the admin.")
+                    Exit Sub
+                End If
+                Rate = R("Rate")
+            Catch ex As Exception
+                MessageBox.Show("An error occured. HINT: Null values")
+                Exit Sub
+            End Try
+        Next
+
         ' DATA: date, passcode, empname, position, in, out, lunchin, lunchout, hours, overtime, notes
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
         Access.AddParam("@date", todaysdate)
@@ -140,8 +158,9 @@
         Access.AddParam("@name", EMP_NAME)
         Access.AddParam("@position", EMP_POSITION)
         Access.AddParam("@in", lblCurrentTime.Text)
-        Access.ExecuteQuery("INSERT INTO tblAttendance ([Date],[Passcode],[EmployeeName],[Position],[In]) " &
-                            "VALUES (@date,@passcode,@name,@position,@in)")
+        Access.AddParam("@rate", Rate)
+        Access.ExecuteQuery("INSERT INTO tblAttendance ([Date],[Passcode],[EmployeeName],[Position],[In],[Rate]) " &
+                            "VALUES (@date,@passcode,@name,@position,@in,@rate)")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         UpdateEmployeeStatus("In", EMP_PASSCODE)
 
@@ -158,6 +177,8 @@
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
         Dim strclockin As String = ""
         Dim totalbreak As String = ""
+        Dim rate As Double = 0
+        Dim pay As Double = 0
 
         ' GET CLOCK IN TIME AND TOTAL BREAK
         Access.AddParam("@passcode", EMP_PASSCODE)
@@ -166,6 +187,7 @@
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         For Each R As DataRow In Access.DbDataTable.Rows
             Try
+                rate = R("Rate")
                 strclockin = R("In")
                 If String.IsNullOrEmpty(R("TotalBreak").ToString) Then
                     totalbreak = "00:00:00"
@@ -189,18 +211,22 @@
         clockout = Convert.ToDateTime(lblCurrentTime.Text)
         hour = clockout.Subtract(clockin)
         totalhour = hour.Subtract(TimeSpan.Parse(totalbreak))
-
+        pay = Decimal.Round(rate * totalhour.TotalHours, 2, MidpointRounding.AwayFromZero)
         ' Check values
         'MessageBox.Show(hour.ToString & " : " & totalbreak & " = " & totalhour.ToString)
-
+        MsgBox(pay.ToString)
         ' REGISTER OUT
         Access.AddParam("@totalhour", totalhour.ToString)
         Access.AddParam("@out", lblCurrentTime.Text)
         Access.AddParam("@passcode", EMP_PASSCODE)
         Access.AddParam("@date", todaysdate)
-        Access.ExecuteQuery("UPDATE tblAttendance SET [TotalHour]=@totalhour,[Out]=@out" &
+        Access.AddParam("@pay", pay)
+        Access.ExecuteQuery("UPDATE tblAttendance SET [TotalHour]=@totalhour,[Out]=@out,[Pay]='" & pay & "'" &
             " WHERE [Passcode]=@passcode AND [Date]=@date")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+
+        ' UPDATE SALARY BALANCE
+        UpdateSalaryBalance(EMP_PASSCODE, pay)
 
         ' UPDATE STATUS
         UpdateEmployeeStatus("Out", EMP_PASSCODE)
@@ -211,6 +237,27 @@
         Me.Hide()
         frmPasscode.Show()
 
+    End Sub
+
+    Private Sub UpdateSalaryBalance(passcode As String, balancetobeadded As Double)
+        Dim newbalance As Double = 0
+        Dim oldbalance As Double = 0
+        ' GET OLD BALANCE
+        Access.AddParam("@passcode", passcode)
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE [Passcode]=@passcode")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        For Each R As DataRow In Access.DbDataTable.Rows
+            If Not String.IsNullOrEmpty(R("SalaryBalance").ToString) Then
+                oldbalance = R("SalaryBalance")
+                Exit For
+            End If
+        Next
+        newbalance = oldbalance + balancetobeadded
+        Access.AddParam("@passcode", passcode)
+        Access.AddParam("@balance", newbalance)
+        Access.ExecuteQuery("UPDATE tblEmployee SET [SalaryBalance]='" & newbalance & "'" &
+            " WHERE [Passcode]=@passcode")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
     End Sub
 
     Private Sub UpdateEmployeeStatus(status As String, passcode As String)

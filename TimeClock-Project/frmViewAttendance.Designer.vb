@@ -297,7 +297,6 @@ Partial Class frmViewAttendance
         '
         'txtNote
         '
-        Me.txtNote.Enabled = False
         Me.txtNote.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNote.Location = New System.Drawing.Point(491, 168)
         Me.txtNote.Multiline = True

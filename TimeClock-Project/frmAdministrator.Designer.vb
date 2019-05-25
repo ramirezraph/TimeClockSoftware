@@ -137,6 +137,7 @@ Partial Class frmAdministrator
         Me.lblEmployee = New System.Windows.Forms.Label()
         Me.lblUnderline3 = New System.Windows.Forms.Label()
         Me.pnlPayment = New System.Windows.Forms.Panel()
+        Me.btnUnMark = New System.Windows.Forms.Button()
         Me.btnRegisterRate = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.dgvEmployeePayment = New System.Windows.Forms.DataGridView()
@@ -147,7 +148,6 @@ Partial Class frmAdministrator
         Me.lblToastMessage = New System.Windows.Forms.Label()
         Me.tmrMessage = New System.Windows.Forms.Timer(Me.components)
         Me.tmrTime = New System.Windows.Forms.Timer(Me.components)
-        Me.btnUnMark = New System.Windows.Forms.Button()
         Me.pnlNavBar.SuspendLayout()
         CType(Me.btnHomeIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1481,6 +1481,19 @@ Partial Class frmAdministrator
         Me.pnlPayment.Size = New System.Drawing.Size(1031, 585)
         Me.pnlPayment.TabIndex = 13
         '
+        'btnUnMark
+        '
+        Me.btnUnMark.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(204, Byte), Integer))
+        Me.btnUnMark.FlatAppearance.BorderSize = 0
+        Me.btnUnMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUnMark.ForeColor = System.Drawing.Color.White
+        Me.btnUnMark.Location = New System.Drawing.Point(766, 67)
+        Me.btnUnMark.Name = "btnUnMark"
+        Me.btnUnMark.Size = New System.Drawing.Size(154, 27)
+        Me.btnUnMark.TabIndex = 51
+        Me.btnUnMark.Text = "Mark/Unmark Paid"
+        Me.btnUnMark.UseVisualStyleBackColor = False
+        '
         'btnRegisterRate
         '
         Me.btnRegisterRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
@@ -1597,30 +1610,17 @@ Partial Class frmAdministrator
         '
         Me.tmrTime.Interval = 1000
         '
-        'btnUnMark
-        '
-        Me.btnUnMark.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(204, Byte), Integer))
-        Me.btnUnMark.FlatAppearance.BorderSize = 0
-        Me.btnUnMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUnMark.ForeColor = System.Drawing.Color.White
-        Me.btnUnMark.Location = New System.Drawing.Point(766, 67)
-        Me.btnUnMark.Name = "btnUnMark"
-        Me.btnUnMark.Size = New System.Drawing.Size(154, 27)
-        Me.btnUnMark.TabIndex = 51
-        Me.btnUnMark.Text = "Mark/Unmark Paid"
-        Me.btnUnMark.UseVisualStyleBackColor = False
-        '
         'frmAdministrator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(219, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1284, 677)
+        Me.Controls.Add(Me.pnlStaffAttendance)
         Me.Controls.Add(Me.pnlPayment)
         Me.Controls.Add(Me.pnlDashboard)
         Me.Controls.Add(Me.pnlManageEmployee)
         Me.Controls.Add(Me.lblToastMessage)
-        Me.Controls.Add(Me.pnlStaffAttendance)
         Me.Controls.Add(Me.pnlDropDownBtn1)
         Me.Controls.Add(Me.pnlMenu)
         Me.Controls.Add(Me.pnlNavBar)

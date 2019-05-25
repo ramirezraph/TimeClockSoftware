@@ -26,13 +26,14 @@
     End Sub
 
     Private Sub btnApply_Click(sender As Object, e As EventArgs) Handles btnApply.Click
-        Access.AddParam("@passcode", EMP_PASSCODE)
         Access.AddParam("@rate", txtPaymentRate.Text)
-        Access.ExecuteQuery("UPDATE tblEmployee SET [Rate]=@rate WHERE [Passcode]=@passcode")
+        Access.AddParam("@code", EMP_PASSCODE)
+        Access.ExecuteQuery("UPDATE tblEmployee SET Rate=@rate WHERE Passcode=@code")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
-        Me.Hide()
-        Dim message As String = txtPaymentName.Text & " rate added successfuly"
+        Dim message As String = txtPaymentName.Text & "'s rate registered successfuly"
         frmAdministrator.DisplayToastMessage(message, 1)
+        frmAdministrator.RefreshPaymentTable()
+        Me.Hide()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click

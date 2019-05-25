@@ -1,5 +1,8 @@
 ﻿Public Class frmViewAttendance
 
+    ' IMPORTANT
+    Private Access As New DatabaseControl
+
     Dim S_ID As String
     Dim S_DATE As String
     Dim S_PASSCODE As String
@@ -11,12 +14,17 @@
     Dim S_BREAKIN As DateTime
     Dim S_TOTALBREAK As String
     Dim S_TOTALHOUR As String
+    Dim S_RATE As String
+    Dim S_TOTALPAY As String
+    Dim S_NOTE As String
 
+    Private Const DateFormat As String = "{0:MM/dd/yyyy}"
 
     Public Sub New(sid As String, sdate As String, spasscode As String,
                    semployee As String, sposition As String,
                    sin As DateTime, sout As DateTime, sbreakout As DateTime,
-                   sbreakin As DateTime, stotalbreak As String, stotalhour As String)
+                   sbreakin As DateTime, stotalbreak As String, stotalhour As String,
+                   srate As String, stotalpay As String, snote As String)
 
         S_ID = sid
         S_DATE = sdate
@@ -29,6 +37,9 @@
         S_BREAKIN = sbreakin
         S_TOTALBREAK = stotalbreak
         S_TOTALHOUR = stotalhour
+        S_RATE = srate
+        S_TOTALPAY = stotalpay
+        S_NOTE = snote
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -70,6 +81,9 @@
         txtTotalHour.Text = S_TOTALHOUR
         txtId.Text = S_ID
         txtPasscode.Text = S_PASSCODE
+        txtRate.Text = S_RATE
+        txtTotalPay.Text = S_TOTALPAY
+        txtNote.Text = S_NOTE
 
         If txtTimeClockIn.Text = "12:00 AM" Then
             txtTimeClockIn.Text = ""
@@ -99,5 +113,20 @@
             txtTimeBreakEnd.Text = S_BREAKIN.ToString("hh:mm")
         End If
 
+    End Sub
+
+    Private Sub btnSaveNotes_Click(sender As Object, e As EventArgs) Handles btnSaveNotes.Click
+        Dim date1 As DateTime = dtpDate.Value
+        Dim date2 As String = String.Format(DateFormat, date1)
+
+        Access.AddParam("@note", txtNote.Text)
+        Access.AddParam("@passcode", txtPasscode.Text)
+        Access.AddParam("@id", txtId.Text)
+        Access.ExecuteQuery("UPDATE tblAttendance SET [Notes]=@note WHERE [Passcode]=@passcode AND [ID]=@id")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+
+        frmAdministrator.RefreshAttendanceTable(date2)
+        frmAdministrator.DisplayToastMessage("Note added successfully.", 1)
+        Me.Hide()
     End Sub
 End Class

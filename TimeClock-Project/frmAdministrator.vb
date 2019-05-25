@@ -380,7 +380,7 @@
             End Try
         Next
 
-        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName.Trim, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out", txtRate.Text)
+        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName.Trim, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out", "", "", "No")
     End Sub
 
     Private Function CheckForAlphaCharacters(ByVal StringToCheck As String)
@@ -409,7 +409,7 @@
     Private Sub AddEmployee(Passcode As String, FirstName As String,
                             LastName As String, Position As String,
                             Address As String, Gender As String,
-                            ContactNumber As String, Status As String, Rate As String)
+                            ContactNumber As String, Status As String, Rate As String, SalaryBalance As String, Paid As String)
         Access.AddParam("@passcode", Passcode)
         Access.AddParam("@firstname", FirstName)
         Access.AddParam("@lastname", LastName)
@@ -419,14 +419,17 @@
         Access.AddParam("@contact", ContactNumber)
         Access.AddParam("@status", Status)
         Access.AddParam("@rate", Rate)
+        Access.AddParam("@salarybalance", SalaryBalance)
+        Access.AddParam("@paid", Paid)
 
-        Access.ExecuteQuery("INSERT INTO tblEmployee ([Passcode],[FirstName],[LastName],[Position],[Address],[Gender],[ContactNumber],[Status],[Rate]) " &
-                            "VALUES (@passcode,@firstname,@lastname,@position,@address,@gender,@contact,@status,@rate)")
+        Access.ExecuteQuery("INSERT INTO tblEmployee ([Passcode],[FirstName],[LastName],[Position],[Address],[Gender],[ContactNumber],[Status],[Rate],[SalaryBalance],[Paid]) " &
+                            "VALUES (@passcode,@firstname,@lastname,@position,@address,@gender,@contact,@status,@rate,@salarybalance,@paid)")
 
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
 
         DisplayToastMessage("Employee has been added successfully.", 1)
         RefreshEmployeeTable()
+        RefreshPaymentTable()
         ClearEmployeeTextboxes()
         btnEdit.Enabled = False
         btnDelete.Enabled = False
@@ -461,6 +464,7 @@
 
         DisplayToastMessage("Employee deleted successfully.", 1)
         RefreshEmployeeTable()
+        RefreshPaymentTable()
         ClearEmployeeTextboxes()
         btnEdit.Enabled = False
         btnDelete.Enabled = False
@@ -589,6 +593,7 @@
 
         DisplayToastMessage("Employee has been updated successfully.", 1)
         RefreshEmployeeTable()
+        RefreshPaymentTable()
         ClearEmployeeTextboxes()
         dgvEmployees.ClearSelection()
         btnEdit.Enabled = False
@@ -602,7 +607,7 @@
         RefreshAttendanceTable(selectedDate)
     End Sub
 
-    Private Sub RefreshAttendanceTable(datetime As String)
+    Public Sub RefreshAttendanceTable(datetime As String)
         ' Run Query
         Access.AddParam("@date", datetime)
         Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Date]=@date ORDER BY [In] ASC")
@@ -636,6 +641,7 @@
             dgvAttendance.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvAttendance.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvAttendance.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvAttendance.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -661,6 +667,9 @@
         Dim sbreakin As DateTime
         Dim stotalbreak As String
         Dim stotalhour As String
+        Dim snote As String
+        Dim srate As String
+        Dim stotalpay As String
 
         ' GET SELECTED ROW VALUES
         Dim selectedRow As DataGridViewRow
@@ -694,10 +703,14 @@
         End Try
         stotalbreak = selectedRow.Cells(9).Value.ToString
         stotalhour = selectedRow.Cells(10).Value.ToString
-        Dim frmEditAttendance As New frmViewAttendance(sid, sdate, spasscode, semployee,
+        srate = selectedRow.Cells(13).Value.ToString
+        stotalpay = selectedRow.Cells(14).Value.ToString
+        snote = selectedRow.Cells(12).Value.ToString
+        Dim frmViewAttendance As New frmViewAttendance(sid, sdate, spasscode, semployee,
                                                        sposition, sin, sout, sbreakout,
-                                                       sbreakin, stotalbreak, stotalhour)
-        frmEditAttendance.ShowDialog()
+                                                       sbreakin, stotalbreak, stotalhour,
+                                                       srate, stotalpay, snote)
+        frmViewAttendance.ShowDialog()
     End Sub
 
     Private Sub dgvAttendance_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAttendance.RowEnter
@@ -769,7 +782,7 @@
     End Sub
 
     ' PAYMENT SECTION
-    Private Sub RefreshPaymentTable()
+    Public Sub RefreshPaymentTable()
         ' Run Query
         Access.ExecuteQuery("SELECT * FROM tblEmployee ORDER BY ID DESC")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
@@ -787,6 +800,10 @@
             dgvEmployeePayment.Columns(4).Width = 200
             dgvEmployeePayment.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvEmployeePayment.Columns("Passcode").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvEmployeePayment.Columns("Rate").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvEmployeePayment.Columns("SalaryBalance").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvEmployeePayment.Columns("Paid").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvEmployeePayment.Columns(10).HeaderText = "Balance"
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
