@@ -8,6 +8,7 @@
     Dim selectedindexatattendance As Integer
     Dim selectedindexatpayment As Integer
     Private Const DateFormat As String = "{0:MMM dd, yyyy}"
+    Private Const LastPaidFormat As String = "{0:MM/dd/yyyy}"
 
     Dim USER_NAME As String
     Dim USER_USERLEVEL As String
@@ -103,6 +104,7 @@
         pnlManageEmployee.SendToBack()
         pnlPayment.SendToBack()
         RefreshCurrentlyWorkingEmployee()
+        GetEmployeeTotal()
     End Sub
 
     Private Sub btnMenuAttendance_Click(sender As Object, e As EventArgs) Handles btnMenuAttendance.Click
@@ -268,14 +270,14 @@
 
     Private Sub txtSearchEmployee_TextChanged(sender As Object, e As EventArgs) Handles txtSearchEmployee.TextChanged
         Dim t As TextBox = sender
-        SearchEmployee(t.Text.ToLower)
+        SearchEmployeeOnEmployee(t.Text.ToLower)
 
     End Sub
 
-    Private Sub SearchEmployee(Name As String)
+    Private Sub SearchEmployeeOnEmployee(Name As String)
         ' Add Param and Run Query
         Access.AddParam("@name", "%" & Name & "%")
-        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY ID ASC")
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY LastName ASC")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
 
         ' Fill DataGridView
@@ -380,7 +382,7 @@
             End Try
         Next
 
-        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName.Trim, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out", "", "", "No")
+        AddEmployee(txtPasscode.Text, modifiedFirstName.Trim, modifiedLastName.Trim, txtPosition.Text, txtAddress.Text, gender, txtContactNumber.Text, "Out", "", "")
     End Sub
 
     Private Function CheckForAlphaCharacters(ByVal StringToCheck As String)
@@ -409,7 +411,7 @@
     Private Sub AddEmployee(Passcode As String, FirstName As String,
                             LastName As String, Position As String,
                             Address As String, Gender As String,
-                            ContactNumber As String, Status As String, Rate As String, SalaryBalance As String, Paid As String)
+                            ContactNumber As String, Status As String, Rate As String, SalaryBalance As String)
         Access.AddParam("@passcode", Passcode)
         Access.AddParam("@firstname", FirstName)
         Access.AddParam("@lastname", LastName)
@@ -420,10 +422,9 @@
         Access.AddParam("@status", Status)
         Access.AddParam("@rate", Rate)
         Access.AddParam("@salarybalance", SalaryBalance)
-        Access.AddParam("@paid", Paid)
 
-        Access.ExecuteQuery("INSERT INTO tblEmployee ([Passcode],[FirstName],[LastName],[Position],[Address],[Gender],[ContactNumber],[Status],[Rate],[SalaryBalance],[Paid]) " &
-                            "VALUES (@passcode,@firstname,@lastname,@position,@address,@gender,@contact,@status,@rate,@salarybalance,@paid)")
+        Access.ExecuteQuery("INSERT INTO tblEmployee ([Passcode],[FirstName],[LastName],[Position],[Address],[Gender],[ContactNumber],[Status],[Rate],[SalaryBalance]) " &
+                            "VALUES (@passcode,@firstname,@lastname,@position,@address,@gender,@contact,@status,@rate,@salarybalance)")
 
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
 
@@ -804,6 +805,7 @@
             dgvEmployeePayment.Columns("SalaryBalance").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvEmployeePayment.Columns("Paid").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvEmployeePayment.Columns(10).HeaderText = "Balance"
+            dgvEmployeePayment.Columns("Paid").HeaderText = "Last Paid"
         Catch ex As Exception
             MessageBox.Show(ex.Message)
         End Try
@@ -827,4 +829,57 @@
 
         End Try
     End Sub
+
+    Private Sub btnUnMark_Click(sender As Object, e As EventArgs) Handles btnMarkPaid.Click
+        Dim todaysdate As String = String.Format(DateFormat, Date.Now)
+        Dim id, index As Integer
+        Dim idList(100)
+        Try
+            For Each selected As DataGridViewRow In dgvEmployeePayment.SelectedRows
+                'show ids of multiple selected rows
+                id = selected.Cells(1).Value
+                idList(index) = id
+                index += 1
+            Next selected
+        Catch ex As Exception
+            DisplayToastMessage("Please select an item.", 2)
+            Exit Sub
+        End Try
+
+        Dim confirm As Integer = MessageBox.Show("Please click 'Yes' to confirm.", "Confirm", MessageBoxButtons.YesNo)
+        If confirm = DialogResult.Yes Then
+            For Each passcodes As String In idList
+                If Not String.IsNullOrEmpty(passcodes) Then
+                    Access.AddParam("@today", todaysdate)
+                    Access.AddParam("@passcode", passcodes)
+                    Access.ExecuteQuery("UPDATE tblEmployee SET [Paid]=@today, [SalaryBalance]='0' WHERE [Passcode]=@passcode")
+                    If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+                Else
+                    Exit For
+                End If
+            Next
+        End If
+
+        DisplayToastMessage("Paid status updated successfully.", 1)
+        RefreshPaymentTable()
+        ClearEmployeeTextboxes()
+        btnEdit.Enabled = False
+        btnDelete.Enabled = False
+    End Sub
+
+    Private Sub txtSearchInPayment_TextChanged(sender As Object, e As EventArgs) Handles txtSearchInPayment.TextChanged
+        Dim t As TextBox = sender
+        SearchEmployeeOnPayment(t.Text.ToLower)
+    End Sub
+
+    Private Sub SearchEmployeeOnPayment(Name As String)
+        ' Add Param and Run Query
+        Access.AddParam("@name", "%" & Name & "%")
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY LastName ASC")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+
+        ' Fill DataGridView
+        dgvEmployeePayment.DataSource = Access.DbDataTable
+    End Sub
+
 End Class

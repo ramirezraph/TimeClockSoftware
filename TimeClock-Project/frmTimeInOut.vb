@@ -214,7 +214,7 @@
         pay = Decimal.Round(rate * totalhour.TotalHours, 2, MidpointRounding.AwayFromZero)
         ' Check values
         'MessageBox.Show(hour.ToString & " : " & totalbreak & " = " & totalhour.ToString)
-        MsgBox(pay.ToString)
+
         ' REGISTER OUT
         Access.AddParam("@totalhour", totalhour.ToString)
         Access.AddParam("@out", lblCurrentTime.Text)
