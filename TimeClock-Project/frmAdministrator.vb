@@ -6,19 +6,20 @@
     Private Access As New DatabaseControl
     Dim selectedindexatemployee As Integer
     Dim selectedindexatattendance As Integer
+    Dim selectedindexatpayment As Integer
     Private Const DateFormat As String = "{0:MMM dd, yyyy}"
 
     Dim USER_NAME As String
     Dim USER_USERLEVEL As String
 
-    Public Sub New(name As String, userlevel As String)
-        ' This call is required by the designer.
-        InitializeComponent()
-        ' Add any initialization after the InitializeComponent() call.
-        USER_NAME = name
-        USER_USERLEVEL = userlevel
+    'Public Sub New(name As String, userlevel As String)
+    '    ' This call is required by the designer.
+    '    InitializeComponent()
+    '    ' Add any initialization after the InitializeComponent() call.
+    '    USER_NAME = name
+    '    USER_USERLEVEL = userlevel
 
-    End Sub
+    'End Sub
 
     ' drop down menu item functionalities
     Dim btnNavButtonIsActive = False
@@ -46,6 +47,28 @@
 
     Private Sub btnCloseForm_Click(sender As Object, e As EventArgs) Handles btnCloseForm.Click
         End
+    End Sub
+
+    Public Sub DisplayToastMessage(message As String, type As Integer)
+        tmrMessage.Start()
+
+        If type = 1 Then
+            ' success message
+            lblToastMessage.Text = message
+            lblToastMessage.BackColor = Color.FromArgb(38, 109, 204)
+            lblToastMessage.Visible = True
+        ElseIf type = 2 Then
+            ' error message
+            lblToastMessage.Text = message
+            lblToastMessage.BackColor = Color.Maroon
+            lblToastMessage.Visible = True
+        End If
+    End Sub
+
+    Private Sub tmrMessage_Tick(sender As Object, e As EventArgs) Handles tmrMessage.Tick
+        lblToastMessage.Text = ""
+        lblToastMessage.Visible = False
+        tmrMessage.Stop()
     End Sub
 
     Private Sub btnDropdownIcon_Click(sender As Object, e As EventArgs) Handles btnDropdownIcon.Click
@@ -78,7 +101,7 @@
         pnlDashboard.BringToFront()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
-        pnlSchedules.SendToBack()
+        pnlPayment.SendToBack()
         RefreshCurrentlyWorkingEmployee()
     End Sub
 
@@ -86,7 +109,7 @@
         pnlDashboard.SendToBack()
         pnlStaffAttendance.BringToFront()
         pnlManageEmployee.SendToBack()
-        pnlSchedules.SendToBack()
+        pnlPayment.SendToBack()
 
         dtpAttendance.Value = Date.Now
         Dim selectedDate As String = dtpAttendance.Value.Month & "/" & dtpAttendance.Value.Day & "/" & dtpAttendance.Value.Year
@@ -100,16 +123,16 @@
         pnlDashboard.SendToBack()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.BringToFront()
-        pnlSchedules.SendToBack()
+        pnlPayment.SendToBack()
         btnEdit.Enabled = False
         btnDelete.Enabled = False
     End Sub
 
-    Private Sub btnScheduling_Click(sender As Object, e As EventArgs) Handles btnScheduling.Click
+    Private Sub btnScheduling_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
         pnlDashboard.SendToBack()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
-        pnlSchedules.BringToFront()
+        pnlPayment.BringToFront()
     End Sub
 
     Private Sub dgvEmployees_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmployees.RowEnter
@@ -204,14 +227,15 @@
         RefreshCurrentDateTime()
         RefreshEmployeeTable()
         RefreshCurrentlyWorkingEmployee()
+        RefreshPaymentTable()
         GetEmployeeTotal()
         pnlDashboard.BringToFront()
 
-        lblUserName.Text = USER_NAME
-        Dim TestSplit() As String = Split(USER_NAME)
-        Dim first As String = TestSplit(0).Substring(0, 1).ToUpper
-        Dim second As String = TestSplit(1).Substring(0, 1).ToUpper
-        btnUserInitial.Text = first & second
+        'lblUserName.Text = USER_NAME
+        'Dim TestSplit() As String = Split(USER_NAME)
+        'Dim first As String = TestSplit(0).Substring(0, 1).ToUpper
+        'Dim second As String = TestSplit(1).Substring(0, 1).ToUpper
+        'btnUserInitial.Text = first & second
     End Sub
 
     Private Sub RefreshEmployeeTable()
@@ -234,6 +258,8 @@
             dgvEmployees.Columns("Rate").Visible = False
             dgvEmployees.Columns("Position").Width = 180
             dgvEmployees.Columns("ID").Visible = False
+            dgvEmployees.Columns("SalaryBalance").Visible = False
+            dgvEmployees.Columns("Paid").Visible = False
             dgvEmployees.Columns("Passcode").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -405,29 +431,6 @@
         btnEdit.Enabled = False
         btnDelete.Enabled = False
     End Sub
-
-    Private Sub DisplayToastMessage(message As String, type As Integer)
-        tmrMessage.Start()
-
-        If type = 1 Then
-            ' success message
-            lblToastMessage.Text = message
-            lblToastMessage.BackColor = Color.FromArgb(38, 109, 204)
-            lblToastMessage.Visible = True
-        ElseIf type = 2 Then
-            ' error message
-            lblToastMessage.Text = message
-            lblToastMessage.BackColor = Color.Maroon
-            lblToastMessage.Visible = True
-        End If
-    End Sub
-
-    Private Sub tmrMessage_Tick(sender As Object, e As EventArgs) Handles tmrMessage.Tick
-        lblToastMessage.Text = ""
-        lblToastMessage.Visible = False
-        tmrMessage.Stop()
-    End Sub
-
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Dim id, index As Integer
         Dim idList(100)
@@ -602,7 +605,7 @@
     Private Sub RefreshAttendanceTable(datetime As String)
         ' Run Query
         Access.AddParam("@date", datetime)
-        Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Date]=@date ORDER BY ID ASC")
+        Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Date]=@date ORDER BY [In] ASC")
 
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         ' Fill DataGridView
@@ -643,7 +646,7 @@
         pnlDashboard.BringToFront()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
-        pnlSchedules.SendToBack()
+        pnlPayment.SendToBack()
     End Sub
 
     Private Sub btnEditAttendance_Click(sender As Object, e As EventArgs) Handles btnEditAttendance.Click
@@ -765,4 +768,46 @@
         End While
     End Sub
 
+    ' PAYMENT SECTION
+    Private Sub RefreshPaymentTable()
+        ' Run Query
+        Access.ExecuteQuery("SELECT * FROM tblEmployee ORDER BY ID DESC")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        ' Fill DataGridView
+        dgvEmployeePayment.DataSource = Access.DbDataTable
+
+        Try
+            dgvEmployeePayment.Columns(0).Visible = False
+            dgvEmployeePayment.Columns(5).Visible = False
+            dgvEmployeePayment.Columns(6).Visible = False
+            dgvEmployeePayment.Columns(7).Visible = False
+            dgvEmployeePayment.Columns(8).Visible = False
+            dgvEmployeePayment.Columns(2).Width = 170
+            dgvEmployeePayment.Columns(3).Width = 170
+            dgvEmployeePayment.Columns(4).Width = 200
+            dgvEmployeePayment.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvEmployeePayment.Columns("Passcode").DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub dgvEmployeePayment_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmployeePayment.RowEnter
+        selectedindexatpayment = e.RowIndex
+    End Sub
+
+    Private Sub btnRegisterRate_Click(sender As Object, e As EventArgs) Handles btnRegisterRate.Click
+        Dim selectedRow As DataGridViewRow
+        Try
+            selectedRow = dgvEmployeePayment.Rows(selectedindexatpayment)
+            Dim pc As String = selectedRow.Cells(1).Value.ToString
+            Dim nm As String = selectedRow.Cells(2).Value.ToString & " " & selectedRow.Cells(3).Value.ToString
+            Dim pos As String = selectedRow.Cells(4).Value.ToString
+            Dim ra As String = selectedRow.Cells(9).Value.ToString
+            Dim frmDialogRate As New frmDialogRate(pc, nm, pos, ra)
+            frmDialogRate.ShowDialog()
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

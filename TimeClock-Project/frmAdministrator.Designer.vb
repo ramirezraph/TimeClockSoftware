@@ -23,12 +23,14 @@ Partial Class frmAdministrator
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.pnlNavBar = New System.Windows.Forms.Panel()
         Me.btnHomeIcon = New System.Windows.Forms.PictureBox()
         Me.btnDropdownIcon = New System.Windows.Forms.PictureBox()
@@ -86,7 +88,8 @@ Partial Class frmAdministrator
         Me.lblNumberOfEmployee = New System.Windows.Forms.Label()
         Me.lblUnderline1 = New System.Windows.Forms.Label()
         Me.pnlMenu = New System.Windows.Forms.Panel()
-        Me.btnScheduling = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnPayment = New System.Windows.Forms.Button()
         Me.btnManageEmployee = New System.Windows.Forms.Button()
         Me.btnMenuAttendance = New System.Windows.Forms.Button()
         Me.btnMenuDashboard = New System.Windows.Forms.Button()
@@ -100,6 +103,10 @@ Partial Class frmAdministrator
         Me.lblUnderline2 = New System.Windows.Forms.Label()
         Me.lblStaffAttendance = New System.Windows.Forms.Label()
         Me.pnlManageEmployee = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtRate = New System.Windows.Forms.TextBox()
+        Me.btnGeneratePasscode = New System.Windows.Forms.Button()
         Me.btnCommitUpdate = New System.Windows.Forms.Button()
         Me.txtSearchEmployee = New System.Windows.Forms.TextBox()
         Me.Label28 = New System.Windows.Forms.Label()
@@ -129,16 +136,18 @@ Partial Class frmAdministrator
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.lblEmployee = New System.Windows.Forms.Label()
         Me.lblUnderline3 = New System.Windows.Forms.Label()
-        Me.pnlSchedules = New System.Windows.Forms.Panel()
-        Me.lblSchedules = New System.Windows.Forms.Label()
+        Me.pnlPayment = New System.Windows.Forms.Panel()
+        Me.btnRegisterRate = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.dgvEmployeePayment = New System.Windows.Forms.DataGridView()
+        Me.txtSearchInPayment = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblPayment = New System.Windows.Forms.Label()
         Me.lblUnderline4 = New System.Windows.Forms.Label()
         Me.lblToastMessage = New System.Windows.Forms.Label()
         Me.tmrMessage = New System.Windows.Forms.Timer(Me.components)
         Me.tmrTime = New System.Windows.Forms.Timer(Me.components)
-        Me.btnGeneratePasscode = New System.Windows.Forms.Button()
-        Me.txtRate = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnUnMark = New System.Windows.Forms.Button()
         Me.pnlNavBar.SuspendLayout()
         CType(Me.btnHomeIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,7 +172,8 @@ Partial Class frmAdministrator
         CType(Me.dgvAttendance, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlManageEmployee.SuspendLayout()
         CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlSchedules.SuspendLayout()
+        Me.pnlPayment.SuspendLayout()
+        CType(Me.dgvEmployeePayment, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'pnlNavBar
@@ -429,22 +439,21 @@ Partial Class frmAdministrator
         Me.dgvCurrentlyWorking.AllowUserToAddRows = False
         Me.dgvCurrentlyWorking.AllowUserToDeleteRows = False
         Me.dgvCurrentlyWorking.AllowUserToResizeRows = False
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvCurrentlyWorking.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvCurrentlyWorking.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvCurrentlyWorking.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvCurrentlyWorking.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvCurrentlyWorking.ColumnHeadersHeight = 25
         Me.dgvCurrentlyWorking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvCurrentlyWorking.DefaultCellStyle = DataGridViewCellStyle8
-        Me.dgvCurrentlyWorking.Enabled = False
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvCurrentlyWorking.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvCurrentlyWorking.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvCurrentlyWorking.Location = New System.Drawing.Point(0, 27)
         Me.dgvCurrentlyWorking.MultiSelect = False
@@ -458,7 +467,7 @@ Partial Class frmAdministrator
         Me.dgvCurrentlyWorking.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.dgvCurrentlyWorking.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvCurrentlyWorking.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvCurrentlyWorking.Size = New System.Drawing.Size(725, 189)
+        Me.dgvCurrentlyWorking.Size = New System.Drawing.Size(725, 182)
         Me.dgvCurrentlyWorking.TabIndex = 7
         '
         'pnlTopCurrentlyWorking
@@ -633,9 +642,9 @@ Partial Class frmAdministrator
         Me.lblDashTwoTitle.ForeColor = System.Drawing.Color.Gainsboro
         Me.lblDashTwoTitle.Location = New System.Drawing.Point(7, 7)
         Me.lblDashTwoTitle.Name = "lblDashTwoTitle"
-        Me.lblDashTwoTitle.Size = New System.Drawing.Size(79, 13)
+        Me.lblDashTwoTitle.Size = New System.Drawing.Size(118, 13)
         Me.lblDashTwoTitle.TabIndex = 5
-        Me.lblDashTwoTitle.Text = "SAMPLE TEXT"
+        Me.lblDashTwoTitle.Text = "ATTENDANCE TODAY"
         '
         'pnlTop1
         '
@@ -836,7 +845,8 @@ Partial Class frmAdministrator
         'pnlMenu
         '
         Me.pnlMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.pnlMenu.Controls.Add(Me.btnScheduling)
+        Me.pnlMenu.Controls.Add(Me.Button1)
+        Me.pnlMenu.Controls.Add(Me.btnPayment)
         Me.pnlMenu.Controls.Add(Me.btnManageEmployee)
         Me.pnlMenu.Controls.Add(Me.btnMenuAttendance)
         Me.pnlMenu.Controls.Add(Me.btnMenuDashboard)
@@ -845,17 +855,28 @@ Partial Class frmAdministrator
         Me.pnlMenu.Size = New System.Drawing.Size(200, 410)
         Me.pnlMenu.TabIndex = 6
         '
-        'btnScheduling
+        'Button1
         '
-        Me.btnScheduling.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
-        Me.btnScheduling.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnScheduling.Location = New System.Drawing.Point(-11, 138)
-        Me.btnScheduling.Name = "btnScheduling"
-        Me.btnScheduling.Size = New System.Drawing.Size(223, 37)
-        Me.btnScheduling.TabIndex = 3
-        Me.btnScheduling.Text = "Scheduling"
-        Me.btnScheduling.UseVisualStyleBackColor = False
-        Me.btnScheduling.Visible = False
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(-11, 173)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(223, 37)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Scheduling"
+        Me.Button1.UseVisualStyleBackColor = False
+        Me.Button1.Visible = False
+        '
+        'btnPayment
+        '
+        Me.btnPayment.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
+        Me.btnPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPayment.Location = New System.Drawing.Point(-11, 138)
+        Me.btnPayment.Name = "btnPayment"
+        Me.btnPayment.Size = New System.Drawing.Size(223, 37)
+        Me.btnPayment.TabIndex = 3
+        Me.btnPayment.Text = "Payment"
+        Me.btnPayment.UseVisualStyleBackColor = False
         '
         'btnManageEmployee
         '
@@ -925,21 +946,21 @@ Partial Class frmAdministrator
         Me.dgvAttendance.AllowUserToAddRows = False
         Me.dgvAttendance.AllowUserToDeleteRows = False
         Me.dgvAttendance.AllowUserToResizeRows = False
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.dgvAttendance.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvAttendance.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvAttendance.ColumnHeadersHeight = 25
         Me.dgvAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvAttendance.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvAttendance.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvAttendance.Location = New System.Drawing.Point(21, 72)
         Me.dgvAttendance.MultiSelect = False
@@ -1069,6 +1090,52 @@ Partial Class frmAdministrator
         Me.pnlManageEmployee.Name = "pnlManageEmployee"
         Me.pnlManageEmployee.Size = New System.Drawing.Size(1031, 585)
         Me.pnlManageEmployee.TabIndex = 12
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Red
+        Me.Label2.Location = New System.Drawing.Point(565, 210)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(70, 13)
+        Me.Label2.TabIndex = 33
+        Me.Label2.Text = "( Important )"
+        Me.Label2.Visible = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(564, 189)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(44, 21)
+        Me.Label1.TabIndex = 32
+        Me.Label1.Text = "Rate:"
+        Me.Label1.Visible = False
+        '
+        'txtRate
+        '
+        Me.txtRate.Location = New System.Drawing.Point(648, 186)
+        Me.txtRate.Name = "txtRate"
+        Me.txtRate.ReadOnly = True
+        Me.txtRate.Size = New System.Drawing.Size(143, 22)
+        Me.txtRate.TabIndex = 31
+        Me.txtRate.Visible = False
+        '
+        'btnGeneratePasscode
+        '
+        Me.btnGeneratePasscode.BackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer))
+        Me.btnGeneratePasscode.FlatAppearance.BorderSize = 0
+        Me.btnGeneratePasscode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGeneratePasscode.ForeColor = System.Drawing.Color.Black
+        Me.btnGeneratePasscode.Location = New System.Drawing.Point(816, 67)
+        Me.btnGeneratePasscode.Name = "btnGeneratePasscode"
+        Me.btnGeneratePasscode.Size = New System.Drawing.Size(78, 35)
+        Me.btnGeneratePasscode.TabIndex = 29
+        Me.btnGeneratePasscode.Text = "Generate"
+        Me.btnGeneratePasscode.UseVisualStyleBackColor = False
+        Me.btnGeneratePasscode.Visible = False
         '
         'btnCommitUpdate
         '
@@ -1308,21 +1375,21 @@ Partial Class frmAdministrator
         Me.dgvEmployees.AllowUserToDeleteRows = False
         Me.dgvEmployees.AllowUserToResizeColumns = False
         Me.dgvEmployees.AllowUserToResizeRows = False
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
-        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvEmployees.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
         Me.dgvEmployees.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.dgvEmployees.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.dgvEmployees.ColumnHeadersHeight = 25
         Me.dgvEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployees.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvEmployees.GridColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.dgvEmployees.Location = New System.Drawing.Point(42, 270)
         Me.dgvEmployees.Name = "dgvEmployees"
@@ -1397,26 +1464,108 @@ Partial Class frmAdministrator
         Me.lblUnderline3.TabIndex = 1
         Me.lblUnderline3.Text = "____________"
         '
-        'pnlSchedules
+        'pnlPayment
         '
-        Me.pnlSchedules.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
-        Me.pnlSchedules.Controls.Add(Me.lblSchedules)
-        Me.pnlSchedules.Controls.Add(Me.lblUnderline4)
-        Me.pnlSchedules.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.pnlSchedules.Location = New System.Drawing.Point(227, 64)
-        Me.pnlSchedules.Name = "pnlSchedules"
-        Me.pnlSchedules.Size = New System.Drawing.Size(1031, 585)
-        Me.pnlSchedules.TabIndex = 13
+        Me.pnlPayment.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.pnlPayment.Controls.Add(Me.btnUnMark)
+        Me.pnlPayment.Controls.Add(Me.btnRegisterRate)
+        Me.pnlPayment.Controls.Add(Me.Label4)
+        Me.pnlPayment.Controls.Add(Me.dgvEmployeePayment)
+        Me.pnlPayment.Controls.Add(Me.txtSearchInPayment)
+        Me.pnlPayment.Controls.Add(Me.Label3)
+        Me.pnlPayment.Controls.Add(Me.lblPayment)
+        Me.pnlPayment.Controls.Add(Me.lblUnderline4)
+        Me.pnlPayment.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.pnlPayment.Location = New System.Drawing.Point(227, 64)
+        Me.pnlPayment.Name = "pnlPayment"
+        Me.pnlPayment.Size = New System.Drawing.Size(1031, 585)
+        Me.pnlPayment.TabIndex = 13
         '
-        'lblSchedules
+        'btnRegisterRate
         '
-        Me.lblSchedules.AutoSize = True
-        Me.lblSchedules.Font = New System.Drawing.Font("Segoe UI", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSchedules.Location = New System.Drawing.Point(38, 14)
-        Me.lblSchedules.Name = "lblSchedules"
-        Me.lblSchedules.Size = New System.Drawing.Size(143, 40)
-        Me.lblSchedules.TabIndex = 0
-        Me.lblSchedules.Text = "Schedules"
+        Me.btnRegisterRate.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
+        Me.btnRegisterRate.FlatAppearance.BorderSize = 0
+        Me.btnRegisterRate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRegisterRate.ForeColor = System.Drawing.Color.White
+        Me.btnRegisterRate.Location = New System.Drawing.Point(515, 67)
+        Me.btnRegisterRate.Name = "btnRegisterRate"
+        Me.btnRegisterRate.Size = New System.Drawing.Size(247, 27)
+        Me.btnRegisterRate.TabIndex = 50
+        Me.btnRegisterRate.Text = "Register Rate"
+        Me.btnRegisterRate.UseVisualStyleBackColor = False
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(55, 77)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(122, 17)
+        Me.Label4.TabIndex = 38
+        Me.Label4.Text = "List of Employee/s :"
+        '
+        'dgvEmployeePayment
+        '
+        Me.dgvEmployeePayment.AllowUserToAddRows = False
+        Me.dgvEmployeePayment.AllowUserToDeleteRows = False
+        Me.dgvEmployeePayment.AllowUserToResizeColumns = False
+        Me.dgvEmployeePayment.AllowUserToResizeRows = False
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.Padding = New System.Windows.Forms.Padding(0, 5, 0, 5)
+        Me.dgvEmployeePayment.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvEmployeePayment.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.dgvEmployeePayment.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvEmployeePayment.ColumnHeadersHeight = 25
+        Me.dgvEmployeePayment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer), CType(CType(26, Byte), Integer))
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployeePayment.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvEmployeePayment.GridColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.dgvEmployeePayment.Location = New System.Drawing.Point(21, 105)
+        Me.dgvEmployeePayment.Name = "dgvEmployeePayment"
+        Me.dgvEmployeePayment.ReadOnly = True
+        Me.dgvEmployeePayment.RowHeadersVisible = False
+        Me.dgvEmployeePayment.RowHeadersWidth = 60
+        Me.dgvEmployeePayment.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
+        Me.dgvEmployeePayment.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dgvEmployeePayment.RowTemplate.Height = 35
+        Me.dgvEmployeePayment.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmployeePayment.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvEmployeePayment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvEmployeePayment.Size = New System.Drawing.Size(988, 467)
+        Me.dgvEmployeePayment.TabIndex = 37
+        '
+        'txtSearchInPayment
+        '
+        Me.txtSearchInPayment.Location = New System.Drawing.Point(291, 70)
+        Me.txtSearchInPayment.Name = "txtSearchInPayment"
+        Me.txtSearchInPayment.Size = New System.Drawing.Size(168, 22)
+        Me.txtSearchInPayment.TabIndex = 36
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(241, 75)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(44, 13)
+        Me.Label3.TabIndex = 35
+        Me.Label3.Text = "Search:"
+        '
+        'lblPayment
+        '
+        Me.lblPayment.AutoSize = True
+        Me.lblPayment.Font = New System.Drawing.Font("Segoe UI", 21.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPayment.Location = New System.Drawing.Point(38, 14)
+        Me.lblPayment.Name = "lblPayment"
+        Me.lblPayment.Size = New System.Drawing.Size(139, 40)
+        Me.lblPayment.TabIndex = 0
+        Me.lblPayment.Text = "Payments"
         '
         'lblUnderline4
         '
@@ -1448,51 +1597,18 @@ Partial Class frmAdministrator
         '
         Me.tmrTime.Interval = 1000
         '
-        'btnGeneratePasscode
+        'btnUnMark
         '
-        Me.btnGeneratePasscode.BackColor = System.Drawing.Color.FromArgb(CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer), CType(CType(241, Byte), Integer))
-        Me.btnGeneratePasscode.FlatAppearance.BorderSize = 0
-        Me.btnGeneratePasscode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGeneratePasscode.ForeColor = System.Drawing.Color.Black
-        Me.btnGeneratePasscode.Location = New System.Drawing.Point(816, 67)
-        Me.btnGeneratePasscode.Name = "btnGeneratePasscode"
-        Me.btnGeneratePasscode.Size = New System.Drawing.Size(78, 35)
-        Me.btnGeneratePasscode.TabIndex = 29
-        Me.btnGeneratePasscode.Text = "Generate"
-        Me.btnGeneratePasscode.UseVisualStyleBackColor = False
-        Me.btnGeneratePasscode.Visible = False
-        '
-        'txtRate
-        '
-        Me.txtRate.Location = New System.Drawing.Point(648, 186)
-        Me.txtRate.Name = "txtRate"
-        Me.txtRate.ReadOnly = True
-        Me.txtRate.Size = New System.Drawing.Size(143, 22)
-        Me.txtRate.TabIndex = 31
-        Me.txtRate.Visible = False
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(564, 189)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(44, 21)
-        Me.Label1.TabIndex = 32
-        Me.Label1.Text = "Rate:"
-        Me.Label1.Visible = False
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.Red
-        Me.Label2.Location = New System.Drawing.Point(565, 210)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(70, 13)
-        Me.Label2.TabIndex = 33
-        Me.Label2.Text = "( Important )"
-        Me.Label2.Visible = False
+        Me.btnUnMark.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(204, Byte), Integer))
+        Me.btnUnMark.FlatAppearance.BorderSize = 0
+        Me.btnUnMark.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUnMark.ForeColor = System.Drawing.Color.White
+        Me.btnUnMark.Location = New System.Drawing.Point(766, 67)
+        Me.btnUnMark.Name = "btnUnMark"
+        Me.btnUnMark.Size = New System.Drawing.Size(154, 27)
+        Me.btnUnMark.TabIndex = 51
+        Me.btnUnMark.Text = "Mark/Unmark Paid"
+        Me.btnUnMark.UseVisualStyleBackColor = False
         '
         'frmAdministrator
         '
@@ -1500,12 +1616,12 @@ Partial Class frmAdministrator
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(170, Byte), Integer), CType(CType(180, Byte), Integer), CType(CType(219, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1284, 677)
+        Me.Controls.Add(Me.pnlPayment)
+        Me.Controls.Add(Me.pnlDashboard)
         Me.Controls.Add(Me.pnlManageEmployee)
+        Me.Controls.Add(Me.lblToastMessage)
         Me.Controls.Add(Me.pnlStaffAttendance)
         Me.Controls.Add(Me.pnlDropDownBtn1)
-        Me.Controls.Add(Me.pnlDashboard)
-        Me.Controls.Add(Me.lblToastMessage)
-        Me.Controls.Add(Me.pnlSchedules)
         Me.Controls.Add(Me.pnlMenu)
         Me.Controls.Add(Me.pnlNavBar)
         Me.ForeColor = System.Drawing.SystemColors.Control
@@ -1550,8 +1666,9 @@ Partial Class frmAdministrator
         Me.pnlManageEmployee.ResumeLayout(False)
         Me.pnlManageEmployee.PerformLayout()
         CType(Me.dgvEmployees, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlSchedules.ResumeLayout(False)
-        Me.pnlSchedules.PerformLayout()
+        Me.pnlPayment.ResumeLayout(False)
+        Me.pnlPayment.PerformLayout()
+        CType(Me.dgvEmployeePayment, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1610,7 +1727,7 @@ Partial Class frmAdministrator
     Friend WithEvents Type As DataGridViewTextBoxColumn
     Friend WithEvents btnMenuDashboard As Button
     Friend WithEvents btnMenuAttendance As Button
-    Friend WithEvents btnScheduling As Button
+    Friend WithEvents btnPayment As Button
     Friend WithEvents btnManageEmployee As Button
     Friend WithEvents pnlStaffAttendance As Panel
     Friend WithEvents lblUnderline2 As Label
@@ -1618,8 +1735,8 @@ Partial Class frmAdministrator
     Friend WithEvents pnlManageEmployee As Panel
     Friend WithEvents lblEmployee As Label
     Friend WithEvents lblUnderline3 As Label
-    Friend WithEvents pnlSchedules As Panel
-    Friend WithEvents lblSchedules As Label
+    Friend WithEvents pnlPayment As Panel
+    Friend WithEvents lblPayment As Label
     Friend WithEvents lblUnderline4 As Label
     Friend WithEvents btnAdd As Button
     Friend WithEvents btnDelete As Button
@@ -1665,4 +1782,11 @@ Partial Class frmAdministrator
     Friend WithEvents Label1 As Label
     Friend WithEvents txtRate As TextBox
     Friend WithEvents Label2 As Label
+    Friend WithEvents Button1 As Button
+    Friend WithEvents txtSearchInPayment As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents dgvEmployeePayment As DataGridView
+    Friend WithEvents btnRegisterRate As Button
+    Friend WithEvents btnUnMark As Button
 End Class

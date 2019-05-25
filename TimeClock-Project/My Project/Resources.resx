@@ -124,19 +124,22 @@
   <data name="admin_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\admin_icon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="frmpasscodebg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\frmpasscodebg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="gear_icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gear_icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="attendanceicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\attendanceicon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="setting_icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\setting_icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="home_icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\home_icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="setting_icon64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\setting_icon64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="frmpasscodebg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\frmpasscodebg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="money_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\money_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

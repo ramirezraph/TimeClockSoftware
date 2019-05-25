@@ -29,8 +29,8 @@
                     txtUsername.Text = ""
                     txtPassword.Text = ""
                     Me.Hide()
-                    Dim frmAdmin As New frmAdministrator(R("name").ToString, R("userlevel"))
-                    frmAdmin.Show()
+                    'Dim frmAdmin As New frmAdministrator(R("name").ToString, R("userlevel"))
+                    'frmAdmin.Show()
                 End If
             Next
 
