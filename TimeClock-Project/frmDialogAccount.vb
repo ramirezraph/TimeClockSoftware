@@ -96,25 +96,39 @@
         Dim confirm As Integer = MessageBox.Show("Are you sure you want to update?", "Confirm", MessageBoxButtons.YesNo)
         If confirm = DialogResult.Yes Then
             If cbIsChangePass.Checked Then
-                If Not (txtOldPass.Text).Equals(PASSWORD) Then
-                    MessageBox.Show("Old password is incorrect.")
+
+                If String.IsNullOrEmpty(txtOldPass.Text) Then
+                    MessageBox.Show("Please complete the form.")
                     Exit Sub
                 End If
-                If Not (txtNewPass.Text).Equals(txtConfirmPass.Text) Then
-                    MessageBox.Show("Your password does not match.")
+                If String.IsNullOrEmpty(txtNewPass.Text) Then
+                    MessageBox.Show("Please complete the form.")
+                    Exit Sub
+                End If
+                If String.IsNullOrEmpty(txtConfirmPass.Text) Then
+                    MessageBox.Show("Please complete the form.")
                     Exit Sub
                 End If
 
-                Access.AddParam("@username", txtUsername.Text)
-                Access.AddParam("@name", txtName.Text)
-                Access.AddParam("@newpassword", txtNewPass.Text)
-                Access.ExecuteQuery("UPDATE tblAccount SET [username]=@username,[name]=@name,[password]=@newpassword WHERE ID=1")
-                If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
-                frmAdministrator.GetAccountInfo()
-                frmAdministrator.DisplayToastMessage("Account updated successfully.", 1)
-                Me.Close()
-            Else
-                Access.AddParam("@username", txtUsername.Text)
+                If Not (txtOldPass.Text).Equals(PASSWORD) Then
+                        MessageBox.Show("Old password is incorrect.")
+                        Exit Sub
+                    End If
+                    If Not (txtNewPass.Text).Equals(txtConfirmPass.Text) Then
+                        MessageBox.Show("Your password does not match.")
+                        Exit Sub
+                    End If
+
+                    Access.AddParam("@username", txtUsername.Text)
+                    Access.AddParam("@name", txtName.Text)
+                    Access.AddParam("@newpassword", txtNewPass.Text)
+                    Access.ExecuteQuery("UPDATE tblAccount SET [username]=@username,[name]=@name,[password]=@newpassword WHERE ID=1")
+                    If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+                    frmAdministrator.GetAccountInfo()
+                    frmAdministrator.DisplayToastMessage("Account updated successfully.", 1)
+                    Me.Close()
+                Else
+                    Access.AddParam("@username", txtUsername.Text)
                 Access.AddParam("@name", txtName.Text)
                 Access.ExecuteQuery("UPDATE tblAccount SET [username]=@username,[name]=@name WHERE ID=1")
                 If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub

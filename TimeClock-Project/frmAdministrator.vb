@@ -793,7 +793,9 @@
     End Sub
 
     Private Sub RefreshLogTable()
-        Access.ExecuteQuery("SELECT * FROM tblLog ORDER BY ID DESC")
+        Dim todaysdate As String = String.Format(DateFormat, Date.Now)
+        Access.AddParam("@date", todaysdate)
+        Access.ExecuteQuery("SELECT * FROM tblLog WHERE [Date]=@date ORDER BY ID DESC")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         dgvAttendanceLog.DataSource = Access.DbDataTable
         dgvAttendanceLog.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
