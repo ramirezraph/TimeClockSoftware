@@ -469,6 +469,7 @@ Partial Class frmPasscode
         Me.Name = "frmPasscode"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Time Clock Software"
+        Me.TopMost = True
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

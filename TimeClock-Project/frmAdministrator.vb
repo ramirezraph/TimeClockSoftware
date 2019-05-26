@@ -12,14 +12,15 @@
 
     Dim USER_NAME As String
     Dim USER_USERLEVEL As String
+    Dim USER_ID As Integer
 
-    'Public Sub New(name As String, userlevel As String)
+    'Public Sub New(name As String, userlevel As String, ID As Integer)
     '    ' This call is required by the designer.
     '    InitializeComponent()
     '    ' Add any initialization after the InitializeComponent() call.
     '    USER_NAME = name
     '    USER_USERLEVEL = userlevel
-
+    '    USER_ID = ID
     'End Sub
 
     ' drop down menu item functionalities
@@ -95,10 +96,14 @@
     End Sub
 
     Private Sub menuItmAccount_Click(sender As Object, e As EventArgs) Handles menuItmAccount.Click
-
+        HideMenuItem1()
+        Dim frmAccount As New frmDialogAccount(USER_NAME, USER_ID)
+        frmAccount.ShowDialog()
     End Sub
 
     Private Sub btnMenuDashboard_Click(sender As Object, e As EventArgs) Handles btnMenuDashboard.Click
+        txtSearchEmployee.Text = ""
+        txtSearchInPayment.Text = ""
         pnlDashboard.BringToFront()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
@@ -111,6 +116,8 @@
     End Sub
 
     Private Sub btnMenuAttendance_Click(sender As Object, e As EventArgs) Handles btnMenuAttendance.Click
+        txtSearchEmployee.Text = ""
+        txtSearchInPayment.Text = ""
         pnlDashboard.SendToBack()
         pnlStaffAttendance.BringToFront()
         pnlManageEmployee.SendToBack()
@@ -123,6 +130,8 @@
     End Sub
 
     Private Sub btnManageEmployee_Click(sender As Object, e As EventArgs) Handles btnManageEmployee.Click
+        txtSearchEmployee.Text = ""
+        txtSearchInPayment.Text = ""
         dgvEmployees.ClearSelection()
         selectedindexatemployee = -1
         ClearEmployeeTextboxes()
@@ -136,6 +145,8 @@
     End Sub
 
     Private Sub btnScheduling_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
+        txtSearchEmployee.Text = ""
+        txtSearchInPayment.Text = ""
         pnlDashboard.SendToBack()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
@@ -243,13 +254,27 @@
         GetAttendanceToday()
         RefreshLogTable()
 
+        GetAccountInfo()
         pnlDashboard.BringToFront()
 
-        'lblUserName.Text = USER_NAME
-        'Dim TestSplit() As String = Split(USER_NAME)
-        'Dim first As String = TestSplit(0).Substring(0, 1).ToUpper
-        'Dim second As String = TestSplit(1).Substring(0, 1).ToUpper
-        'btnUserInitial.Text = first & second
+    End Sub
+
+    Public Sub GetAccountInfo()
+        ' GET ACCOUNT INFFO
+        Access.ExecuteQuery("SELECT * FROM tblAccount WHERE ID=1")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+
+        For Each R As DataRow In Access.DbDataTable.Rows
+            USER_NAME = R("name")
+            USER_USERLEVEL = R("userlevel")
+            USER_ID = R("ID")
+        Next
+
+        lblUserName.Text = USER_NAME
+        Dim TestSplit() As String = Split(USER_NAME)
+        Dim first As String = TestSplit(0).Substring(0, 1).ToUpper
+        Dim second As String = TestSplit(1).Substring(0, 1).ToUpper
+        btnUserInitial.Text = first & second
     End Sub
 
     Private Sub RefreshEmployeeTable()
@@ -289,7 +314,7 @@
     Private Sub SearchEmployeeOnEmployee(Name As String)
         ' Add Param and Run Query
         Access.AddParam("@name", "%" & Name & "%")
-        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY LastName ASC")
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY ID DESC")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
 
         ' Fill DataGridView
@@ -623,7 +648,7 @@
     Public Sub RefreshAttendanceTable(datetime As String)
         ' Run Query
         Access.AddParam("@date", datetime)
-        Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Date]=@date ORDER BY [In] ASC")
+        Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Date]=@date ORDER BY [In] DESC")
 
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         ' Fill DataGridView
@@ -867,13 +892,14 @@
 
     Private Sub btnUnMark_Click(sender As Object, e As EventArgs) Handles btnMarkPaid.Click
         Dim todaysdate As String = String.Format(DateFormat, Date.Now)
-        Dim id, index As Integer
-        Dim idList(100)
+        Dim index As Integer
+        Dim pass As String
+        Dim passcodeList(100)
         Try
             For Each selected As DataGridViewRow In dgvEmployeePayment.SelectedRows
                 'show ids of multiple selected rows
-                id = selected.Cells(1).Value
-                idList(index) = id
+                pass = selected.Cells(1).Value
+                passcodeList(index) = pass
                 index += 1
             Next selected
         Catch ex As Exception
@@ -883,19 +909,18 @@
 
         Dim confirm As Integer = MessageBox.Show("Please click 'Yes' to confirm.", "Confirm", MessageBoxButtons.YesNo)
         If confirm = DialogResult.Yes Then
-            For Each passcodes As String In idList
+            For Each passcodes As String In passcodeList
                 If Not String.IsNullOrEmpty(passcodes) Then
                     Access.AddParam("@today", todaysdate)
                     Access.AddParam("@passcode", passcodes)
                     Access.ExecuteQuery("UPDATE tblEmployee SET [Paid]=@today, [SalaryBalance]='0' WHERE [Passcode]=@passcode")
                     If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+                    DisplayToastMessage("Paid status updated successfully.", 1)
                 Else
                     Exit For
                 End If
             Next
         End If
-
-        DisplayToastMessage("Paid status updated successfully.", 1)
         RefreshPaymentTable()
         ClearEmployeeTextboxes()
         btnEdit.Enabled = False
@@ -910,7 +935,7 @@
     Private Sub SearchEmployeeOnPayment(Name As String)
         ' Add Param and Run Query
         Access.AddParam("@name", "%" & Name & "%")
-        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY LastName ASC")
+        Access.ExecuteQuery("SELECT * FROM tblEmployee WHERE FirstName LIKE @name OR LastName LIKE @name ORDER BY ID DESC")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
 
         ' Fill DataGridView

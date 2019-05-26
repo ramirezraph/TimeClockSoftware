@@ -262,6 +262,7 @@ Partial Class frmTimeInOut
         Me.Name = "frmTimeInOut"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Time Clock Software"
+        Me.TopMost = True
         Me.pnlAppbar.ResumeLayout(False)
         Me.pnlAppbar.PerformLayout()
         CType(Me.pbUserImage, System.ComponentModel.ISupportInitialize).EndInit()

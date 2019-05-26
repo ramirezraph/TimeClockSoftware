@@ -103,6 +103,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseControl.vb" />
+    <Compile Include="frmDialogAccount.Designer.vb">
+      <DependentUpon>frmDialogAccount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDialogAccount.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmAdministrator.Designer.vb">
       <DependentUpon>frmAdministrator.vb</DependentUpon>
     </Compile>
@@ -157,6 +163,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmDialogAccount.resx">
+      <DependentUpon>frmDialogAccount.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAdministrator.resx">
       <DependentUpon>frmAdministrator.vb</DependentUpon>
     </EmbeddedResource>
@@ -218,6 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\money_icon.png" />
+    <None Include="Resources\account_icon.png" />
     <Content Include="TimeClockProject.accdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
