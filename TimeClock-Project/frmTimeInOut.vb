@@ -130,8 +130,6 @@
     End Sub
 
     Private Sub btnClockIn_Click(sender As Object, e As EventArgs) Handles btnClockIn.Click
-        ' Check Schedule
-        ' soon
 
         ' GET RATE AND SalaryBalance
         Dim Rate As String = ""
@@ -151,7 +149,7 @@
             End Try
         Next
 
-        ' DATA: date, passcode, empname, position, in, out, lunchin, lunchout, hours, overtime, notes
+        ' INSERT ATTENDANCE: date, passcode, empname, position, in, out, lunchin, lunchout, hours, overtime, notes
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
         Access.AddParam("@date", todaysdate)
         Access.AddParam("@passcode", EMP_PASSCODE)
@@ -163,6 +161,9 @@
                             "VALUES (@date,@passcode,@name,@position,@in,@rate)")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         UpdateEmployeeStatus("In", EMP_PASSCODE)
+
+        ' INSERT LOG: passcode, date, employee, time, type
+        UpdateLog(EMP_PASSCODE, todaysdate, lblCurrentTime.Text, EMP_NAME, "In")
 
         MessageBox.Show("Clocked in successfully.")
         timer = 15
@@ -231,12 +232,26 @@
         ' UPDATE STATUS
         UpdateEmployeeStatus("Out", EMP_PASSCODE)
 
+        ' INSERT LOG: passcode, date, employee, time, type
+        UpdateLog(EMP_PASSCODE, todaysdate, lblCurrentTime.Text, EMP_NAME, "Out")
+
         MessageBox.Show("Clocked out successfully.")
         timer = 15
         tmrCurrentTime.Stop()
         Me.Hide()
         frmPasscode.Show()
 
+    End Sub
+
+    Private Sub UpdateLog(passcode As String, logdate As DateTime, time As DateTime, employee As String, type As String)
+        Access.AddParam("@passcode", passcode)
+        Access.AddParam("@date", logdate)
+        Access.AddParam("@time", time)
+        Access.AddParam("@employee", employee)
+        Access.AddParam("@type", type)
+        Access.ExecuteQuery("INSERT INTO tblLog ([Passcode],[Date],[Time],[Employee],[Type]) " &
+                            "VALUES (@passcode,@date,@time,@employee,@type)")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show("Log update failed." & vbCrLf & Access.Exception) : Exit Sub
     End Sub
 
     Private Sub UpdateSalaryBalance(passcode As String, balancetobeadded As Double)
@@ -285,6 +300,9 @@
 
             ' UPDATE STATUS - break
             UpdateEmployeeStatus("break", EMP_PASSCODE)
+
+            ' INSERT LOG: passcode, date, employee, time, type
+            UpdateLog(EMP_PASSCODE, todaysdate, lblCurrentTime.Text, EMP_NAME, "B. Start")
 
             ' REPORT
             MessageBox.Show("Break started successfully.")
@@ -346,6 +364,9 @@
 
             ' UPDATE STATUS - break
             UpdateEmployeeStatus("In", EMP_PASSCODE)
+
+            ' INSERT LOG: passcode, date, employee, time, type
+            UpdateLog(EMP_PASSCODE, todaysdate, lblCurrentTime.Text, EMP_NAME, "B. End")
 
             ' REPORT
             MessageBox.Show("Break ended successfuly.")

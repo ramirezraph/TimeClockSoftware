@@ -103,8 +103,11 @@
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
         pnlPayment.SendToBack()
+        HideMenuItem1()
         RefreshCurrentlyWorkingEmployee()
         GetEmployeeTotal()
+        GetAttendanceToday()
+        RefreshLogTable()
     End Sub
 
     Private Sub btnMenuAttendance_Click(sender As Object, e As EventArgs) Handles btnMenuAttendance.Click
@@ -112,6 +115,7 @@
         pnlStaffAttendance.BringToFront()
         pnlManageEmployee.SendToBack()
         pnlPayment.SendToBack()
+        HideMenuItem1()
 
         dtpAttendance.Value = Date.Now
         Dim selectedDate As String = dtpAttendance.Value.Month & "/" & dtpAttendance.Value.Day & "/" & dtpAttendance.Value.Year
@@ -126,6 +130,7 @@
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.BringToFront()
         pnlPayment.SendToBack()
+        HideMenuItem1()
         btnEdit.Enabled = False
         btnDelete.Enabled = False
     End Sub
@@ -135,6 +140,7 @@
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
         pnlPayment.BringToFront()
+        HideMenuItem1()
     End Sub
 
     Private Sub dgvEmployees_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmployees.RowEnter
@@ -231,6 +237,12 @@
         RefreshCurrentlyWorkingEmployee()
         RefreshPaymentTable()
         GetEmployeeTotal()
+
+        Dim todaysdate As String = String.Format(DateFormat, Date.Now)
+        RefreshAttendanceTable(todaysdate)
+        GetAttendanceToday()
+        RefreshLogTable()
+
         pnlDashboard.BringToFront()
 
         'lblUserName.Text = USER_NAME
@@ -755,9 +767,32 @@
         End Try
     End Sub
 
+    Private Sub RefreshLogTable()
+        Access.ExecuteQuery("SELECT * FROM tblLog ORDER BY ID DESC")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        dgvAttendanceLog.DataSource = Access.DbDataTable
+        dgvAttendanceLog.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dgvAttendanceLog.Columns(0).Visible = False
+        dgvAttendanceLog.Columns(1).Visible = False
+        dgvAttendanceLog.Columns(2).Visible = False
+        dgvAttendanceLog.Columns(3).DefaultCellStyle.Format = "hh:mm:tt"
+        dgvAttendanceLog.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dgvAttendanceLog.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dgvAttendanceLog.Columns(3).Width = 57
+        dgvAttendanceLog.Columns(4).Width = 123
+        dgvAttendanceLog.Columns(5).Width = 50
+
+        dgvAttendanceLog.ClearSelection()
+    End Sub
+
     Private Sub GetEmployeeTotal()
         Dim employeecount As Integer = dgvEmployees.Rows.Count()
         lblNumberOfEmployee.Text = employeecount
+    End Sub
+
+    Private Sub GetAttendanceToday()
+        Dim attendancetoday As Integer = dgvAttendance.Rows.Count()
+        lblDashTwoValue.Text = attendancetoday
     End Sub
 
     Private Sub btnGeneratePasscode_Click(sender As Object, e As EventArgs) Handles btnGeneratePasscode.Click
@@ -881,5 +916,4 @@
         ' Fill DataGridView
         dgvEmployeePayment.DataSource = Access.DbDataTable
     End Sub
-
 End Class
