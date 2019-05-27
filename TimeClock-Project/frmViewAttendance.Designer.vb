@@ -301,6 +301,7 @@ Partial Class frmViewAttendance
         Me.txtNote.Location = New System.Drawing.Point(491, 168)
         Me.txtNote.Multiline = True
         Me.txtNote.Name = "txtNote"
+        Me.txtNote.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtNote.Size = New System.Drawing.Size(230, 111)
         Me.txtNote.TabIndex = 35
         '

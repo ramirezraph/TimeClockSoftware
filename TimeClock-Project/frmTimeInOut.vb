@@ -130,6 +130,54 @@
     End Sub
 
     Private Sub btnClockIn_Click(sender As Object, e As EventArgs) Handles btnClockIn.Click
+        Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
+        ' CHECK IF SECOND TIME IN
+        Access.AddParam("@passcode", EMP_PASSCODE)
+        Access.AddParam("@date", todaysdate)
+        Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Passcode]=@passcode AND [Date]=@date")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        If Access.DbDataTable.Rows.Count > 0 Then
+            Dim confirm As Integer = MessageBox.Show("You're having a more than 1 time in, please confirm.", "", MessageBoxButtons.YesNo)
+            If confirm = DialogResult.Yes Then
+                Dim oldtotalhour As TimeSpan
+                Dim oldnotes As String = ""
+                Dim timein As DateTime
+                Dim timeout As DateTime
+                Dim pay As String = ""
+                For Each R As DataRow In Access.DbDataTable.Rows
+                    oldtotalhour = TimeSpan.Parse(R("totalhour"))
+                    oldnotes = R("Notes").ToString
+                    timein = R("In").ToString
+                    timeout = R("Out").ToString
+                    pay = R("Pay").ToString
+                Next
+                Dim newnotes As String = "Time In: " & timein &
+                            vbCrLf & "Time Out: " & timeout &
+                            vbCrLf & "Hour: " & oldtotalhour.ToString &
+                            vbCrLf & "Pay: " & pay.ToString &
+                            vbCrLf & "---------------------------------------" &
+                            vbCrLf & oldnotes
+                Access.AddParam("@in", lblCurrentTime.Text)
+                Access.AddParam("@notes", newnotes)
+                Access.AddParam("@passcode", EMP_PASSCODE)
+                Access.AddParam("@date", todaysdate)
+                Access.ExecuteQuery("UPDATE tblAttendance SET [In]=@in,[Notes]=@totalhour WHERE [Passcode]=@passcode AND [Date]=@date")
+                If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+                UpdateEmployeeStatus("In", EMP_PASSCODE)
+
+                ' INSERT LOG: passcode, date, employee, time, type
+                UpdateLog(EMP_PASSCODE, todaysdate, lblCurrentTime.Text, EMP_NAME, "In")
+
+                MessageBox.Show("Clocked in successfully.")
+                timer = 15
+                tmrCurrentTime.Stop()
+                Me.Hide()
+                frmPasscode.Show()
+                Exit Sub
+            Else
+                Exit Sub
+            End If
+        End If
 
         ' GET RATE AND SalaryBalance
         Dim Rate As String = ""
@@ -150,7 +198,6 @@
         Next
 
         ' INSERT ATTENDANCE: date, passcode, empname, position, in, out, lunchin, lunchout, hours, overtime, notes
-        Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
         Access.AddParam("@date", todaysdate)
         Access.AddParam("@passcode", EMP_PASSCODE)
         Access.AddParam("@name", EMP_NAME)
@@ -181,7 +228,7 @@
         Dim rate As Double = 0
         Dim pay As Double = 0
 
-        ' GET CLOCK IN TIME AND TOTAL BREAK
+        ' GET CLOCK IN TIME AND TOTAL BREAK AND TOTAL HOUR
         Access.AddParam("@passcode", EMP_PASSCODE)
         Access.AddParam("@date", todaysdate)
         Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Passcode]=@passcode AND [Date]=@date")
