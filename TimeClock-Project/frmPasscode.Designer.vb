@@ -61,19 +61,19 @@ Partial Class frmPasscode
         '
         Me.lblAppName.AutoSize = True
         Me.lblAppName.BackColor = System.Drawing.Color.Transparent
-        Me.lblAppName.Font = New System.Drawing.Font("Arial Rounded MT Bold", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblAppName.Font = New System.Drawing.Font("Arial Rounded MT Bold", 26.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAppName.Location = New System.Drawing.Point(12, 4)
         Me.lblAppName.Name = "lblAppName"
-        Me.lblAppName.Size = New System.Drawing.Size(186, 32)
+        Me.lblAppName.Size = New System.Drawing.Size(157, 40)
         Me.lblAppName.TabIndex = 0
-        Me.lblAppName.Text = "Lorem Ipsum"
+        Me.lblAppName.Text = "Celltech"
         '
         'lblAppTitle
         '
         Me.lblAppTitle.AutoSize = True
         Me.lblAppTitle.BackColor = System.Drawing.Color.Transparent
         Me.lblAppTitle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblAppTitle.Location = New System.Drawing.Point(18, 36)
+        Me.lblAppTitle.Location = New System.Drawing.Point(21, 42)
         Me.lblAppTitle.Name = "lblAppTitle"
         Me.lblAppTitle.Size = New System.Drawing.Size(116, 15)
         Me.lblAppTitle.TabIndex = 1

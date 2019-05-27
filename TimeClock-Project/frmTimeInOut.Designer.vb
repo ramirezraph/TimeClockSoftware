@@ -72,7 +72,7 @@ Partial Class frmTimeInOut
         '
         Me.lblAppTitle.AutoSize = True
         Me.lblAppTitle.BackColor = System.Drawing.Color.Transparent
-        Me.lblAppTitle.Location = New System.Drawing.Point(178, 20)
+        Me.lblAppTitle.Location = New System.Drawing.Point(119, 20)
         Me.lblAppTitle.Name = "lblAppTitle"
         Me.lblAppTitle.Size = New System.Drawing.Size(105, 13)
         Me.lblAppTitle.TabIndex = 10
@@ -85,9 +85,9 @@ Partial Class frmTimeInOut
         Me.lblAppName.Font = New System.Drawing.Font("Rockwell", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblAppName.Location = New System.Drawing.Point(10, 9)
         Me.lblAppName.Name = "lblAppName"
-        Me.lblAppName.Size = New System.Drawing.Size(173, 29)
+        Me.lblAppName.Size = New System.Drawing.Size(113, 29)
         Me.lblAppName.TabIndex = 9
-        Me.lblAppName.Text = "Lorem Ipsum"
+        Me.lblAppName.Text = "Celltech"
         '
         'pbUserImage
         '
