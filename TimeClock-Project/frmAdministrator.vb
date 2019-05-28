@@ -1,12 +1,11 @@
 ﻿Public Class frmAdministrator
 
-
-
     ' IMPORTANT
     Private Access As New DatabaseControl
     Dim selectedindexatemployee As Integer
     Dim selectedindexatattendance As Integer
     Dim selectedindexatpayment As Integer
+    Dim selectedindexatschedule As Integer
     Private Const DateFormat As String = "{0:MMM dd, yyyy}"
     Private Const LastPaidFormat As String = "{0:MM/dd/yyyy}"
 
@@ -132,6 +131,7 @@
     Private Sub btnManageEmployee_Click(sender As Object, e As EventArgs) Handles btnManageEmployee.Click
         txtSearchEmployee.Text = ""
         txtSearchInPayment.Text = ""
+        RefreshEmployeeTable()
         dgvEmployees.ClearSelection()
         selectedindexatemployee = -1
         ClearEmployeeTextboxes()
@@ -144,13 +144,26 @@
         btnDelete.Enabled = False
     End Sub
 
-    Private Sub btnScheduling_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
+    Private Sub btnPayment_Click(sender As Object, e As EventArgs) Handles btnPayment.Click
+        txtSearchEmployee.Text = ""
+        txtSearchInPayment.Text = ""
+        RefreshPaymentTable()
+        pnlDashboard.SendToBack()
+        pnlStaffAttendance.SendToBack()
+        pnlManageEmployee.SendToBack()
+        pnlPayment.BringToFront()
+        HideMenuItem1()
+    End Sub
+
+    Private Sub btnSchedule_Click(sender As Object, e As EventArgs) Handles btnSchedule.Click
         txtSearchEmployee.Text = ""
         txtSearchInPayment.Text = ""
         pnlDashboard.SendToBack()
         pnlStaffAttendance.SendToBack()
         pnlManageEmployee.SendToBack()
-        pnlPayment.BringToFront()
+        pnlPayment.SendToBack()
+        pnlScheduling.BringToFront()
+        RefreshEmployeeTableOnSchedule()
         HideMenuItem1()
     End Sub
 
@@ -253,10 +266,10 @@
         RefreshAttendanceTable(todaysdate)
         GetAttendanceToday()
         RefreshLogTable()
+        RefreshEmployeeTableOnSchedule()
 
         GetAccountInfo()
         pnlDashboard.BringToFront()
-
     End Sub
 
     Public Sub GetAccountInfo()
@@ -494,41 +507,20 @@
                     Access.AddParam("@id", tobedeleted)
                     Access.ExecuteQuery("DELETE * FROM tblEmployee WHERE [ID] = @id")
                     If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+                    DisplayToastMessage("Employee deleted successfully.", 1)
+                    RefreshEmployeeTable()
+                    RefreshPaymentTable()
+                    ClearEmployeeTextboxes()
+                    btnEdit.Enabled = False
+                    btnDelete.Enabled = False
+                    Exit Sub
                 Else
-                    Exit For
+                    Exit Sub
                 End If
             Next
         End If
 
-        DisplayToastMessage("Employee deleted successfully.", 1)
-        RefreshEmployeeTable()
-        RefreshPaymentTable()
-        ClearEmployeeTextboxes()
-        btnEdit.Enabled = False
-        btnDelete.Enabled = False
 
-        'Dim selectedRow As DataGridViewRow
-        'Try
-        '    selectedRow = dgvEmployees.Rows(selectedindexatemployee)
-        'Catch ex As Exception
-        '    DisplayToastMessage("Please select the employee you want to delete.", 2)
-        '    Exit Sub
-        'End Try
-
-        'Dim id As String = selectedRow.Cells(0).Value.ToString
-
-        'Dim confirm As Integer = MessageBox.Show("Are you sure you want to delete?", "Confirm", MessageBoxButtons.YesNo)
-        'If confirm = DialogResult.Yes Then
-        '    Access.AddParam("@id", id)
-        '    Access.ExecuteQuery("DELETE * FROM tblEmployee WHERE [ID] = @id")
-        '    If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
-        '    DisplayToastMessage("Employee deleted successfully.", 1)
-
-        '    RefreshEmployeeTable()
-        '    ClearEmployeeTextboxes()
-        '    btnEdit.Enabled = False
-        '    btnDelete.Enabled = False
-        'End If
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
@@ -942,5 +934,56 @@
 
         ' Fill DataGridView
         dgvEmployeePayment.DataSource = Access.DbDataTable
+    End Sub
+
+    ' SCHEDULING
+    Public Sub RefreshEmployeeTableOnSchedule()
+        ' Run Query
+        Access.ExecuteQuery("SELECT * FROM tblEmployee ORDER BY ID DESC")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        ' Fill DataGridView
+        dgvEmployeeSched.DataSource = Access.DbDataTable
+
+        Try
+            dgvEmployeeSched.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvEmployeeSched.Columns(0).Visible = False
+            dgvEmployeeSched.Columns(5).Visible = False
+            dgvEmployeeSched.Columns(6).Visible = False
+            dgvEmployeeSched.Columns(7).Visible = False
+            dgvEmployeeSched.Columns(8).Visible = False
+            dgvEmployeeSched.Columns(9).Visible = False
+            dgvEmployeeSched.Columns(10).Visible = False
+            dgvEmployeeSched.Columns(11).Visible = False
+            dgvEmployeeSched.Columns(1).Width = 120
+            dgvEmployeeSched.Columns(2).Width = 150
+            dgvEmployeeSched.Columns(3).Width = 150
+            dgvEmployeeSched.Columns(4).Width = 250
+            dgvEmployeeSched.Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub dgvEmployeeSched_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmployeeSched.RowEnter
+        Try
+            selectedindexatschedule = e.RowIndex
+            Dim selectedRow As DataGridViewRow
+            selectedRow = dgvEmployeeSched.Rows(selectedindexatschedule)
+            ' passcode
+            txtPasscodeSched.Text = selectedRow.Cells(1).Value.ToString
+            ' first name
+            txtFirstNameSched.Text = selectedRow.Cells(2).Value.ToString
+            ' last name
+            txtLastNameSched.Text = selectedRow.Cells(3).Value.ToString
+            ' position
+            txtPositionSched.Text = selectedRow.Cells(4).Value.ToString
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnManageSchedule_Click(sender As Object, e As EventArgs) Handles btnManageSchedule.Click
+        Dim ShowSched As New frmManageEmployeeSchedule(txtPasscodeSched.Text, txtFirstNameSched.Text, txtLastNameSched.Text)
+        ShowSched.ShowDialog()
     End Sub
 End Class

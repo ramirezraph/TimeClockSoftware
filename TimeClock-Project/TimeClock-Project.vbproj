@@ -15,7 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Ramirez\Desktop\TimeClock-Project\</PublishUrl>
+    <PublishUrl>C:\Users\Ramirez\Desktop\Time Clock Software\Installation Files\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -121,6 +121,12 @@
     <Compile Include="frmDialogRate.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmManageEmployeeSchedule.Designer.vb">
+      <DependentUpon>frmManageEmployeeSchedule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageEmployeeSchedule.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmViewAttendance.Designer.vb">
       <DependentUpon>frmViewAttendance.vb</DependentUpon>
     </Compile>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDialogRate.resx">
       <DependentUpon>frmDialogRate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageEmployeeSchedule.resx">
+      <DependentUpon>frmManageEmployeeSchedule.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmViewAttendance.resx">
       <DependentUpon>frmViewAttendance.vb</DependentUpon>
@@ -228,6 +237,7 @@
   <ItemGroup>
     <None Include="Resources\money_icon.png" />
     <None Include="Resources\account_icon.png" />
+    <None Include="Resources\schedule_icon.png" />
     <Content Include="TimeClockProject.accdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
