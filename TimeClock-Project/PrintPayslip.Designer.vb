@@ -365,6 +365,9 @@ Partial Class PrintPayslip
         Me.PrintPreviewDialogPayslip.Name = "PrintPreviewDialogPayslip"
         Me.PrintPreviewDialogPayslip.Visible = False
         '
+        'PrintDocumentPayslip
+        '
+        '
         'PrintPayslip
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 17.0!)
@@ -404,8 +407,10 @@ Partial Class PrintPayslip
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.KeyPreview = True
         Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.Name = "PrintPayslip"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PrintPayslip"
         Me.ResumeLayout(False)
         Me.PerformLayout()

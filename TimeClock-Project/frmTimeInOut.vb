@@ -290,14 +290,15 @@
     Private Sub btnClockOut_Click(sender As Object, e As EventArgs) Handles btnClockOut.Click
 
         Dim todaysdate As String = String.Format(ClockInOutDateFormat, Date.Now)
-        Dim strclockin As String = ""
+        Dim strclockinSched As String = ""
+        Dim strclockinAtten As String = ""
         Dim totalbreak As String = ""
         Dim rate As Double = 0
         Dim pay As Double = 0
-
+        Dim strclockinfinal As String = ""
         ' CHECK SCHEDULE
 
-        ' GET CLOCK IN TIME AND TOTAL BREAK AND TOTAL HOUR
+        ' GET TOTAL BREAK AND TOTAL HOUR
         Access.AddParam("@passcode", EMP_PASSCODE)
         Access.AddParam("@date", todaysdate)
         Access.ExecuteQuery("SELECT * FROM tblAttendance WHERE [Passcode]=@passcode AND [Date]=@date")
@@ -305,7 +306,7 @@
         For Each R As DataRow In Access.DbDataTable.Rows
             Try
                 rate = R("Rate")
-                strclockin = R("In")
+                strclockinAtten = R("In")
                 If String.IsNullOrEmpty(R("TotalBreak").ToString) Then
                     totalbreak = "00:00:00"
                 Else
@@ -317,6 +318,42 @@
             End Try
         Next
 
+        ' GET CLOCK IN TIME
+        Access.AddParam("@passcode", EMP_PASSCODE)
+        Access.AddParam("@date", Date.Now.DayOfWeek.ToString)
+        Access.ExecuteQuery("SELECT * FROM tblTimeCard WHERE [Passcode]=@passcode AND [Day]=@date")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        For Each R As DataRow In Access.DbDataTable.Rows
+            Try
+                strclockinSched = R("In")
+            Catch ex As Exception
+                MessageBox.Show("An error occured. HINT: Null values - In")
+                Exit Sub
+            End Try
+        Next
+
+        ' COMPARE 
+        Dim compClockInAtten As DateTime = DateTime.Parse(strclockinAtten) ' 5:11
+        Dim compClockInSched As DateTime = DateTime.Parse(strclockinSched) ' 7:00
+        Dim date1 As New DateTime(2009, 8, 1, compClockInAtten.Hour, compClockInAtten.Minute, 0)
+        Dim date2 As New DateTime(2009, 8, 1, compClockInSched.Hour, compClockInSched.Minute, 0)
+        Dim compare As Integer = DateTime.Compare(date2, date1) ' t1, t2
+
+        'MessageBox.Show(date1)
+        'MessageBox.Show(date2)
+        'MessageBox.Show(compare)
+
+        If compare = 1 Then
+            ' USE TIME IN SCHED, TOO EARLY
+            strclockinfinal = compClockInSched
+        Else
+            strclockinfinal = compClockInAtten
+        End If
+
+        'MessageBox.Show(strclockinfinal.ToString)
+
+        'Exit Sub ' Stop
+
         ' CALCULATE
         Dim clockout As DateTime
         Dim clockin As DateTime
@@ -324,14 +361,20 @@
         Dim totalhour As TimeSpan
         clockin = New DateTime
         clockout = New DateTime
-        clockin = Convert.ToDateTime(strclockin)
+        clockin = Convert.ToDateTime(strclockinfinal)
         clockout = Convert.ToDateTime(lblCurrentTime.Text)
-        hour = clockout.Subtract(clockin)
+        Dim date3 As New DateTime(2009, 8, 1, clockin.Hour, clockin.Minute, 0)
+        Dim date4 As New DateTime(2009, 8, 1, clockout.Hour, clockout.Minute, 0)
+        hour = date4.Subtract(date3)
         totalhour = hour.Subtract(TimeSpan.Parse(totalbreak))
         pay = Decimal.Round(rate * totalhour.TotalHours, 2, MidpointRounding.AwayFromZero)
         ' Check values
         'MessageBox.Show(hour.ToString & " : " & totalbreak & " = " & totalhour.ToString)
-
+        'MessageBox.Show(clockin.ToString)
+        'MessageBox.Show(date3.ToString)
+        'MessageBox.Show(date4.ToString)
+        'MessageBox.Show(hour.ToString)
+        'Exit Sub
         ' REGISTER OUT
         Access.AddParam("@totalhour", totalhour.ToString)
         Access.AddParam("@out", lblCurrentTime.Text)

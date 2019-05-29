@@ -104,6 +104,7 @@ Partial Class frmAdministrator
         Me.lblUnderline2 = New System.Windows.Forms.Label()
         Me.lblStaffAttendance = New System.Windows.Forms.Label()
         Me.pnlManageEmployee = New System.Windows.Forms.Panel()
+        Me.btnEmployeeReport = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -139,7 +140,7 @@ Partial Class frmAdministrator
         Me.lblEmployee = New System.Windows.Forms.Label()
         Me.lblUnderline3 = New System.Windows.Forms.Label()
         Me.pnlPayment = New System.Windows.Forms.Panel()
-        Me.btnExport = New System.Windows.Forms.Button()
+        Me.btnGetPayslip = New System.Windows.Forms.Button()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnMarkPaid = New System.Windows.Forms.Button()
         Me.btnRegisterRate = New System.Windows.Forms.Button()
@@ -170,7 +171,6 @@ Partial Class frmAdministrator
         Me.btnManageSchedule = New System.Windows.Forms.Button()
         Me.Label45 = New System.Windows.Forms.Label()
         Me.Label46 = New System.Windows.Forms.Label()
-        Me.btnGetPayslip = New System.Windows.Forms.Button()
         Me.pnlNavBar.SuspendLayout()
         CType(Me.btnHomeIcon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnDropdownIcon, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1066,6 +1066,7 @@ Partial Class frmAdministrator
         'pnlManageEmployee
         '
         Me.pnlManageEmployee.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
+        Me.pnlManageEmployee.Controls.Add(Me.btnEmployeeReport)
         Me.pnlManageEmployee.Controls.Add(Me.Label6)
         Me.pnlManageEmployee.Controls.Add(Me.Label2)
         Me.pnlManageEmployee.Controls.Add(Me.Label1)
@@ -1105,6 +1106,19 @@ Partial Class frmAdministrator
         Me.pnlManageEmployee.Name = "pnlManageEmployee"
         Me.pnlManageEmployee.Size = New System.Drawing.Size(1031, 585)
         Me.pnlManageEmployee.TabIndex = 12
+        '
+        'btnEmployeeReport
+        '
+        Me.btnEmployeeReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(204, Byte), Integer))
+        Me.btnEmployeeReport.FlatAppearance.BorderSize = 0
+        Me.btnEmployeeReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmployeeReport.ForeColor = System.Drawing.Color.White
+        Me.btnEmployeeReport.Location = New System.Drawing.Point(648, 23)
+        Me.btnEmployeeReport.Name = "btnEmployeeReport"
+        Me.btnEmployeeReport.Size = New System.Drawing.Size(246, 27)
+        Me.btnEmployeeReport.TabIndex = 54
+        Me.btnEmployeeReport.Text = "Generate Report"
+        Me.btnEmployeeReport.UseVisualStyleBackColor = False
         '
         'Label6
         '
@@ -1494,7 +1508,6 @@ Partial Class frmAdministrator
         '
         Me.pnlPayment.BackColor = System.Drawing.Color.FromArgb(CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(21, Byte), Integer))
         Me.pnlPayment.Controls.Add(Me.btnGetPayslip)
-        Me.pnlPayment.Controls.Add(Me.btnExport)
         Me.pnlPayment.Controls.Add(Me.Label5)
         Me.pnlPayment.Controls.Add(Me.btnMarkPaid)
         Me.pnlPayment.Controls.Add(Me.btnRegisterRate)
@@ -1510,18 +1523,18 @@ Partial Class frmAdministrator
         Me.pnlPayment.Size = New System.Drawing.Size(1031, 585)
         Me.pnlPayment.TabIndex = 13
         '
-        'btnExport
+        'btnGetPayslip
         '
-        Me.btnExport.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(109, Byte), Integer), CType(CType(204, Byte), Integer))
-        Me.btnExport.FlatAppearance.BorderSize = 0
-        Me.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExport.ForeColor = System.Drawing.Color.White
-        Me.btnExport.Location = New System.Drawing.Point(831, 33)
-        Me.btnExport.Name = "btnExport"
-        Me.btnExport.Size = New System.Drawing.Size(154, 27)
-        Me.btnExport.TabIndex = 53
-        Me.btnExport.Text = "Export"
-        Me.btnExport.UseVisualStyleBackColor = False
+        Me.btnGetPayslip.BackColor = System.Drawing.Color.FromArgb(CType(CType(188, Byte), Integer), CType(CType(149, Byte), Integer), CType(CType(35, Byte), Integer))
+        Me.btnGetPayslip.FlatAppearance.BorderSize = 0
+        Me.btnGetPayslip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGetPayslip.ForeColor = System.Drawing.Color.White
+        Me.btnGetPayslip.Location = New System.Drawing.Point(831, 32)
+        Me.btnGetPayslip.Name = "btnGetPayslip"
+        Me.btnGetPayslip.Size = New System.Drawing.Size(154, 27)
+        Me.btnGetPayslip.TabIndex = 54
+        Me.btnGetPayslip.Text = "Get Payslip"
+        Me.btnGetPayslip.UseVisualStyleBackColor = False
         '
         'Label5
         '
@@ -1879,19 +1892,6 @@ Partial Class frmAdministrator
         Me.Label46.TabIndex = 1
         Me.Label46.Text = "___________"
         '
-        'btnGetPayslip
-        '
-        Me.btnGetPayslip.BackColor = System.Drawing.Color.FromArgb(CType(CType(91, Byte), Integer), CType(CType(178, Byte), Integer), CType(CType(109, Byte), Integer))
-        Me.btnGetPayslip.FlatAppearance.BorderSize = 0
-        Me.btnGetPayslip.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGetPayslip.ForeColor = System.Drawing.Color.White
-        Me.btnGetPayslip.Location = New System.Drawing.Point(578, 32)
-        Me.btnGetPayslip.Name = "btnGetPayslip"
-        Me.btnGetPayslip.Size = New System.Drawing.Size(247, 27)
-        Me.btnGetPayslip.TabIndex = 54
-        Me.btnGetPayslip.Text = "Get Payslip"
-        Me.btnGetPayslip.UseVisualStyleBackColor = False
-        '
         'frmAdministrator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1900,8 +1900,8 @@ Partial Class frmAdministrator
         Me.ClientSize = New System.Drawing.Size(1284, 677)
         Me.Controls.Add(Me.pnlPayment)
         Me.Controls.Add(Me.pnlStaffAttendance)
-        Me.Controls.Add(Me.pnlScheduling)
         Me.Controls.Add(Me.pnlManageEmployee)
+        Me.Controls.Add(Me.pnlScheduling)
         Me.Controls.Add(Me.pnlDropDownBtn1)
         Me.Controls.Add(Me.pnlDashboard)
         Me.Controls.Add(Me.lblToastMessage)
@@ -2074,7 +2074,6 @@ Partial Class frmAdministrator
     Friend WithEvents btnMarkPaid As Button
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
-    Friend WithEvents btnExport As Button
     Friend WithEvents pnlScheduling As Panel
     Friend WithEvents Label30 As Label
     Friend WithEvents txtSearchOnSchedule As TextBox
@@ -2094,4 +2093,5 @@ Partial Class frmAdministrator
     Friend WithEvents txtPasscodeSched As TextBox
     Friend WithEvents Label31 As Label
     Friend WithEvents btnGetPayslip As Button
+    Friend WithEvents btnEmployeeReport As Button
 End Class

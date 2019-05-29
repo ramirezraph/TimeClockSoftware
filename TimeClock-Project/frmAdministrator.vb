@@ -672,6 +672,10 @@
             dgvAttendance.Columns(9).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvAttendance.Columns(10).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvAttendance.Columns(12).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(13).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(14).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(15).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            dgvAttendance.Columns(16).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             dgvAttendance.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         Catch ex As Exception
             MessageBox.Show(ex.Message)
@@ -1013,7 +1017,18 @@
         Dim confirm As Integer = MessageBox.Show(payslipmsg, "Employee Payslip Confirmation", MessageBoxButtons.YesNo)
         If confirm = DialogResult.Yes Then
             ' print
-            PrintPayslip.ShowDialog()
+            Dim paysil As New PrintPayslip(selectedRow.Cells(2).Value.ToString & " " & selectedRow.Cells(3).Value.ToString, selectedRow.Cells(4).Value.ToString, selectedRow.Cells(10).Value.ToString)
+            paysil.ShowDialog()
         End If
+    End Sub
+
+    Private Sub btnEmployeeReport_Click(sender As Object, e As EventArgs) Handles btnEmployeeReport.Click
+        Dim frmReportEmployee As New frmReportEmployee()
+        frmReportEmployee.Show()
+    End Sub
+
+    Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
+        Dim frmReportAttendance As New frmReportAttendance(dtpAttendance.Value)
+        frmReportAttendance.Show()
     End Sub
 End Class
