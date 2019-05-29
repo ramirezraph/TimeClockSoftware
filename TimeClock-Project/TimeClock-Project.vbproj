@@ -167,6 +167,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="PrintPayslip.Designer.vb">
+      <DependentUpon>PrintPayslip.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PrintPayslip.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmDialogAccount.resx">
@@ -198,6 +204,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintPayslip.resx">
+      <DependentUpon>PrintPayslip.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

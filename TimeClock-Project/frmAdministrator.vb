@@ -1001,4 +1001,19 @@
         ' Fill DataGridView
         dgvEmployeeSched.DataSource = Access.DbDataTable
     End Sub
+
+    Private Sub btnGetPayslip_Click(sender As Object, e As EventArgs) Handles btnGetPayslip.Click
+        Dim selectedRow As DataGridViewRow
+        selectedRow = dgvEmployeePayment.Rows(selectedindexatpayment)
+
+        Dim payslipmsg As String = "Employee ID: " & selectedRow.Cells(1).Value.ToString & vbCrLf &
+            "Employee Name: " & selectedRow.Cells(2).Value.ToString & " " & selectedRow.Cells(3).Value.ToString & vbCrLf &
+            "Position: " & selectedRow.Cells(4).Value.ToString & vbCrLf & vbCrLf &
+            "Please click 'yes' to confirm and continue. "
+        Dim confirm As Integer = MessageBox.Show(payslipmsg, "Employee Payslip Confirmation", MessageBoxButtons.YesNo)
+        If confirm = DialogResult.Yes Then
+            ' print
+            PrintPayslip.ShowDialog()
+        End If
+    End Sub
 End Class
