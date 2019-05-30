@@ -111,6 +111,7 @@
         RefreshCurrentlyWorkingEmployee()
         GetEmployeeTotal()
         GetAttendanceToday()
+        GetAbsentToday()
         RefreshLogTable()
     End Sub
 
@@ -718,8 +719,18 @@
         sdate = selectedRow.Cells(1).Value.ToString
         spasscode = selectedRow.Cells(2).Value.ToString
         semployee = selectedRow.Cells(3).Value.ToString
-        sposition = selectedRow.Cells(4).Value.ToString
-        sin = Convert.ToDateTime(selectedRow.Cells(5).Value.ToString)
+
+        Try
+            sposition = selectedRow.Cells(4).Value.ToString
+        Catch ex As Exception
+            sposition = Nothing
+        End Try
+        Try
+            sin = Convert.ToDateTime(selectedRow.Cells(5).Value.ToString)
+        Catch ex As Exception
+            sin = Nothing
+        End Try
+
         Try
             sout = Convert.ToDateTime(selectedRow.Cells(6).Value.ToString)
         Catch ex As Exception
@@ -814,8 +825,21 @@
     End Sub
 
     Private Sub GetAttendanceToday()
-        Dim attendancetoday As Integer = dgvAttendance.Rows.Count()
-        lblDashTwoValue.Text = attendancetoday
+        Access.AddParam("date", Date.Now.ToString("MM/dd/yyyy"))
+        Access.ExecuteQuery("SELECT COUNT(*) FROM tblAttendance WHERE [Date]=@date AND NOT [TotalHour]='ABSENT'")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        For Each R As DataRow In Access.DbDataTable.Rows
+            lblDashTwoValue.Text = R(0)
+        Next
+    End Sub
+
+    Private Sub GetAbsentToday()
+        Access.AddParam("date", Date.Now.ToString("MM/dd/yyyy"))
+        Access.ExecuteQuery("SELECT COUNT(*) FROM tblAttendance WHERE [Date]=@date AND [TotalHour]='ABSENT'")
+        If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
+        For Each R As DataRow In Access.DbDataTable.Rows
+            lblDashThreeValue.Text = R(0)
+        Next
     End Sub
 
     Private Sub btnGeneratePasscode_Click(sender As Object, e As EventArgs) Handles btnGeneratePasscode.Click
@@ -1030,5 +1054,11 @@
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         Dim frmReportAttendance As New frmReportAttendance(dtpAttendance.Value)
         frmReportAttendance.Show()
+    End Sub
+
+    Private Sub btnDisplayAbsentToday_Click(sender As Object, e As EventArgs) Handles btnDisplayAbsentToday.Click
+        Dim selectedDate As String = dtpAttendance.Value.Month & "/" & dtpAttendance.Value.Day & "/" & dtpAttendance.Value.Year
+        Dim dialogPerformAbsent As New frmShowAbsentAuth(USER_ID, dtpAttendance.Value.DayOfWeek.ToString, selectedDate)
+        dialogPerformAbsent.ShowDialog()
     End Sub
 End Class

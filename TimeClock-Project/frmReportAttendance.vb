@@ -16,7 +16,8 @@
 
     Private Sub frmReportAttendance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim datesearch As String = String.Format(DateFormat, searchAtten)
-        crvAttendance.ReportSource = Application.StartupPath + "\CrystalReportAttendance.rpt"
+        'crvAttendance.ReportSource = Application.StartupPath + "\CrystalReportAttendance.rpt"
+        crvAttendance.ReportSource = "C:\\Program Files\RRDev\TimeClock-Celltech\CrystalReportAttendance.rpt"
         crvAttendance.SelectionFormula = "{tblAttendance.Date} = DateTime('" & datesearch & "')"
         crvAttendance.Refresh()
         crvAttendance.RefreshReport()

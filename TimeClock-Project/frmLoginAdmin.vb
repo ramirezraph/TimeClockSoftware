@@ -36,8 +36,6 @@
             ShowMessage("Incorrect credential. Try again.")
             txtPassword.Text = ""
         End If
-
-
     End Sub
     Private Sub ShowMessage(msg As String)
         tmrMessage.Start()

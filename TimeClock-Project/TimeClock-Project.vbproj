@@ -160,6 +160,12 @@
     <Compile Include="frmReportEmployee.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmShowAbsentAuth.Designer.vb">
+      <DependentUpon>frmShowAbsentAuth.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmShowAbsentAuth.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmViewAttendance.Designer.vb">
       <DependentUpon>frmViewAttendance.vb</DependentUpon>
     </Compile>
@@ -235,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmReportEmployee.resx">
       <DependentUpon>frmReportEmployee.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmShowAbsentAuth.resx">
+      <DependentUpon>frmShowAbsentAuth.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmViewAttendance.resx">
       <DependentUpon>frmViewAttendance.vb</DependentUpon>
