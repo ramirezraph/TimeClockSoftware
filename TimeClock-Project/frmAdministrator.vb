@@ -12,6 +12,7 @@
     Dim USER_NAME As String
     Dim USER_USERLEVEL As String
     Dim USER_ID As Integer
+    Dim ABSENTCOUNT As Integer = 0
 
     'Public Sub New(name As String, userlevel As String, ID As Integer)
     '    ' This call is required by the designer.
@@ -266,6 +267,7 @@
         Dim todaysdate As String = String.Format(DateFormat, Date.Now)
         RefreshAttendanceTable(todaysdate)
         GetAttendanceToday()
+        GetAbsentToday()
         RefreshLogTable()
         RefreshEmployeeTableOnSchedule()
 
@@ -520,7 +522,6 @@
                 End If
             Next
         End If
-
 
     End Sub
 
@@ -826,10 +827,10 @@
 
     Private Sub GetAttendanceToday()
         Access.AddParam("date", Date.Now.ToString("MM/dd/yyyy"))
-        Access.ExecuteQuery("SELECT COUNT(*) FROM tblAttendance WHERE [Date]=@date AND NOT [TotalHour]='ABSENT'")
+        Access.ExecuteQuery("SELECT COUNT(*) FROM tblAttendance WHERE [Date]=@date")
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         For Each R As DataRow In Access.DbDataTable.Rows
-            lblDashTwoValue.Text = R(0)
+            lblDashTwoValue.Text = R(0) - ABSENTCOUNT
         Next
     End Sub
 
@@ -839,6 +840,7 @@
         If Not String.IsNullOrEmpty(Access.Exception) Then MessageBox.Show(Access.Exception) : Exit Sub
         For Each R As DataRow In Access.DbDataTable.Rows
             lblDashThreeValue.Text = R(0)
+            ABSENTCOUNT = R(0)
         Next
     End Sub
 

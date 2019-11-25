@@ -15,13 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0D0D40CA77774F58BF505E8850C6425B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_19B20E9C5C8C4F959F24F1F62B9C266A"
+        "MsmKey" = "8:_20740050CA994662974B5C31DDA7DCDE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -33,25 +27,37 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_381A96F397EB48C5AF21D4B9971C19CD"
-        "OwnerKey" = "8:_418DE3CDD2B146F48DF506AD3D706F62"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_381A96F397EB48C5AF21D4B9971C19CD"
-        "OwnerKey" = "8:_C1ED008B5E994F5C2FDFF2D3906B4489"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_418DE3CDD2B146F48DF506AD3D706F62"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8A6F0CB5E1C44054AE22AA59AB7100C4"
+        "MsmKey" = "8:_5AB819868276431AB65CEF651012A6BF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_6E31D8A3796F48E4B9E6113CA357D2F1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_76AFC845427E9A07919F364E4FD9C480"
+        "OwnerKey" = "8:_C1ED008B5E994F5C2FDFF2D3906B4489"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_76AFC845427E9A07919F364E4FD9C480"
+        "OwnerKey" = "8:_418DE3CDD2B146F48DF506AD3D706F62"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_89EA6CF6B9304BDEB75FC49D570B5B5D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,14 +87,14 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_C5AD9A4353A542C6A3937AC9C9ABAF27"
+        "MsmKey" = "8:_C356F216BB4245FD8C0659AE89C56B9C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D0A6E45CFDFA488A945CFF0110EB6E41"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_D9FC418501ED4448577E4FE84C5FBAF1"
+        "OwnerKey" = "8:_418DE3CDD2B146F48DF506AD3D706F62"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -124,13 +130,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_76AFC845427E9A07919F364E4FD9C480"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_98C42346618E5CEC4B6E4C4CF91D5850"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_381A96F397EB48C5AF21D4B9971C19CD"
+        "OwnerKey" = "8:_D9FC418501ED4448577E4FE84C5FBAF1"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -228,30 +240,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0D0D40CA77774F58BF505E8850C6425B"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_20740050CA994662974B5C31DDA7DCDE"
             {
-            "SourcePath" = "8:..\\TimeClock-Project\\CrystalReportEmployee.rpt"
-            "TargetName" = "8:CrystalReportEmployee.rpt"
-            "Tag" = "8:"
-            "Folder" = "8:_9137CCEA28A546BABF98A36F15860B93"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_19B20E9C5C8C4F959F24F1F62B9C266A"
-            {
-            "SourcePath" = "8:..\\TimeClock-Project\\CrystalReportAttendance.vb"
-            "TargetName" = "8:CrystalReportAttendance.vb"
+            "SourcePath" = "8:..\\TimeClock-Project\\bin\\Debug\\TimeClockProject.accdb"
+            "TargetName" = "8:TimeClockProject.accdb"
             "Tag" = "8:"
             "Folder" = "8:_9137CCEA28A546BABF98A36F15860B93"
             "Condition" = "8:"
@@ -299,14 +291,54 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_381A96F397EB48C5AF21D4B9971C19CD"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5AB819868276431AB65CEF651012A6BF"
+            {
+            "SourcePath" = "8:..\\TimeClock-Project\\CrystalReportEmployee.rpt"
+            "TargetName" = "8:CrystalReportEmployee.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_9137CCEA28A546BABF98A36F15860B93"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6E31D8A3796F48E4B9E6113CA357D2F1"
+            {
+            "SourcePath" = "8:..\\TimeClock-Project\\CrystalReportAttendance.rpt"
+            "TargetName" = "8:CrystalReportAttendance.rpt"
+            "Tag" = "8:"
+            "Folder" = "8:_9137CCEA28A546BABF98A36F15860B93"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_76AFC845427E9A07919F364E4FD9C480"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_381A96F397EB48C5AF21D4B9971C19CD"
+                    "_76AFC845427E9A07919F364E4FD9C480"
                     {
                     "Name" = "8:stdole.dll"
                     "Attributes" = "3:512"
@@ -330,10 +362,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A6F0CB5E1C44054AE22AA59AB7100C4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_89EA6CF6B9304BDEB75FC49D570B5B5D"
             {
-            "SourcePath" = "8:..\\TimeClock-Project\\bin\\Debug\\TimeClockProject.accdb"
-            "TargetName" = "8:TimeClockProject.accdb"
+            "SourcePath" = "8:..\\TimeClock-Project\\CrystalReportEmployee.vb"
+            "TargetName" = "8:CrystalReportEmployee.vb"
             "Tag" = "8:"
             "Folder" = "8:_9137CCEA28A546BABF98A36F15860B93"
             "Condition" = "8:"
@@ -432,10 +464,10 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C5AD9A4353A542C6A3937AC9C9ABAF27"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C356F216BB4245FD8C0659AE89C56B9C"
             {
-            "SourcePath" = "8:..\\TimeClock-Project\\CrystalReportEmployee.vb"
-            "TargetName" = "8:CrystalReportEmployee.vb"
+            "SourcePath" = "8:..\\TimeClock-Project\\CrystalReportAttendance.vb"
+            "TargetName" = "8:CrystalReportAttendance.vb"
             "Tag" = "8:"
             "Folder" = "8:_9137CCEA28A546BABF98A36F15860B93"
             "Condition" = "8:"
@@ -452,10 +484,21 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D0A6E45CFDFA488A945CFF0110EB6E41"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D9FC418501ED4448577E4FE84C5FBAF1"
             {
-            "SourcePath" = "8:..\\TimeClock-Project\\CrystalReportAttendance.rpt"
-            "TargetName" = "8:CrystalReportAttendance.rpt"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                "ScatterAssemblies"
+                {
+                    "_D9FC418501ED4448577E4FE84C5FBAF1"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9137CCEA28A546BABF98A36F15860B93"
             "Condition" = "8:"
@@ -469,7 +512,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E8E609B4F407F64B30C00C72242EB6EC"
@@ -571,7 +614,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TimeClock-Celltech"
         "ProductCode" = "8:{E6D87C35-50F0-4EBF-BBB5-00DF6A6CDA8F}"
-        "PackageCode" = "8:{E356E537-1339-4C4C-86C7-093574BB6294}"
+        "PackageCode" = "8:{CD457A25-57DE-410A-B1EB-451312399308}"
         "UpgradeCode" = "8:{269C5DA2-DA48-4933-8911-F623FC06F4AF}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

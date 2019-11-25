@@ -19,6 +19,7 @@
         crvAttendance.ReportSource = Application.StartupPath + "\CrystalReportAttendance.rpt"
         'crvAttendance.ReportSource = "C:\Program Files\RRDev\TimeClock-Celltech\CrystalReportAttendance.rpt"
         crvAttendance.SelectionFormula = "{tblAttendance.Date} = DateTime('" & datesearch & "')"
+        crvAttendance.Refresh()
         crvAttendance.RefreshReport()
     End Sub
 End Class

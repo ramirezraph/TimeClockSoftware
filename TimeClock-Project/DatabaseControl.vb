@@ -18,8 +18,6 @@ Public Class DatabaseControl
     Public RecordCount As Integer
     Public Exception As String
 
-
-
     Public Sub ExecuteQuery(Query As String)
         ' Reset Query Stats
         RecordCount = 0
