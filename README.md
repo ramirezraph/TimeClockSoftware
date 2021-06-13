@@ -9,7 +9,9 @@ You can try the application by going to the _Installer_ directory and run _setup
 
 ## Screenshots
 
-### Passcode - each employee has their own unique passcode
+### Passcode
+each employee has their own unique passcode
+
 <img src="demo/passcode.png">
 
 ### Clock In
@@ -17,7 +19,24 @@ You can try the application by going to the _Installer_ directory and run _setup
 
 ### Admin Login
 Admin Login UI will be visible after entering a 0143 passcode.
-<img src="demo/adminlogin.png">
+
+<img src="demo/administrator-login.png">
 
 ### Dashboard
 <img src="demo/dashboard.png">
+
+### Staff Attendance
+<img src="demo/staffattendance.png">
+
+### Employee Masterlist
+<img src="demo/employee.png">
+
+### Payments
+<img src="demo/payments.png">
+
+### Scheduling
+<img src="demo/schedules.png">
+<img src="demo/manageschedule.png">
+
+
+
