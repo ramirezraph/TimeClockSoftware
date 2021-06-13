@@ -1,7 +1,7 @@
 # Celltech - Time Clock Software
 
 Celltech is a time clock windows system developed using VisualBasic and MS Access as database.
-This is a school project in Bulacan State University, and the main goal of the project is to automate the attendance checking of a site engineer.
+This is a school project during my sophomore year in Bulacan State University. The main goal of the project is to automate the attendance checking of a site engineer.
 
 ## Setup
 
